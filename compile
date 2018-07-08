@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+import sys, re
+
+from pyquil.quil import Program
+from pyquil.api import QVMConnection
+from pyquil.gates import ALL_GATES
+
+def parens_separate(item):
+    stack = []
+    depth = 0
+    inner = ''
+    def add(item):
+        current = stack
+        for _ in range(depth):
+            current = current[-1]
+        if isinstance(item, str):
+            for subitem in item.split():
+                current.append(subitem)
+        else:
+            current.append(item)
+    for character in item.strip():
+        if character == '(':
+            if inner.strip() != '':
+                add(inner.strip())
+                inner = ''
+            add([])
+            depth += 1
+        elif character == ')':
+            add(inner.strip())
+            depth -= 1
+            inner = ''
+        else:
+            inner += character
+    return stack
+
+def build(stack):
+    for expression in stack:
+        assert len(expression) > 0, 'Error: parsed empty list {}'.format(item)
+        head = expression[0]
+        if head in ALL_GATES:
+            yield ' '.join(expression)
+        else:
+            1/0
+
+def main(args):
+    assert len(args) > 0, 'Usage: ./build [filename]'
+    filename = args[0]
+    with open(filename, 'r') as infile:
+        body = infile.read()
+    stack = parens_separate(body)
+    lines = build(stack)
+    quil  = '\n'.join(lines)
+    with open('.out.quil', 'w') as outfile:
+        outfile.write(quil)
+    program = Program(quil)
+    qvm = QVMConnection()
+    wave_function = qvm.wavefunction(program)
+    print(wave_function)
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
