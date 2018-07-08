@@ -3,3 +3,4 @@
 (CNOT 0 1)
 (MEASURE 0 0)
 (MEASURE 1 1)
+(if 0 (X 2) (Y 2))

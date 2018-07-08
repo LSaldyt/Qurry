@@ -1,3 +1,12 @@
 X 0
 H 1
 CNOT 0 1
+MEASURE 0 [0]
+MEASURE 1 [1]
+
+JUMP-WHEN @first-3fc4e0a2-0a21-43ec-b326-9a5168f0cf52 [0]
+  Y 2
+JUMP @end-cfc1b9c7-1eb1-4a53-9164-9f5aa3fb87d3
+LABEL @first-3fc4e0a2-0a21-43ec-b326-9a5168f0cf52
+  X 2
+LABEL @end-cfc1b9c7-1eb1-4a53-9164-9f5aa3fb87d3
