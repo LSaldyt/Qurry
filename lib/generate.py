@@ -14,16 +14,28 @@ def create_if(cond, a, b):
             end=named_uuid('end'))
 
 def build(stack):
+    definitions = dict()
+    def insert_defs(items):
+        for item in items:
+            try:
+                yield definitions[item]
+            except KeyError:
+                yield item
+            except TypeError:
+                yield item
     for expression in stack:
         assert len(expression) > 0, 'Error: parsed empty list {}'.format(item)
         head = expression[0]
         if head in ALL_GATES:
             if head == 'MEASURE':
-                yield '{} {} [{}]'.format(*expression)
+                yield '{} {} [{}]'.format(*insert_defs(expression))
             else:
-                yield ' '.join(expression)
+                yield ' '.join(insert_defs(expression))
         elif head == 'if':
-            yield create_if(*expression[1:])
+            yield create_if(*(insert_defs(expression[1:])))
+        elif head == 'def':
+            assert len(expression) == 3, 'Def expressions should take the form (def var val)'
+            definitions[expression[1]] = expression[2]
         else:
             print(head)
             1/0
