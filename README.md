@@ -1,5 +1,6 @@
 # Quantum Probabilistic Programming Language
 
-This language is unnamed. Suggest a name through a github issue?
+This repository contains a prototype of a quantum probabilistic programming language.
+The official project duration is one year.
 
 This is my project for the [unitary fund](unitary.fund).
