@@ -1,0 +1,664 @@
+ (abs x)
+Absolute value
+x	real
+
+(acos x)
+Arccosine
+x	real
+
+(all lst)
+Test whether all of the values in a list are true
+lst	list	List of boolean values
+
+(and [b ...])
+Logical conjunction
+[b ...]	boolean	Boolean values
+
+(append [lst ...])
+Merge an arbitrary number of lists
+[lst ...]	list
+
+(apply fn lst)
+If lst is (x1 x2 x3 ...), returns the function call (fn x1 x2 x3 ...)
+fn	function
+lst	list
+
+(asin x)
+Arcsine
+x	real
+
+(assoc x alist)
+Lookup a value in an association list
+x
+alist	list
+
+(atan x)
+Arctangent
+x	real
+
+(atan2 y x)
+Arctangent (quotient version)
+y	real
+x	real
+
+(bang-bang x)
+Coerce an object to a boolean
+x
+
+(beta a b [conditionedValue])
+Sample from the beta distribution B(a,b). Returns only the first element.
+a	positive real
+b	positive real
+[conditionedValue]
+
+(boolean->number b)
+Convert a boolean to a number
+b	boolean
+
+(bootstrap fn fileName n)
+fn	function
+fileName	string
+n	nat
+
+(but-last lst)
+ Aliases: initial
+Get everything except the last item in a list
+lst	list
+
+(ceil x)
+ Aliases: ceiling
+Ceiling of a number
+x	real
+
+(compose [f ...])
+ Aliases: o
+compose functions: ((o f g) a) == (f (g a))
+[f ...]	function
+
+(condition-equal comp value)
+comp
+value
+
+(condition-repeat-equal comp values)
+comp
+values
+
+(conditional comp params)
+comp	function
+params	list	List where the first element is the sampling strategy, one of ("enumeration", "rejection, "mh"), if "mh", second element is the lag
+
+(console-log [s ...])
+Print arguments to Javascript console
+[s ...]
+
+(cos x)
+Cosine
+x	real
+
+(curry f)
+ Aliases: c
+curry function: (f::a)::b -> f::a,b
+f	function
+
+(difference lst [lst ...])
+difference of sets
+lst	list
+[lst ...]	list
+
+(dirichlet alpha [conditionedValue])
+Sample from the Dirichlet distribution Dir(alpha).
+alpha	list
+[conditionedValue]
+
+(display [s ...])
+ Aliases: print,pn
+[s ...]
+
+(div [x] [y ...])
+ Aliases: /
+Divide numbers. Returns x / (y1 * y2 * ... )
+[x]	real	Numerator
+[y ...]	real	Denominator values
+
+(DPmem alpha f)
+Stochastic memoization using the Dirichlet Process
+alpha	positive real	Concentration parameter of the DP
+f	function	Function to stochastically memoize
+
+(drop lst n)
+Drop the first n items from a list. If there are fewer than n items in the list, return the empty list.
+lst	list
+n	nat
+
+(enumeration-query comp)
+Do enumeration query on a model
+comp
+
+(eq [x ...])
+ Aliases: =
+Test whether all (numeric) arguments are equal
+[x ...]	real
+
+(eq? x y)
+Type-strict and reference-based equality check (e.g., (eq? '(1 2) '(1 2)) returns #f)
+x
+y
+
+(equal? x y)
+Less strict and value-based equality check (e.g., (equal? '(1 2) '(1 2)) returns #f)
+x
+y
+
+(eval lst)
+Evaluate a list representing a Church s-expression, e.g., (eval (list + 1 2)) returns 3
+lst
+
+(exp x)
+Exponential
+x	real
+
+(exponential rate [conditionedValue])
+Sample from the exponential distribution with parameter rate
+rate	positive real
+[conditionedValue]
+
+(expt x y)
+ Aliases: pow
+Compute x raised to the power y
+x	real
+y	real
+
+(fifth lst)
+Get the fifth item of a list
+lst	list
+
+(filter pred lst)
+Select subset of elements of a list that satisfy a predicate pred
+pred	function
+lst	list
+
+(first lst)
+ Aliases: car
+Get the first item of a list (or pair)
+lst	pair
+
+(flatten lst)
+lst	list
+
+(flip [p] [conditionedValue])
+Flip a weighted coin. Returns true or false
+[p]	real
+[conditionedValue]
+
+(floor x)
+Floor of a number
+x	real
+
+(fold f init [lst ...])
+Accumulate the result of applying a function to a list
+f	function	Function to apply
+init		Seed value for function
+[lst ...]	list	List to apply the fold over
+
+(foldl f init lst)
+Accumulate the result of applying a function to a list left to right
+f	function	Function to apply
+init		Seed value for function
+lst	list	List to apply the fold over
+
+(foldr f init lst)
+Accumulate the result of applying a function to a list right to left
+f	function	Function to apply
+init		Seed value for function
+lst	list	List to apply the fold over
+
+(for-each fn lst)
+Apply a function to every member of a list, but don't return anything
+fn	function
+lst	list
+
+(fourth lst)
+Get the fourth item of a list
+lst	list
+
+(gamma a b [conditionedValue])
+Sample from the gamma distribution G(a,b)
+a	real
+b	real
+[conditionedValue]
+
+(gaussian [mu] [sigma] [isStructural] [conditionedValue])
+Sample from the Gaussian distribution N(mu, sigma)
+[mu]	real
+[sigma]	real
+[isStructural]
+[conditionedValue]
+
+(gensym )
+A default gensym (prefix is g)
+
+(geq x [y ...])
+ Aliases: >=
+Test whether x is greater than or equal to all y's
+x	real
+[y ...]	real
+(get-time )
+
+(greater x [y ...])
+ Aliases: >
+Test whether x is greater than all y's
+x	real
+[y ...]	real
+
+(identity v)
+ Aliases: id
+The Identity function
+v
+
+(intersection [lst ...])
+intersection of sets
+[lst ...]	list
+
+(iota count [start] [step])
+Create list based on arithmetic progressions
+count	nat	Number of items
+[start]	real	First item in list
+[step]	real	Difference between successive items in the list
+
+(js-debug )
+Trigger the javascript debugger
+
+(last lst)
+Get the last item in a list
+lst	list
+
+(length lst)
+Get the length of a list
+lst	list
+
+(leq x [y ...])
+ Aliases: <=
+Test whether x is less than or equal to all y's
+x	real
+[y ...]	real
+
+(less x [y ...])
+ Aliases: <
+Test whether x is less than all y's
+x	real
+[y ...]	real
+
+(list [...])
+List constructor
+[...]
+
+(list-elt lst n)
+Get the nth item of a list (1-indexed)
+lst	list
+n	nat
+
+(list-index lst x)
+ Aliases: position
+lst	list
+x
+
+(list-ref lst n)
+Get the nth item of a list (0-indexed)
+lst	list
+n	nat
+
+(list? x)
+Test whether x is a list
+x
+
+(load-url path)
+Load a remote url
+path	string
+
+(log x)
+Natural logarithm
+x	real
+
+(make-gensym [prefix])
+Returns a gensym, which is a function that returns a new string value every time you call it (i.e., you're guaranteed to never get the same return value twice). You can specify an optional prefix for these values (default is 'g')
+[prefix]	string
+
+(make-list n x)
+Make a list of length n where all elements are x
+n	nat
+x
+
+(map fn [lst ...])
+Apply a function to every element of a list
+fn	function
+[lst ...]	list
+
+(map-at lst i f)
+ Aliases: f-at
+lst	list
+i	nat
+f	function
+
+(max [x ...])
+Maximum of arguments
+[x ...]	real
+
+(mean lst)
+Mean of a list
+lst	list
+
+(member x list [cmp])
+Test whether x is in a list according to some optional comparator function cmp
+x
+list	list
+[cmp]	function
+(mh-query comp samples lag)
+comp
+samples	nat
+lag	nat
+(mh-query-scored comp samples lag)
+comp
+samples	nat
+lag	nat
+
+(min [x ...])
+Minimum of arguments
+[x ...]	real
+
+(minus [x ...])
+ Aliases: -
+Subtract numbers
+[x ...]	real	Numbers to subtract
+
+(mod x y)
+ Aliases: modulo
+Modulo. Returns x mod y
+x	real
+y	real
+
+(mult [x ...])
+ Aliases: *
+Multiply numbers
+[x ...]	real	Numbers to multiply
+
+(multi-equals-condition fn n value)
+fn	function
+n	nat
+value	list
+
+(multinomial lst probs [conditionedValue])
+Sample an element from lst with the probability specified in probs
+lst	list
+probs	list
+[conditionedValue]
+
+(none lst)
+Test whether none of the values in a list are true
+lst	list	List of boolean values
+
+(not b)
+Logical negation
+b	boolean	Boolean value
+
+(nub lst)
+Remove duplicates with equality as ===
+lst	list
+
+(null? x)
+Test whether x is null
+x
+
+(number->boolean x)
+Convert a number to a boolean
+x	real
+
+(number->string x)
+Convert a number to a string
+x	real
+
+(or [b ...])
+Logical disjunction
+[b ...]	boolean	Boolean values
+
+(pair head tail)
+ Aliases: cons
+Pair constructor
+head
+tail
+
+(pair? x)
+Test whether x is a pair
+x
+
+(partition pred lst)
+Partition elements of a list into those that satisfy a predicate and those that don't
+pred	function
+lst	list
+
+(plus [x ...])
+ Aliases: +
+Add numbers
+[x ...]	real	Numbers to add
+
+(prod lst)
+Multiply a list of numbers
+lst	list	List of numbers to multiply
+
+(pw-geq x [y ...])
+ Aliases: .>=.
+Test whether greater than or equal to applies transitively
+x	real
+[y ...]	real
+
+(pw-greater x [y ...])
+ Aliases: .>.
+Test whether greater applies transitively
+x	real
+[y ...]	real
+
+(pw-leq x [y ...])
+ Aliases: .<=.
+Test whether less than or equal to applies transitively
+x	real
+[y ...]	real
+
+(pw-less x [y ...])
+ Aliases: .<.
+Test whether less than applies transitively
+x	real
+[y ...]	real
+
+(random-integer n [conditionedValue])
+ Aliases: sample-integer
+n	nat
+[conditionedValue]
+
+(range start end)
+Create list based on a range
+start	integer
+end	integer
+
+(read-csv fileName [sep])
+fileName	string
+[sep]	string
+
+(read-file fileName)
+fileName	string
+
+(regexp-split s sep)
+ Aliases: string-split
+Split a string into a list of substrings based on a separator
+s	string
+sep	string
+
+(rejection-query comp)
+comp
+
+(repeat n f)
+Repeat a function n times
+n	nat	Number of times to repeat
+f	function	Function to repeat
+
+(rest x)
+ Aliases: cdr
+Get everything after the first item in a pair or list
+x	pair
+
+(reverse lst)
+Reverse a list
+lst	list
+
+(round x)
+Round a number
+x	real
+
+(sample thunk)
+apply a thunk
+thunk	function
+
+(sample-discrete weights)
+Takes a list of weights and samples an index between 0 and (number of weights - 1) with probability proportional to the weights.
+weights	list
+
+(second lst)
+Get the second item of a list
+lst	list
+
+(set-seed seed)
+Seed a seed for the PRNG
+seed	string
+
+(seventh lst)
+Get the seventh item of a list
+lst	list
+
+(sin x)
+Sine
+x	real
+
+(sixth lst)
+Get the sixth item of a list
+lst	list
+
+(soft-equal y x tol)
+ Aliases: soft=
+Check whether y is in the interval [x - tol, x + tol]
+y	real
+x	real
+tol	real
+
+(some lst)
+ Aliases: any
+Test whether some of the values in a list are true
+lst	list	List of boolean values
+
+(sort lst [cmp])
+Sort a list according to a comparator function cmp(a,b) that returns a number greater than 0 if a > b, 0 if a == b, and a number less than 0 if a < b
+lst	list
+[cmp]	function
+
+(sqrt x)
+Square root
+x	real
+
+(string->number s)
+Convert a string to a number
+s	string
+
+(string->symbol s)
+Convert a string to a symbol
+s	string
+
+(string-append [x ...])
+Concatenates the given strings
+[x ...]	string	Strings to concatenate
+
+(string-append [s ...])
+Append an arbitrary number of strings
+[s ...]	string
+
+(string-length string)
+Get the length of string
+string	string
+
+(string-slice string start [end])
+Extract a substring from a string
+string	string
+start	nat
+[end]	nat
+
+(stringify x)
+Convert an object to a string
+x
+
+(sum lst)
+Sum a list of numbers
+lst	list	List of numbers to sum
+
+(symbol->string sym)
+sym	string
+
+(take lst n)
+Get the first n items in a list. If there are fewer than n items in the list, returns just the list.
+lst	list
+n	nat
+
+(tan x)
+Tangent
+x	real
+
+(third lst)
+Get the third item of a list
+lst	list
+
+(transpose mat)
+Transpose list of lists
+mat	list
+
+(uncurry f)
+ Aliases: uc
+uncurry function: f::a,b -> (f::a)::b
+f	function
+
+(uniform a b [conditionedValue])
+Sample a random real uniformly from the interval [a,b]
+a	real
+b	real
+[conditionedValue]
+
+(uniform-draw items [conditionedValue])
+Uniformly sample an element from a list
+items	list
+[conditionedValue]
+
+(union [lst ...])
+union of sets
+[lst ...]	list
+
+(unique lst [eq])
+Get the unique items in a list
+lst	list
+[eq]	function	Optional equality comparison function
+
+(update-list lst n value)
+lst	list
+n	nat
+value
+
+(variance lst)
+ Aliases: var
+Population variance
+lst	list	List of numbers
+
+(write-csv data fileName [sep])
+data	list
+fileName	string
+[sep]	string
+
+(zip [lst ...])
+Zip together lists using longest list as base -- is invertable
+[lst ...]	list
+
+(zipT [lst ...])
+Zip together lists using shortest list as base -- not invertable as it truncates
+[lst ...]	list
