@@ -1,4 +1,4 @@
-from pyquil.gates import ALL_GATES
+from pyquil.gates import STANDARD_INSTRUCTIONS
 
 from pprint import pprint
 
@@ -26,7 +26,7 @@ def build(stack):
     for expression in stack:
         assert len(expression) > 0, 'Error: parsed empty list {}'.format(item)
         head = expression[0]
-        if head in ALL_GATES:
+        if head in STANDARD_INSTRUCTIONS:
             if head == 'MEASURE':
                 yield '{} {} [{}]'.format(*insert_defs(expression))
             else:

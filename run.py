@@ -3,7 +3,6 @@ import sys
 
 from pyquil.quil  import Program
 from pyquil.api   import QVMConnection
-from pyquil.gates import ALL_GATES
 
 def run(filename):
     with open(filename, 'r') as infile:
