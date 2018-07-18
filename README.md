@@ -3,7 +3,9 @@
 Curry is a prototype of a quantum probabilistic programming language, done with the [unitary fund](unitary.fund).
 The official project duration is one year, but the language may be usable before then (and in fact, can already be used to use all of the QUIL spec).
 
-Currently the name "Curry" is up for debate. I have other ideas, and I'm open to suggestions. However, Curry is both an incredible food and comes from Haskell Curry. It also respects the naming of the "Church" programming language.
+Currently the name "Curry" is up for debate. 
+I have other ideas, and I'm open to suggestions. However, Curry is both an incredible food and comes from the mathematician [Haskell Curry](https://en.wikipedia.org/wiki/Haskell_Curry). 
+It also respects the naming of the "Church" programming language.
 
 Essentially, this project aims to allow people to build probabilistic models and run them on a quantum computer without using raw assembly instructions. 
 Instead, the goal is to build common quantum random primitives and distributions that can be used to compose larger probabilistic structures, without referencing raw quantum computer instructions whatsoever (or at least, unless doing so was desired).
