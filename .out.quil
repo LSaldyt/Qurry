@@ -1,12 +1,1 @@
-X 0
-H 1
-CNOT 0 1
-MEASURE 0 [0]
-MEASURE 1 [1]
-
-JUMP-WHEN @first-35c5825a-089f-4739-a9cf-113767aa8205 [0]
-  Y 2
-JUMP @end-398c3ddc-92e9-4d65-aabe-c52c4db973d0
-LABEL @first-35c5825a-089f-4739-a9cf-113767aa8205
-  X 2
-LABEL @end-398c3ddc-92e9-4d65-aabe-c52c4db973d0
+# FLIP {}

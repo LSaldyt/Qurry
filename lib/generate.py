@@ -36,6 +36,10 @@ def build(stack):
         elif head == 'def':
             assert len(expression) == 3, 'Def expressions should take the form (def var val)'
             definitions[expression[1]] = expression[2]
+        elif head == 'flip':
+            assert len(expression) == 1 or len(expression) == 2, 'Flip requires either zero or one argument'
+            print(expression)
+            yield '# FLIP {}'
         else:
             print(head)
             1/0
