@@ -11,6 +11,7 @@ def run(filename):
     qvm = QVMConnection()
     wave_function = qvm.wavefunction(program)
     print(wave_function)
+    print(wave_function.pretty_print_probabilities())
 
 def main(args):
     assert len(args) > 0, 'Usage: ./run [filename]'

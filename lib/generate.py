@@ -16,6 +16,8 @@ def create_if(cond, a, b):
 def create_clear(q, scratch=63):
     return clear_template.format(q=q, scratch_bit=scratch, uuid=named_uuid('qubit-{}'.format(q)))
 
+from math import acos, asin, sin, cos, sqrt
+
 def build(stack):
     definitions = dict()
     def insert_defs(items):
@@ -52,6 +54,12 @@ def build(stack):
                 yield ''
             print(expression)
             yield '# FLIP {}'
+        elif head == 'bernoulli':
+            assert len(expression) == 3
+            _, p, q = expression
+            p = float(p)
+            theta = 2 * acos(sqrt(p))
+            yield 'RX({theta}) {q}'.format(theta=theta, q=q)
         else:
             print('No generation branch for:')
             print(head)

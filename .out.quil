@@ -1,6 +1,1 @@
-H 0
-# Clearing qubit 0
-MEASURE 0 [63]
-JUMP-UNLESS @qubit-0-5fe1db17-af91-4c91-b183-97b17794ad28 [63]
-X 0
-LABEL @qubit-0-5fe1db17-af91-4c91-b183-97b17794ad28
+RX(2.0943951023931957) 0
