@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+from pyquil.gates import STANDARD_INSTRUCTIONS
+
+from pprint import pprint
+
+pprint(STANDARD_INSTRUCTIONS)
