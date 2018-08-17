@@ -48,12 +48,19 @@ def build(stack):
         elif head == 'clear':
             assert len(expression) == 2, 'Clear expressions should look like: (clear q)'
             yield create_clear(expression[1])
-        elif head == 'bernoulli':
+        elif 'bernoulli' in head:
             assert len(expression) == 3
+            postfix = head.replace('bernoulli', '')
+            if postfix == '' or postfix == '_x':
+                rot = 'RX'
+            elif postfix == '_y':
+                rot = 'RY'
+            else:
+                rot = 'RZ'
             _, p, q = expression
             p = float(p)
             theta = 2 * acos(sqrt(p))
-            yield 'RX({theta}) {q}'.format(theta=theta, q=q)
+            yield '{rot}({theta}) {q}'.format(rot=rot, theta=theta, q=q)
         else:
             print('No generation branch for:')
             print(head)
