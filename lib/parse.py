@@ -1,4 +1,7 @@
 def parse(item):
+    '''
+    item is the raw text of a q-lisp file
+    '''
     stack = []
     depth = 0
     inner = ''
@@ -12,6 +15,8 @@ def parse(item):
         else:
             current.append(item)
     for character in item.strip():
+        if character == '#':
+            item = item[:item.find('\n')]
         if character == '(':
             if inner.strip() != '':
                 add(inner.strip())

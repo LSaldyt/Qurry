@@ -1,6 +1,8 @@
-from pyquil.gates import STANDARD_INSTRUCTIONS
+import sys
 
 from pprint import pprint
+
+from pyquil.gates import STANDARD_INSTRUCTIONS
 
 from .templates import if_template, clear_template
 from .utils     import named_uuid
@@ -44,16 +46,8 @@ def build(stack):
             assert len(expression) == 3, 'Def expressions should take the form (def var val)'
             definitions[expression[1]] = expression[2]
         elif head == 'clear':
-            assert len(expression) == 2, 'Clean expressions should look like: (clear q)'
+            assert len(expression) == 2, 'Clear expressions should look like: (clear q)'
             yield create_clear(expression[1])
-        elif head == 'flip':
-            assert len(expression) == 1 or len(expression) == 2, 'Flip requires either zero or one argument'
-            if len(expression) == 1:
-                yield ''
-            else:
-                yield ''
-            print(expression)
-            yield '# FLIP {}'
         elif head == 'bernoulli':
             assert len(expression) == 3
             _, p, q = expression
@@ -63,7 +57,9 @@ def build(stack):
         else:
             print('No generation branch for:')
             print(head)
-            1/0
+            print('In:')
+            print(expression)
+            sys.exit(1)
 
 def generate_single(expression):
     return generate([expression])
