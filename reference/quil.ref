@@ -1,34 +1,60 @@
-{'AND': <function AND at 0x7fe706e806a8>,
- 'CCNOT': <function CCNOT at 0x7fe706e7cf28>,
- 'CNOT': <function CNOT at 0x7fe706e7cea0>,
- 'CPHASE': <function CPHASE at 0x7fe706e801e0>,
- 'CPHASE00': <function CPHASE00 at 0x7fe706e80048>,
- 'CPHASE01': <function CPHASE01 at 0x7fe706e800d0>,
- 'CPHASE10': <function CPHASE10 at 0x7fe706e80158>,
- 'CSWAP': <function CSWAP at 0x7fe706e802f0>,
- 'CZ': <function CZ at 0x7fe706e7ce18>,
- 'EXCHANGE': <function EXCHANGE at 0x7fe706e80840>,
- 'FALSE': <function FALSE at 0x7fe706e80598>,
- 'H': <function H at 0x7fe706e7ca60>,
- 'HALT': <pyquil.quilbase.Halt object at 0x7fe706e71668>,
- 'I': <function I at 0x7fe707693598>,
- 'ISWAP': <function ISWAP at 0x7fe706e80378>,
- 'MEASURE': <function MEASURE at 0x7fe706e80488>,
- 'MOVE': <function MOVE at 0x7fe706e807b8>,
- 'NOP': <pyquil.quilbase.Nop object at 0x7fe706e6c358>,
- 'NOT': <function NOT at 0x7fe706e80620>,
- 'OR': <function OR at 0x7fe706e80730>,
- 'PHASE': <function PHASE at 0x7fe706e7cd90>,
- 'PSWAP': <function PSWAP at 0x7fe706e80400>,
- 'RESET': <pyquil.quilbase.Reset object at 0x7fe706e6c278>,
- 'RX': <function RX at 0x7fe706e7cbf8>,
- 'RY': <function RY at 0x7fe706e7cc80>,
- 'RZ': <function RZ at 0x7fe706e7cd08>,
- 'S': <function S at 0x7fe706e7cae8>,
- 'SWAP': <function SWAP at 0x7fe706e80268>,
- 'T': <function T at 0x7fe706e7cb70>,
- 'TRUE': <function TRUE at 0x7fe706e80510>,
- 'WAIT': <pyquil.quilbase.Wait object at 0x7fe706e6c240>,
- 'X': <function X at 0x7fe706e667b8>,
- 'Y': <function Y at 0x7fe706e7c950>,
- 'Z': <function Z at 0x7fe706e7c9d8>}
+MEASURE
+    ['qubit', 'classical_reg']
+TRUE
+    ['classical_reg']
+FALSE
+    ['classical_reg']
+NOT
+    ['classical_reg']
+AND
+    ['classical_reg1', 'classical_reg2']
+OR
+    ['classical_reg1', 'classical_reg2']
+MOVE
+    ['classical_reg1', 'classical_reg2']
+EXCHANGE
+    ['classical_reg1', 'classical_reg2']
+I
+    ['qubit']
+X
+    ['qubit']
+Y
+    ['qubit']
+Z
+    ['qubit']
+H
+    ['qubit']
+S
+    ['qubit']
+T
+    ['qubit']
+PHASE
+    ['angle', 'qubit']
+RX
+    ['angle', 'qubit']
+RY
+    ['angle', 'qubit']
+RZ
+    ['angle', 'qubit']
+CZ
+    ['control', 'target']
+CNOT
+    ['control', 'target']
+CCNOT
+    ['control1', 'control2', 'target']
+CPHASE00
+    ['angle', 'control', 'target']
+CPHASE01
+    ['angle', 'control', 'target']
+CPHASE10
+    ['angle', 'control', 'target']
+CPHASE
+    ['angle', 'control', 'target']
+SWAP
+    ['q1', 'q2']
+CSWAP
+    ['control', 'target_1', 'target_2']
+ISWAP
+    ['q1', 'q2']
+PSWAP
+    ['angle', 'q1', 'q2']
