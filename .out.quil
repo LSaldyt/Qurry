@@ -1,5 +1,8 @@
 RX(1.5707963267948966) 0
-X 0
-Y 0
-Z 0
-H 1
+DEFGATE CRX(%theta):
+    1, 0, 0, 0
+    0, 1, 0, 0
+    0, 0, cos(%theta/2), -i*sin(%theta/2)
+    0, 0, -i*sin(%theta/2), cos(%theta/2)
+
+CRX(pi/2) 0 1

@@ -7,6 +7,8 @@ from pyquil.gates import STANDARD_INSTRUCTIONS
 from .templates import if_template, clear_template
 from .utils     import named_uuid
 
+from .controlled import controlled_bernoulli
+
 def create_if(cond, a, b):
     return if_template.format(
             cond=cond,
@@ -48,6 +50,18 @@ def build(stack):
         elif head == 'clear':
             assert len(expression) == 2, 'Clear expressions should look like: (clear q)'
             yield create_clear(expression[1])
+        elif 'cbernoulli' in head:
+            assert len(expression) == 4
+            postfix = head.replace('cbernoulli', '')
+            if postfix == '' or postfix == '_x':
+                rot = 'RX'
+            elif postfix == '_y':
+                rot = 'RY'
+            else:
+                rot = 'RZ'
+            _, p, a, b = expression
+            p = float(p)
+            yield controlled_bernoulli(p, int(a), int(b))
         elif 'bernoulli' in head:
             assert len(expression) == 3
             postfix = head.replace('bernoulli', '')
