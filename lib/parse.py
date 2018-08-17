@@ -15,7 +15,7 @@ def parse(item):
         else:
             current.append(item)
     for character in item.strip():
-        if character == '#':
+        if character == ';':
             item = item[:item.find('\n')]
         if character == '(':
             if inner.strip() != '':
