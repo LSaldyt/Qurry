@@ -1,11 +1,11 @@
-RX(1.1592794807274085) 0
+RX(1.5707963267948966) 0
 DEFGATE CRX(%theta):
     1, 0, 0, 0
     0, 1, 0, 0
     0, 0, cos(%theta/2), -i*sin(%theta/2)
     0, 0, -i*sin(%theta/2), cos(%theta/2)
 
-CRX(1.9106332433200863) 0 1
+CRX(pi/2) 0 1
 DEFGATE CRX(%theta):
     1, 0, 0, 0
     0, 1, 0, 0
@@ -13,3 +13,38 @@ DEFGATE CRX(%theta):
     0, 0, -i*sin(%theta/2), cos(%theta/2)
 
 CRX(pi/2) 1 2
+DEFGATE CRX(%theta):
+    1, 0, 0, 0
+    0, 1, 0, 0
+    0, 0, cos(%theta/2), -i*sin(%theta/2)
+    0, 0, -i*sin(%theta/2), cos(%theta/2)
+
+CRX(pi/2) 2 3
+DEFGATE CRX(%theta):
+    1, 0, 0, 0
+    0, 1, 0, 0
+    0, 0, cos(%theta/2), -i*sin(%theta/2)
+    0, 0, -i*sin(%theta/2), cos(%theta/2)
+
+CRX(pi/2) 3 4
+DEFGATE CRX(%theta):
+    1, 0, 0, 0
+    0, 1, 0, 0
+    0, 0, cos(%theta/2), -i*sin(%theta/2)
+    0, 0, -i*sin(%theta/2), cos(%theta/2)
+
+CRX(pi/2) 4 5
+DEFGATE CRX(%theta):
+    1, 0, 0, 0
+    0, 1, 0, 0
+    0, 0, cos(%theta/2), -i*sin(%theta/2)
+    0, 0, -i*sin(%theta/2), cos(%theta/2)
+
+CRX(pi/2) 5 6
+DEFGATE CRX(%theta):
+    1, 0, 0, 0
+    0, 1, 0, 0
+    0, 0, cos(%theta/2), -i*sin(%theta/2)
+    0, 0, -i*sin(%theta/2), cos(%theta/2)
+
+CRX(pi/2) 6 7

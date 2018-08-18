@@ -1,0 +1,8 @@
+(bernoulli 0.5 0)
+(cbernoulli 0.5 0 1)
+(cbernoulli 0.5 1 2)
+(cbernoulli 0.5 2 3)
+(cbernoulli 0.5 3 4)
+(cbernoulli 0.5 4 5)
+(cbernoulli 0.5 5 6)
+(cbernoulli 0.5 6 7)
