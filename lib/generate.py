@@ -33,7 +33,7 @@ def build(stack):
             except TypeError:
                 yield item
     for expression in stack:
-        assert len(expression) > 0, 'Error: parsed empty list {}'.format(item)
+        assert len(expression) > 0, 'Error: parsed empty list {}'.format(expression)
         head = expression[0]
         upper = head.upper()
         if upper in STANDARD_INSTRUCTIONS:

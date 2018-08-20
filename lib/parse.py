@@ -1,7 +1,16 @@
+
+def remove_comment(line):
+    if ';' not in line:
+        return line
+    else:
+        return line[:line.find(';')]
+
 def parse(item):
     '''
     item is the raw text of a q-lisp file
     '''
+    cleaned = (remove_comment(line) for line in item.split('\n'))
+    item = '\n'.join(line for line in cleaned if line != '') # Strip comments
     stack = []
     depth = 0
     inner = ''
@@ -15,8 +24,6 @@ def parse(item):
         else:
             current.append(item)
     for character in item.strip():
-        if character == ';':
-            item = item[:item.find('\n')]
         if character == '(':
             if inner.strip() != '':
                 add(inner.strip())
