@@ -7,7 +7,7 @@ from pyquil.gates import STANDARD_INSTRUCTIONS
 from .templates import if_template, clear_template
 from .utils     import named_uuid
 
-from .controlled import controlled_bernoulli
+from .controlled import controlled_bernoulli, controlled_i_bernoulli
 
 def create_if(cond, a, b):
     return if_template.format(
@@ -62,6 +62,18 @@ def build(stack):
             _, p, a, b = expression
             p = float(p)
             yield controlled_bernoulli(p, int(a), int(b))
+        elif 'cibernoulli' in head:
+            assert len(expression) == 4
+            postfix = head.replace('cibernoulli', '')
+            if postfix == '' or postfix == '_x':
+                rot = 'RX'
+            elif postfix == '_y':
+                rot = 'RY'
+            else:
+                rot = 'RZ'
+            _, p, a, b = expression
+            p = float(p)
+            yield controlled_i_bernoulli(p, int(a), int(b))
         elif 'bernoulli' in head:
             assert len(expression) == 3
             postfix = head.replace('bernoulli', '')

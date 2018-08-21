@@ -22,8 +22,16 @@ def controlled_X(n, a, b):
     CRX = DefGate('CRX', crx, [theta])
     return str(CRX) + '\n' + str(CRX.get_constructor()(n)(a, b))
 
-#print(controlled_X(1.567))
+def controlled_i_X(n, a, b):
+    theta = Parameter('theta')
+    cirx = np.array([[quil_cos(theta / 2), -1j * quil_sin(theta / 2), 0, 0], [-1j * quil_sin(theta / 2), quil_cos(theta / 2), 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+    CIRX = DefGate('CIRX', cirx, [theta])
+    return str(CIRX) + '\n' + str(CIRX.get_constructor()(n)(a, b))
+
 def controlled_bernoulli(n, a, b):
     theta = 2 * acos(sqrt(n))
     return controlled_X(theta, a, b)
 
+def controlled_i_bernoulli(n, a, b):
+    theta = 2 * acos(sqrt(n))
+    return controlled_i_X(theta, a, b)
