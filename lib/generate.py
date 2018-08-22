@@ -8,6 +8,7 @@ from .templates import if_template, clear_template
 from .utils     import named_uuid
 
 from .controlled import controlled_bernoulli, controlled_i_bernoulli
+from .multinomial import CRX_diags
 
 def create_if(cond, a, b):
     return if_template.format(
@@ -87,6 +88,8 @@ def build(stack):
             p = float(p)
             theta = 2 * acos(sqrt(p))
             yield '{rot}({theta}) {q}'.format(rot=rot, theta=theta, q=q)
+        elif 'defcrxdiags' in head:
+            yield CRX_diags(3)
         else:
             print('No generation branch for:')
             print(head)
