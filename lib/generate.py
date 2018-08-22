@@ -91,11 +91,11 @@ def build(stack):
         elif 'defcrxdiags' in head:
             yield CRX_diags(3)
         elif 'crxbern3' in head:
-            assert len(expression) == 7
-            _, a, b, c, q0, q1, q2 = expression
+            assert len(expression) == 8
+            _, a, b, c, d, q0, q1, q2 = expression
             f = lambda x : 2 * acos(sqrt(float(x)))
-            a, b, c = f(a), f(b), f(c)
-            yield 'CRX_diag_3({})'.format(', '.join(map(str, [a, b, c]))) + q0 + q1 + q2
+            a, b, c, d = f(a), f(b), f(c), f(d)
+            yield 'CRX_diag_3({})'.format(', '.join(map(str, [a, b, c, d]))) + ' ' + q0 + ' ' + q1 + ' ' + q2
         else:
             print('No generation branch for:')
             print(head)
