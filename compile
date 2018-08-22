@@ -6,7 +6,6 @@ from run import run
 from lib.parse    import parse
 from lib.generate import generate
 
-
 def main(args):
     assert len(args) > 0, 'Usage: ./compile [filename]'
     filename = args[0]

@@ -90,6 +90,12 @@ def build(stack):
             yield '{rot}({theta}) {q}'.format(rot=rot, theta=theta, q=q)
         elif 'defcrxdiags' in head:
             yield CRX_diags(3)
+        elif 'crxbern3' in head:
+            assert len(expression) == 7
+            _, a, b, c, q0, q1, q2 = expression
+            f = lambda x : 2 * acos(sqrt(float(x)))
+            a, b, c = f(a), f(b), f(c)
+            yield 'CRX_diag_3({})'.format(', '.join(map(str, [a, b, c]))) + q0 + q1 + q2
         else:
             print('No generation branch for:')
             print(head)
