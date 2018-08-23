@@ -12,9 +12,9 @@ def controlled(U):
     base[2:4,2:4] = U
     return base
 
-#Y = np.array([[0, 0.0-1j], [0.0+1j, 0]])
-#print(Y)
-#print(controlled(Y))
+def bernoulli(p, q, rot='RX'):
+    theta = 2 * acos(sqrt(p))
+    return '{rot}({theta}) {q}'.format(rot=rot, theta=theta, q=q)
 
 def controlled_X(n, a, b):
     theta = Parameter('theta')

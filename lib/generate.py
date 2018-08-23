@@ -7,7 +7,7 @@ from pyquil.gates import STANDARD_INSTRUCTIONS
 from .templates import if_template, clear_template
 from .utils     import named_uuid
 
-from .controlled import controlled_bernoulli, controlled_i_bernoulli
+from .controlled import controlled_bernoulli, controlled_i_bernoulli, bernoulli
 from .multinomial import CRX_diags
 
 def create_if(cond, a, b):
@@ -86,8 +86,7 @@ def build(stack):
                 rot = 'RZ'
             _, p, q = expression
             p = float(p)
-            theta = 2 * acos(sqrt(p))
-            yield '{rot}({theta}) {q}'.format(rot=rot, theta=theta, q=q)
+            yield bernoulli(p, rot=rot)
         elif 'defcrxdiags' in head:
             yield CRX_diags(3)
         elif 'crxbern3' in head:
