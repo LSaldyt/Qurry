@@ -8,7 +8,7 @@ from .templates import if_template, clear_template
 from .utils     import named_uuid
 
 from .controlled import controlled_bernoulli, controlled_i_bernoulli, bernoulli
-from .multinomial import CRX_diags
+from .multinomial import CRX_diags, multinomial
 
 def create_if(cond, a, b):
     return if_template.format(
@@ -86,7 +86,7 @@ def build(stack):
                 rot = 'RZ'
             _, p, q = expression
             p = float(p)
-            yield bernoulli(p, rot=rot)
+            yield bernoulli(p, q, rot=rot)
         elif 'defcrxdiags' in head:
             yield CRX_diags(3)
         elif 'crxbern3' in head:
@@ -95,6 +95,9 @@ def build(stack):
             f = lambda x : 2 * acos(sqrt(float(x)))
             a, b, c, d = f(a), f(b), f(c), f(d)
             yield 'CRX_diag_3({})'.format(', '.join(map(str, [a, b, c, d]))) + ' ' + q0 + ' ' + q1 + ' ' + q2
+
+        elif 'multinomial' in head:
+            yield multinomial(*(map(float, expression[1:])))
         else:
             print('No generation branch for:')
             print(head)
