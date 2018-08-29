@@ -4,6 +4,10 @@ import sys
 from pyquil.quil  import Program
 from pyquil.api   import QVMConnection
 
+from math import floor, log
+
+bitstr  = lambda n : str(bin(n))[2:]
+
 def run(filename):
     with open(filename, 'r') as infile:
         quil = infile.read()
@@ -12,6 +16,11 @@ def run(filename):
     wave_function = qvm.wavefunction(program)
     print(wave_function)
     print(wave_function.pretty_print_probabilities())
+    probs = wave_function.pretty_print_probabilities()
+    rbitstr = lambda n : bitstr(n)[::-1].ljust(floor(log(len(probs), 2)), '0')
+    lprobs = [probs[rbitstr(i)] for i in range(len(probs))]
+    print('Retrieved probabilities:')
+    print(lprobs)
 
 def main(args):
     assert len(args) > 0, 'Usage: ./run [filename]'

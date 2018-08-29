@@ -51,30 +51,6 @@ def build(stack):
         elif head == 'clear':
             assert len(expression) == 2, 'Clear expressions should look like: (clear q)'
             yield create_clear(expression[1])
-        elif 'cbernoulli' in head:
-            assert len(expression) == 4
-            postfix = head.replace('cbernoulli', '')
-            if postfix == '' or postfix == '_x':
-                rot = 'RX'
-            elif postfix == '_y':
-                rot = 'RY'
-            else:
-                rot = 'RZ'
-            _, p, a, b = expression
-            p = float(p)
-            yield controlled_bernoulli(p, int(a), int(b))
-        elif 'cibernoulli' in head:
-            assert len(expression) == 4
-            postfix = head.replace('cibernoulli', '')
-            if postfix == '' or postfix == '_x':
-                rot = 'RX'
-            elif postfix == '_y':
-                rot = 'RY'
-            else:
-                rot = 'RZ'
-            _, p, a, b = expression
-            p = float(p)
-            yield controlled_i_bernoulli(p, int(a), int(b))
         elif 'bernoulli' in head:
             assert len(expression) == 3
             postfix = head.replace('bernoulli', '')
@@ -87,15 +63,6 @@ def build(stack):
             _, p, q = expression
             p = float(p)
             yield bernoulli(p, q, rot=rot)
-        elif 'defcrxdiags' in head:
-            yield CRX_diags(3)
-        elif 'crxbern3' in head:
-            assert len(expression) == 8
-            _, a, b, c, d, q0, q1, q2 = expression
-            f = lambda x : 2 * acos(sqrt(float(x)))
-            a, b, c, d = f(a), f(b), f(c), f(d)
-            yield 'CRX_diag_3({})'.format(', '.join(map(str, [a, b, c, d]))) + ' ' + q0 + ' ' + q1 + ' ' + q2
-
         elif 'multinomial' in head:
             yield multinomial(*(map(float, expression[1:])))
         elif 'uniform' in head:
@@ -103,7 +70,7 @@ def build(stack):
                 n = int(expression[1])
             except TypeError:
                 raise TypeError('(uniform n) expects an integer argument')
-            yield multinomial(1/n for _ in range(n))
+            yield multinomial(*(1/n for _ in range(n)))
         else:
             print('No generation branch for:')
             print(head)
