@@ -1,4 +1,6 @@
 # Originally written by M. Sohaib Alam, github: msohaibalam
+# Essentially unmodified and now used by LSaldyt
+
 import numpy as np
 import itertools
 from pyquil.quil import Program
