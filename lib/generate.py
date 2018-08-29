@@ -98,6 +98,12 @@ def build(stack):
 
         elif 'multinomial' in head:
             yield multinomial(*(map(float, expression[1:])))
+        elif 'uniform' in head:
+            try:
+                n = int(expression[1])
+            except TypeError:
+                raise TypeError('(uniform n) expects an integer argument')
+            yield multinomial(1/n for _ in range(n))
         else:
             print('No generation branch for:')
             print(head)
