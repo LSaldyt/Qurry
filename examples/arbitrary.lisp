@@ -1,2 +1,4 @@
-(multinomial 0.1 0.2 0.3 0.4)
-;(uniform 5)
+(def start 0)
+(multinomial .25 .25 .25 .25 start)
+(def b 1)
+(multinomial 0 0 .5 .5 b)

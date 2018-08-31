@@ -55,18 +55,21 @@ def produce_probability_tree(weights):
 
     return [first_s, levels]
 
-def write_diag_bernoulli_code(probtree):
+def write_diag_bernoulli_code(probtree, offset):
     code = ''
     for i, level in enumerate(probtree):
         level = [2 * acos(sqrt(x)) for x in level]
         n_qubits = floor(log(len(level), 2)) + 1
         code += '\nCRX_diag_{}({}) {}'.format(n_qubits,
                                               ', '.join(map(str, level)),
-                                               ' '.join(map(str, range(n_qubits))))
+                                               ' '.join(map(str, (offset + n for n in range(n_qubits)))))
     return code
 
 def multinomial(*weights):
-    weights  = list(weights)
+    definitions = weights[-1]
+    offset      = int(definitions[weights[-2]])
+
+    weights  = list(map(float, weights[:-2]))
     n_qubits = ceil(log(len(weights), 2))
     lendiff  = 2 ** n_qubits - len(weights)
     weights  = weights + [0] * lendiff
@@ -77,7 +80,7 @@ def multinomial(*weights):
     code = ''
     for i in range(1, 4):
         code += CRX_diags(i)
-    code += bernoulli(initial_p, 0)
-    code += write_diag_bernoulli_code(probtree)
+    code += bernoulli(initial_p, offset)
+    code += write_diag_bernoulli_code(probtree, offset)
 
     return code

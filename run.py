@@ -18,9 +18,10 @@ def run(filename):
     print(wave_function.pretty_print_probabilities())
     probs = wave_function.pretty_print_probabilities()
     rbitstr = lambda n : bitstr(n)[::-1].ljust(floor(log(len(probs), 2)), '0')
-    lprobs = [probs[rbitstr(i)] for i in range(len(probs))]
-    print('Retrieved probabilities:')
-    print(lprobs)
+    #lprobs = [probs[rbitstr(i)] for i in range(len(probs))]
+    #print('Retrieved probabilities:')
+    #print(lprobs)
+    print(probs)
 
 def main(args):
     assert len(args) > 0, 'Usage: ./run [filename]'

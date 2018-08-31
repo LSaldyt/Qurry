@@ -64,13 +64,14 @@ def build(stack):
             p = float(p)
             yield bernoulli(p, q, rot=rot)
         elif 'multinomial' in head:
-            yield multinomial(*(map(float, expression[1:])))
+            yield multinomial(*expression[1:], definitions)
         elif 'uniform' in head:
             try:
                 n = int(expression[1])
+                o = expression[2]
             except TypeError:
                 raise TypeError('(uniform n) expects an integer argument')
-            yield multinomial(*(1/n for _ in range(n)))
+            yield multinomial(*(1/n for _ in range(n)), o, definitions)
         else:
             print('No generation branch for:')
             print(head)
