@@ -6,3 +6,5 @@
 (x a)
 (bernoulli 0.5 a)
 (clear a)
+
+(uniform 8 a)

@@ -58,32 +58,6 @@ def build(stack, definitions=None):
             module  = getattr(constructs, head)
             creator = getattr(module, 'create_' + head)
             yield creator(*insert_defs(expression[1:]), definitions=definitions)
-        #elif head == 'if':
-        #    yield create_if(*(insert_defs(expression[1:])))
-        #elif head == 'clear':
-        #    assert len(expression) == 2, 'Clear expressions should look like: (clear q)'
-        #    yield create_clear(expression[1])
-        #elif 'bernoulli' in head:
-        #    assert len(expression) == 3
-        #    postfix = head.replace('bernoulli', '')
-        #    if postfix == '' or postfix == '_x':
-        #        rot = 'RX'
-        #    elif postfix == '_y':
-        #        rot = 'RY'
-        #    else:
-        #        rot = 'RZ'
-        #    _, p, q = expression
-        #    p = float(p)
-        #    yield bernoulli(p, q, rot=rot)
-        #elif 'multinomial' in head:
-        #    yield multinomial(*expression[1:], definitions)
-        #elif 'uniform' in head:
-        #    try:
-        #        n = int(expression[1])
-        #        o = expression[2]
-        #    except TypeError:
-        #        raise TypeError('(uniform n) expects an integer argument')
-        #    yield multinomial(*(1/n for _ in range(n)), o, definitions)
         else:
             print('No generation branch for:')
             print(head)

@@ -57,11 +57,12 @@ def produce_probability_tree(weights):
 def write_diag_bernoulli_code(probtree, offset):
     code = ''
     for i, level in enumerate(probtree):
-        level = [2 * acos(sqrt(x)) for x in level]
-        n_qubits = floor(log(len(level), 2)) + 1
-        code += '\nCRX_diag_{}({}) {}'.format(n_qubits,
-                                              ', '.join(map(str, level)),
-                                               ' '.join(map(str, (offset + n for n in range(n_qubits)))))
+        if level:
+            level = [2 * acos(sqrt(x)) for x in level]
+            n_qubits = floor(log(len(level), 2)) + 1
+            code += '\nCRX_diag_{}({}) {}'.format(n_qubits,
+                                                  ', '.join(map(str, level)),
+                                                   ' '.join(map(str, (offset + n for n in range(n_qubits)))))
     return code
 
 def multinomial(*weights, offset, definitions):
