@@ -16,3 +16,17 @@ DEFGATE CRX_diag_3(%p0, %p1, %p2, %p3):
     0, 0, 0, 0, 0, 0, cos(%p3/2), -i*sin(%p3/2)
     0, 0, 0, 0, 0, 0, -i*sin(%p3/2), cos(%p3/2)
 RX(1.5707963267948966) 0
+# Conditional statement
+JUMP-WHEN @first-f63bec1c-5da4-456b-9dcc-5b0dc93834b6 [0]
+  
+JUMP @end-dfe3d0ab-4b8d-48be-a800-b17aabd6f4f1
+LABEL @first-f63bec1c-5da4-456b-9dcc-5b0dc93834b6
+  
+LABEL @end-dfe3d0ab-4b8d-48be-a800-b17aabd6f4f1
+X 0
+RX(1.5707963267948966) 0
+# Clearing qubit 0
+MEASURE 0 [63]
+JUMP-UNLESS @qubit-0-86c89114-7903-4a01-8511-b7f873b07f16 [63]
+X 0
+LABEL @qubit-0-86c89114-7903-4a01-8511-b7f873b07f16

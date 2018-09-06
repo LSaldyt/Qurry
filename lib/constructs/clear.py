@@ -1,3 +1,5 @@
+from ..utils import named_uuid
+
 clear_template = '''# Clearing qubit {q}
 MEASURE {q} [{scratch_bit}]
 JUMP-UNLESS @{uuid} [{scratch_bit}]

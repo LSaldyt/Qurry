@@ -29,8 +29,9 @@ def create_clear(q, scratch=63):
 
 from math import acos, asin, sin, cos, sqrt
 
-def build(stack):
-    definitions = dict()
+def build(stack, definitions=None):
+    if definitions is None:
+        definitions = dict()
     def insert_defs(items):
         for item in items:
             try:
@@ -40,8 +41,8 @@ def build(stack):
             except TypeError:
                 yield item
     for expression in stack:
-        print(dir(constructs))
         assert len(expression) > 0, 'Error: parsed empty list {}'.format(expression)
+        expression = ['\n'.join(build([item], definitions)) if isinstance(item, list) else item for item in expression]
         head = expression[0]
         upper = head.upper()
         if upper in STANDARD_INSTRUCTIONS:
@@ -95,4 +96,6 @@ def generate_single(expression):
 
 def generate(stack):
     pprint(stack)
-    return '\n'.join(build(stack))
+    l = list(build(stack))
+    print(l)
+    return '\n'.join(l)

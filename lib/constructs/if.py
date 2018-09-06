@@ -1,3 +1,5 @@
+from ..utils import named_uuid
+
 if_template = '''# Conditional statement
 JUMP-WHEN @{first} [{cond}]
   {b}
@@ -11,7 +13,7 @@ def create_if(cond, a, b, definitions=None):
         definitions = dict()
     return if_template.format(
             cond=cond,
-            a=generate_single(a),
-            b=generate_single(b),
+            a=a,
+            b=b,
             first=named_uuid('first'),
             end=named_uuid('end'))
