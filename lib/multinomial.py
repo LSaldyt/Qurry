@@ -67,7 +67,9 @@ def write_diag_bernoulli_code(probtree, offset):
 
 def multinomial(*weights, offset, definitions):
     weights = list(weights)
-    print(len(weights))
+    initial, *mid, final = offset.split(' ')
+    assert int(final) - int(initial) <= len(weights)
+    offset = int(initial)
     n_qubits = ceil(log(len(weights), 2))
     lendiff  = 2 ** n_qubits - len(weights)
     weights  = weights + [0] * lendiff
@@ -76,7 +78,7 @@ def multinomial(*weights, offset, definitions):
     print(initial_p, probtree)
 
     code = ''
-    for i in range(1, 4):
+    for i in range(1, 5):
         code += CRX_diags(i)
     code += bernoulli(initial_p, offset)
     code += write_diag_bernoulli_code(probtree, offset)

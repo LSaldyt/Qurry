@@ -6,8 +6,6 @@ from pprint import pprint
 
 import inspect
 
-
-
 for k, v in STANDARD_INSTRUCTIONS.items():
     if callable(v):
         aspec = inspect.getfullargspec(v)

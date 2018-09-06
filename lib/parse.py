@@ -1,9 +1,19 @@
-
 def remove_comment(line):
     if ';' not in line:
         return line
     else:
         return line[:line.find(';')]
+
+def typify(item):
+    try:
+        return int(item)
+    except ValueError:
+        try:
+            return float(item)
+        except ValueError:
+            return item
+    except TypeError:
+        return [typify(subitem) for subitem in item]
 
 def parse(item):
     '''

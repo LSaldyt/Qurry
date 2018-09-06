@@ -31,7 +31,9 @@ class Gaussian:
         mu_: mean
         N: cutoff the for the infinite sum, i.e. sum_{i=-N}^{i=N} (...)
         """
-        return np.sum(np.exp((-(np.arange(-N, N+1, 1) - mu_)**2)/float(sigma_**2)))
+        return np.sum(
+                np.exp((-(np.arange(-N, N+1, 1) - mu_)**2) /
+                        float(sigma_**2)))
 
     def angle_(self, sigma_, mu_, N=10**3):
         """
@@ -41,7 +43,8 @@ class Gaussian:
         mu_: mean
         N: cutoff for the infinite sum in the norm_(..)
         """
-        return np.arccos(np.sqrt(self.norm_(sigma_/2., mu_/2., N)/self.norm_(sigma_, mu_, N)))
+        return np.arccos(np.sqrt(
+                   self.norm_(sigma_/2., mu_/2., N) / self.norm_(sigma_, mu_, N)))
 
     def qubit_strings(self, n):
         """
