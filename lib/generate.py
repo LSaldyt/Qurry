@@ -23,7 +23,9 @@ def create_if(cond, a, b):
 
 def create_clear(q, scratch=63):
     return clear_template.format(q=q, scratch_bit=scratch, uuid=named_uuid('qubit-{}'.format(q)))
+
 '''
+
 
 from math import acos, asin, sin, cos, sqrt
 
@@ -52,7 +54,9 @@ def build(stack):
             assert len(expression) == 3, 'Def expressions should take the form (def var val)'
             definitions[expression[1]] = expression[2]
         elif hasattr(constructs, head):
-            1/0
+            module  = getattr(constructs, head)
+            creator = getattr(module, 'create_' + head)
+            yield creator(*insert_defs(expression[1:]), definitions=definitions)
         #elif head == 'if':
         #    yield create_if(*(insert_defs(expression[1:])))
         #elif head == 'clear':

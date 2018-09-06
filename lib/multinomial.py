@@ -32,12 +32,11 @@ def controlled_diag_bernoulli(weights, qubits):
 
 def produce_probability_tree(weights):
     if len(weights) <= 2:
-        return [weights[0]]
+        return [weights[0], []]
 
     n_qubits = ceil(log(len(weights), 2))
     divider  = 2 ** (n_qubits - 1)
 
-    print(weights)
     first        = weights[:divider]
     second       = weights[divider:]
     first_s      = sum(first)
@@ -65,11 +64,9 @@ def write_diag_bernoulli_code(probtree, offset):
                                                ' '.join(map(str, (offset + n for n in range(n_qubits)))))
     return code
 
-def multinomial(*weights):
-    definitions = weights[-1]
-    offset      = int(definitions[weights[-2]])
-
-    weights  = list(map(float, weights[:-2]))
+def multinomial(*weights, offset, definitions):
+    weights = list(weights)
+    print(len(weights))
     n_qubits = ceil(log(len(weights), 2))
     lendiff  = 2 ** n_qubits - len(weights)
     weights  = weights + [0] * lendiff
