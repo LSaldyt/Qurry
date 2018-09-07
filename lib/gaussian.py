@@ -173,6 +173,8 @@ class Gaussian:
         """
         Create and return the Gaussian wavefunction
         """
+        #print([1.0 / mu if mu != 0 else 0 for mu in self.level_means(self.mu, self.num_qubits)])
+        #1/0
         # define all gates to the program
         self.defn_all_gates(self.sigma, self.mu, self.num_qubits, self.prog)
         # apply all gates to the program

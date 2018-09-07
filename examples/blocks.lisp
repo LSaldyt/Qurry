@@ -4,4 +4,4 @@
 (def blockc 3 4 quantum)
 
 (x start)
-(multinomial 0.25 .25 .25 .25 blocka)
+(multinomial 0.02 0.96 0.02 blocka)

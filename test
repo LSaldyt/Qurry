@@ -4,9 +4,11 @@ import sys
 from lib.gaussian import Gaussian
 
 def main(args):
-    g = Gaussian(1.0, 1.0, 5)
+    g = Gaussian(.5, 2.0, 5)
     print(g.gaussian_wavefunc().pretty_print_probabilities())
-    print(g.prog._out(True))
+    #print(g.prog._out(True))
+    with open('.gaussian', 'w') as outfile:
+        outfile.write(g.prog._out(True))
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
