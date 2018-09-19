@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys
+import sys, time
 
 from pyquil.quil  import Program
 from pyquil.api   import QVMConnection
@@ -13,6 +13,7 @@ def run(filename):
         quil = infile.read()
     program = Program(quil)
     qvm = QVMConnection()
+    start = time.time()
     wave_function = qvm.wavefunction(program)
     print(wave_function)
     print(wave_function.pretty_print_probabilities())
@@ -22,6 +23,8 @@ def run(filename):
     #print('Retrieved probabilities:')
     #print(lprobs)
     print(probs)
+    end = time.time()
+    print((end-start) * 1000, 'ms simulated runtime')
 
 def main(args):
     assert len(args) > 0, 'Usage: ./run [filename]'

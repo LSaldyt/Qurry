@@ -66,6 +66,8 @@ def write_diag_bernoulli_code(probtree, offset):
     return code
 
 def multinomial(*weights, offset, definitions):
+    print(weights, offset, definitions)
+    print(offset)
     weights = list(weights)
     initial, *mid, final = offset.split(' ')
     assert int(final) - int(initial) <= len(weights)
