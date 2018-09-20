@@ -88,7 +88,7 @@ S(entence): (NP, VP)
 ```
 
 We can model this in curry using similar multinomial distributions and local classical mappings.
-To make things even simpler, let's first just consider modeling a randomly sampled Noun-Phrase.
+To make things even simpler, let's first just consider modeling a randomly sampled Noun-Phrase (which is the first part in sampling a full toy sentence).
 The noun-phrase is a concatenation of a determiner and a noun. In our toy example, we have two determiners and three nouns, both uniformly sampled, which makes for a total of six options with equal probability.
 So, we'll need three qubits to model this. Curry has builtins for these distributions.
 ```scheme
@@ -111,3 +111,30 @@ grid {curry}: ./compile examples/test.lisp
 
 277.4035930633545 ms simulated runtime
 ```
+
+In our output, the rightmost bit is representing the determiner, and the other two bits are representing the noun.
+So the output is (sic):
+```python3
+{'the chef' : 1/6, 'a chef' : 1/6, 'the omelet' : 1/6, 'a omelet' : 1/6, 'the soup' : 1/6, 'a soup' : 1/6}
+```
+Curry contains functionality to decode what these bits mean, but I will explain this in detail later.
+
+Now, let's consider the rest of the model.
+When we sample a Verb Phrase, it contains recursive elements.
+So, it will branch (with equal probabilities) to either (V AP) or (V NP).
+Before diving in, let's look at branching in quantum computers.
+
+Consider preparing a bell state:
+```
+(h 0)
+(cnot 0 1)
+```
+
+It is important to distinguish this preparation from the following:
+```
+(bernoulli 0.5 0)
+(measure 0 0)
+(if 0 (x 1) (nop))
+```
+
+?
