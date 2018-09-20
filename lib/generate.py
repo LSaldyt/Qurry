@@ -53,5 +53,5 @@ def generate_single(expression):
 def generate(stack):
     pprint(stack)
     l = list(build(stack))
-    print(l)
+    #print(l)
     return '\n'.join(l)

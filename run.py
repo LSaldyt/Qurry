@@ -15,7 +15,7 @@ def run(filename):
     qvm = QVMConnection()
     start = time.time()
     wave_function = qvm.wavefunction(program)
-    print(wave_function)
+    #print(wave_function)
     print(wave_function.pretty_print_probabilities())
     probs = wave_function.pretty_print_probabilities()
     rbitstr = lambda n : bitstr(n)[::-1].ljust(floor(log(len(probs), 2)), '0')
