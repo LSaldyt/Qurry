@@ -23,56 +23,30 @@ We can successfully produce sampleable classical distributions on a quantum comp
 For instance, consider the following model from the Church programming language tutorial (a probabilistic context-free grammar):
 
 ```scheme
-(define (sample distribution) (distribution))
-
-(define (terminal t) (lambda () t))
-
-(define D (lambda ()
-            (map sample
-                 (multinomial
-                  (list (list (terminal 'the) )
-                        (list (terminal 'a)))
-                  (list (/ 1 2) (/ 1 2))))))
-(define N (lambda ()
-            (map sample
-                 (multinomial
-                  (list (list (terminal 'chef))
-                        (list (terminal 'soup))
-                        (list (terminal 'omelet)))
-                  (list (/ 1 3) (/ 1 3) (/ 1 3))))))
-(define V (lambda ()
-            (map sample
-                 (multinomial
-                  (list (list (terminal 'cooks))
-                        (list (terminal 'works)))
-                  (list (/ 1 2) (/ 1 2))))))
-(define A (lambda ()
-            (map sample
-                 (multinomial
-                  (list (list (terminal 'diligently)))
-                  (list (/ 1 1))))))
-(define AP (lambda ()
-             (map sample
-                  (multinomial
-                   (list (list A))
-                   (list (/ 1 1))))))
-(define NP (lambda ()
-             (map sample
-                  (multinomial
-                   (list (list D N))
-                   (list (/ 1 1))))))
-(define VP (lambda ()
-             (map sample
-                  (multinomial
-                   (list (list V AP)
-                         (list V NP))
-                   (list (/ 1 2) (/ 1 2))))))
-(define S (lambda ()
-            (map sample
-                 (multinomial
-                  (list (list NP VP))
-                  (list (/ 1 1))))))
-(S)
+(define (transition nonterminal)
+  (case nonterminal
+        (('D) (multinomial(list (list (terminal 'the))
+                                (list (terminal 'a)))
+                          (list (/ 1 2) (/ 1 2))))
+        (('N) (multinomial (list (list (terminal 'chef))
+                                 (list (terminal 'soup))
+                                 (list (terminal 'omelet)))
+                           (list (/ 1 3) (/ 1 3) (/ 1 3))))
+        (('V) (multinomial (list (list (terminal 'cooks))
+                                 (list (terminal 'works)))
+                           (list (/ 1 2) (/ 1 2))))
+        (('A) (multinomial (list (list (terminal 'diligently)))
+                           (list (/ 1 1))))
+        (('AP) (multinomial (list (list 'A))
+                            (list (/ 1 1))))
+        (('NP) (multinomial (list (list 'D 'N))
+                            (list (/ 1 1))))
+        (('VP) (multinomial (list (list 'V 'AP)
+                                  (list 'V 'NP))
+                            (list (/ 1 2) (/ 1 2))))
+        (('S) (multinomial (list (list 'NP 'VP))
+                           (list (/ 1 1))))
+        (else 'error)))
 ```
 
 More succinctly, this is specifying the following (toy) language model:
@@ -129,12 +103,26 @@ Consider preparing a bell state:
 (h 0)
 (cnot 0 1)
 ```
-
-It is important to distinguish this preparation from the following:
+And distinguish this from the following, which will produce the same classical measurements, but no entanglement (because the state of the first qubit is known before producing the state in the second qubit). 
+In this case, the state 01 is possible, because the first qubit may be measured in the 1 state, and the second qubit is unprepared, and in the zero state.
 ```
 (bernoulli 0.5 0)
 (measure 0 0)
 (if 0 (x 1) (nop))
 ```
 
-?
+So, when creating a probabilistic model which branches, we distinguish between these two types of branching, because only one truly creates an entangled state.
+However, this makes representing information slightly more difficult, because we will not know which bits correspond to which states (unless we encode this, which we will).
+
+First, consider an example that produces the probability distribution:
+`[1/12, 1/12, 1/12, 1/12, 1/12, 1/12, 1/8, 1/8, 1/12, 1/12, 1/12]`.
+We can produce this by a simple:
+```scheme
+(def space 0 3)
+(multinomial 1/12, 1/12, 1/12, 1/12, 1/12, 1/12, 1/8, 1/8, 1/12, 1/12, 1/12 space)
+```
+But obviously this requires computing the distribution in advance.
+Another possibility is the following:
+```
+(bernoulli 0.5 0)
+```
