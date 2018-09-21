@@ -94,9 +94,8 @@ def multinomial(*weights, offset, definitions):
     lendiff  = 2 ** n_qubits - len(weights)
     weights  = weights + [0.0] * lendiff
 
-    probtree = produce_probability_tree(weights)
-    print(probtree)
-    #1/0
+    initial_p, *probtree = produce_probability_tree(weights)
+    initial_p = initial_p[0]
 
     code = ''
     for i in range(1, 6):
