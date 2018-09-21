@@ -14,9 +14,15 @@ def flatten(l):
     else:
         return l
 
+#def flatten(l):
+#    if isinstance(l, list) and l and isinstance(l[0], list):
+#        return [subitem for sublist in l for subitem in sublist]
+#    else:
+#        return l
+
+
 def X(theta):
     return np.array([[quil_cos(theta / 2), -1j * quil_sin(theta / 2)], [-1j * quil_sin(theta / 2), quil_cos(theta / 2)]])
-
 
 def CRX_diags(n):
     M = np.identity(2 ** n).astype(object)
@@ -32,7 +38,7 @@ def controlled_diag_bernoulli(weights, qubits):
 
 def produce_probability_tree(weights):
     if len(weights) <= 2:
-        return [weights[0], []]
+        return [[weights[0]]]
 
     n_qubits = ceil(log(len(weights), 2))
     divider  = 2 ** (n_qubits - 1)
@@ -44,24 +50,36 @@ def produce_probability_tree(weights):
     first_fracs  = [w / max(1e-8, first_s)  for w in first]
     second_fracs = [w / max(1e-8, second_s) for w in second]
 
+    #print('weights')
+    #print(weights)
+    #print('first')
+    #print(first_fracs)
+    #print('second')
+    #print(second_fracs)
+
     first_tree  = produce_probability_tree(first_fracs)
     second_tree = produce_probability_tree(second_fracs)
+    #print(first_pre)
+    #print(second_pre)
+    print('trees:')
     print(first_tree)
     print(second_tree)
 
     levels = []
-    for item in zip(first_tree, second_tree):
-        item = list(item)
-        levels.append(flatten(item))
+    for a, b in zip(first_tree, second_tree):
+        print(a, b)
+        #if isinstance(a, list) and len(a) > 1:
+        #    1/0
+        levels.append(a + b)
 
-    return [first_s, levels]
+    return [[first_s]] + levels
 
 def write_diag_bernoulli_code(probtree, offset):
     code = ''
     for i, level in enumerate(probtree):
         if level:
             level = [2 * acos(sqrt(x)) for x in level]
-            n_qubits = ceil(log(len(level), 2))
+            n_qubits = ceil(log(len(level), 2)) + 1
             code += '\nCRX_diag_{}({}) {}'.format(n_qubits,
                                                   ', '.join(map(str, level)),
                                                    ' '.join(map(str, (offset + n for n in range(n_qubits)))))
@@ -74,14 +92,14 @@ def multinomial(*weights, offset, definitions):
     offset = int(initial)
     n_qubits = ceil(log(len(weights), 2))
     lendiff  = 2 ** n_qubits - len(weights)
-    weights  = weights + [0] * lendiff
+    weights  = weights + [0.0] * lendiff
 
-    initial_p, probtree = produce_probability_tree(weights)
-    print(initial_p, probtree)
-    1/0
+    probtree = produce_probability_tree(weights)
+    print(probtree)
+    #1/0
 
     code = ''
-    for i in range(1, 5):
+    for i in range(1, 6):
         code += CRX_diags(i)
     code += bernoulli(initial_p, offset)
     code += write_diag_bernoulli_code(probtree, offset)
