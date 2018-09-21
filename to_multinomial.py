@@ -9,10 +9,10 @@ def phi_normal(x):
 def to_multinomial(a, b, n, phi):
     assert n >= 3, 'Minimum three discrete divisions required'
     n -= 2
-    print(b-a)
     step  = (b - a) / n
-    print(step)
+    return discrete_multinomial_probabilities(a, b, step, phi)
 
+def discrete_multinomial_probabilities(a, b, step, phi):
     probabilities = []
     i = a
     while i < b:
