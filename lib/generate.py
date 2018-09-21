@@ -13,6 +13,7 @@ from . import constructs
 from math import acos, asin, sin, cos, sqrt
 
 def build(stack, definitions=None):
+    print(stack)
     if definitions is None:
         definitions = dict()
     def insert_defs(items):
@@ -39,6 +40,7 @@ def build(stack, definitions=None):
         elif hasattr(constructs, head):
             module  = getattr(constructs, head)
             creator = getattr(module, 'create_' + head)
+            print(expression)
             yield creator(*insert_defs(expression[1:]), definitions=definitions)
         else:
             print('No generation branch for:')
