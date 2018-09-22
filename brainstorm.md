@@ -1,21 +1,33 @@
-# Brainstorm for a Probabilistic Computing Language
+# Brainstorm for a Probabilistic Quantum Programming Language
 
-In a nutshell, I'd like to make it easier for people to run real-world models on quantum computers. 
-By "real-world models", I mean calculations that represent an abstract version of the real world, that can inform future actions.
-However, the quantum programming language world is currently lacking one thing: Abstraction.
-Most quantum programming languages simply don't offer abstraction whatsoever -- they're glorified circuit languages usually wrapped in needlessly verbose syntax.
-Of course, there are important exceptions to this rule. 
-One of the most interesting is QA-prolog, which I am influenced by.
-QA-prolog offers a prolog interface for a quantum annealer. 
-So, for instance, one can submit the map-coloring problem as they would classically, and have it solved by a quantum computer.
-However, it only offers a subset of prolog, which is already a specialized language.
+Modern quantum programming, despite its progress, is still esoteric to the average programmer. 
+In general, programming languages offer a midway point between a person's mental model and literal machine instructions.
+So, the question to be resolved is: How do most programmers model algorithms, and what intermediates can make it easier to turn mental models into code?
 
-I just believe that it's better to attempt making something, even just a prototype of a prototype, because this will allow us to learn how to design quantum programming languages of the future.
+There are two main goals for providing abstractions in quantum programming:
+ - Allow novices to more quickly create useful and interesting models
+ - Allow experienced programmers to create models more efficiently, so that they can focus on more important design aspects
+
+Previous attempts at designing quantum programming languages can give insights for the design of new ones:
+First, there are circuit languages, which provide no abstraction, but are useful for interfacing with normal languages or compiling into.
+Circuit languages are also adequate for those who are already experienced with quantum programming.
+Second, there are the quantum-annealing family of languages, which can actually provide abstraction, but limit the scope of solvable problems.
+Third, there are existing attempts at higher-level universal gate languages.
+
+I'll chose one example from each class:
+ - Most of the circuit languages are more or less equivalent. They allow a basic gate set (H, CNOT, etc) and measurement. Rigetti pyquil offers hybrid instructions, which makes it a slight step above previous circuit languages. Essentially, this class of languages is for expressing raw quantum circuits in code, while intentionally electing not to offer abstractions. This class of languages will be useful to compile into.
+ - QA-Prolog: A quantum-annealer compiler for a subset of prolog. It is similar to a lot of other quantum annealing languages. Essentially, users can express problems in a very similar format to how problems are expressed classically, but users can only express a restricted subset of problems. Quantum annealers have their uses, but, generally speaking, they are not as powerful or general as gate-model computers. The abstraction offered, however, is work mimicking.
+ - Robert Tucci's work ("Quantum Fog", "Qubiter"): Tucci's work offers modeling of bayesian networks on quantum computers, and is an interesting sister project to this one. I think that this is moving in the correct direction, by balancing usefulness with expressivity.
+
+ Considering each of the above, I believe that there is an interesting gap to be filled: That of a language which offers lightweight abstractions, but still allows the general power of quantum computing.
+Of course, this is a big goal, and likely one that will only be partially fulfilled.
+I believe that it's better to attempt making something, even just a prototype of a prototype, because this will allow us to learn how to design quantum programming languages of the future.
 I'm reminded of the history of the C programming language: Dennis Ritchie's and Brian Kernighan's C is the basis for a large part of modern software. 
 However, before it, there was B and BCPL, as well as languages before that.
 The goal of this project is to write the precursor to one of these languages: I'd like to create minimal abstractions that allow for easier modeling.
 
-Now, I believe that the source of these abstractions can be rooted in some kind of quantum data types. 
+There are some easy targets for providing abstraction: common things like functions, conditionals, loops, integer data types, and so on. 
+However, let's jump into the quantum/probabilistic side of things.
 
 Models will fundamentally be composed of, generally, wave functions: Superpositions over all possible states.
 First, consider modeling a classical distribution. 
