@@ -13,7 +13,9 @@ def controlled(U):
     return base
 
 def bernoulli(p, q, rot='RX'):
-    theta = 2 * acos(sqrt(p))
+    if p < 0:
+        raise Warning('Bernoulli was called with negative probability: {}'.format(p))
+    theta = 2 * acos(sqrt(abs(p)))
     return '{rot}({theta}) {q}'.format(rot=rot, theta=theta, q=q)
 
 def controlled_X(n, a, b):
