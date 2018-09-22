@@ -16,7 +16,7 @@ Third, there are existing attempts at higher-level universal gate languages.
 
 I'll chose one example from each class:
  - Most of the circuit languages are more or less equivalent. They allow a basic gate set (H, CNOT, etc) and measurement. Rigetti pyquil offers hybrid instructions, which makes it a slight step above previous circuit languages. Essentially, this class of languages is for expressing raw quantum circuits in code, while intentionally electing not to offer abstractions. This class of languages will be useful to compile into.
- - QA-Prolog: A quantum-annealer compiler for a subset of prolog. It is similar to a lot of other quantum annealing languages. Essentially, users can express problems in a very similar format to how problems are expressed classically, but users can only express a restricted subset of problems. Quantum annealers have their uses, but, generally speaking, they are not as powerful or general as gate-model computers. The abstraction offered, however, is work mimicking.
+ - QA-Prolog: A quantum-annealer compiler for a subset of prolog. It is similar to a lot of other quantum annealing languages. Essentially, users can express problems in a very similar format to how problems are expressed classically, but users can only express a restricted subset of problems. Quantum annealers have their uses, but, generally speaking, they are not as powerful or general as gate-model computers. The abstraction offered, however, is worth mimicking.
  - Robert Tucci's work ("Quantum Fog", "Qubiter"): Tucci's work offers modeling of bayesian networks on quantum computers, and is an interesting sister project to this one. I think that this is moving in the correct direction, by balancing usefulness with expressivity.
 
  Considering each of the above, I believe that there is an interesting gap to be filled: That of a language which offers lightweight abstractions, but still allows the general power of quantum computing.
@@ -32,7 +32,8 @@ However, let's jump into the quantum/probabilistic side of things.
 Models will fundamentally be composed of, generally, wave functions: Superpositions over all possible states.
 First, consider modeling a classical distribution. 
 We can successfully produce sampleable classical distributions on a quantum computer.
-For instance, consider the following model from the Church programming language tutorial (a probabilistic context-free grammar):
+For instance, consider the following model from the Church programming language tutorial.
+This code is specifying a probabilistic grammar for simple sentences about cooking.
 
 ```scheme
 (define (transition nonterminal)
@@ -63,17 +64,17 @@ For instance, consider the following model from the Church programming language 
 
 More succinctly, this is specifying the following (toy) language model:
 ```scheme
-D(eterminer): (uniform 'the' 'a')
-N(oun): (uniform 'chef' 'omelet' 'soup')
-V(erb): (uniform 'cooks' 'works')
-A(dverb): (uniform 'diligently')
+D(eterminer):      (uniform 'the' 'a')
+N(oun):            (uniform 'chef' 'omelet' 'soup')
+V(erb):            (uniform 'cooks' 'works')
+A(dverb):          (uniform 'diligently')
 AP(Adverb Phrase): (uniform A)
-NP(Noun Phrase): (D, N)
-VP(Verb Phrase): (uniform (V AP) (V NP))
-S(entence): (NP, VP)
+NP(Noun Phrase):   (D, N)
+VP(Verb Phrase):   (uniform (V AP) (V NP))
+S(entence):        (NP, VP)
 ```
 
-We can model this in curry using similar multinomial distributions and local classical mappings.
+What's the best way to model something like this on a quantum computer?
 To make things even simpler, let's first just consider modeling a randomly sampled Noun-Phrase (which is the first part in sampling a full toy sentence).
 The noun-phrase is a concatenation of a determiner and a noun. In our toy example, we have two determiners and three nouns, both uniformly sampled, which makes for a total of six options with equal probability.
 So, we'll need three qubits to model this. Curry has builtins for these distributions.
@@ -99,7 +100,7 @@ grid {curry}: ./compile examples/test.lisp
 ```
 
 In our output, the rightmost bit is representing the determiner, and the other two bits are representing the noun.
-So the output is (sic):
+So the output is:
 ```python3
 {'the chef' : 1/6, 'a chef' : 1/6, 'the omelet' : 1/6, 'a omelet' : 1/6, 'the soup' : 1/6, 'a soup' : 1/6}
 ```
@@ -155,7 +156,8 @@ Another possibility is the following:
                 (uniform 3 2 3)))) ; Deciding N of NP
 ```
 
-Still, there's a better way:
+Still, there's a better way, and that's what's currently in progress:
 
 ```
+...
 ```
