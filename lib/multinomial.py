@@ -61,13 +61,13 @@ def produce_probability_tree(weights):
     second_tree = produce_probability_tree(second_fracs)
     #print(first_pre)
     #print(second_pre)
-    print('trees:')
-    print(first_tree)
-    print(second_tree)
+    #print('trees:')
+    #print(first_tree)
+    #print(second_tree)
 
     levels = []
     for a, b in zip(first_tree, second_tree):
-        print(a, b)
+        #print(a, b)
         #if isinstance(a, list) and len(a) > 1:
         #    1/0
         levels.append(a + b)

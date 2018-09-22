@@ -6,6 +6,7 @@ from ..to_multinomial import to_multinomial
 
 def gaussian_cdf(x, mu, sigma):
     y = (1.0 + erf((x - mu) / (sigma * sqrt(2.0)))) / 2.0
+    y = (1.0 + erf((x) / (sqrt(2.0)))) / 2.0
     assert y >= 0 and y <= 1.0, 'y is not a valid probability: y={}'.format(y)
     return y
 
