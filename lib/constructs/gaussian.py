@@ -14,5 +14,5 @@ def create_gaussian_cdf(mu, sigma):
     return partial(gaussian_cdf, mu=mu, sigma=sigma)
 
 def create_gaussian(mu, sigma, block, definitions=None):
-    return multinomial(*to_multinomial(-3, 3, 6, create_gaussian_cdf(float(mu), float(sigma))), offset=block, definitions=definitions)
+    return multinomial(*to_multinomial(-3, 3, 64, create_gaussian_cdf(float(mu), float(sigma))), offset=block, definitions=definitions)
 

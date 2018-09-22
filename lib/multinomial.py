@@ -50,26 +50,11 @@ def produce_probability_tree(weights):
     first_fracs  = [w / max(1e-8, first_s)  for w in first]
     second_fracs = [w / max(1e-8, second_s) for w in second]
 
-    #print('weights')
-    #print(weights)
-    #print('first')
-    #print(first_fracs)
-    #print('second')
-    #print(second_fracs)
-
     first_tree  = produce_probability_tree(first_fracs)
     second_tree = produce_probability_tree(second_fracs)
-    #print(first_pre)
-    #print(second_pre)
-    #print('trees:')
-    #print(first_tree)
-    #print(second_tree)
 
     levels = []
     for a, b in zip(first_tree, second_tree):
-        #print(a, b)
-        #if isinstance(a, list) and len(a) > 1:
-        #    1/0
         levels.append(a + b)
 
     return [[first_s]] + levels
@@ -99,7 +84,7 @@ def multinomial(*weights, offset, definitions):
     initial_p = initial_p[0]
 
     code = ''
-    for i in range(1, 6):
+    for i in range(1, 8):
         code += CRX_diags(i)
     code += bernoulli(initial_p, offset)
     code += write_diag_bernoulli_code(probtree, offset)

@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 import sys, time
 
+import seaborn
+import matplotlib.pyplot as plt
+from math import floor, log
+
 from pyquil.quil  import Program
 from pyquil.api   import QVMConnection
-
-from math import floor, log
 
 bitstr  = lambda n : str(bin(n))[2:]
 
@@ -25,6 +27,11 @@ def run(filename):
     print(probs)
     end = time.time()
     print((end-start) * 1000, 'ms simulated runtime')
+    probs_ordered = [t[1] for t in sorted(probs.items(), key=lambda t : int(t[0][::-1], 2))]
+    print(probs_ordered)
+    seaborn.set()
+    seaborn.scatterplot(x=list(range(len(probs_ordered))), y=probs_ordered)
+    plt.show()
 
 def main(args):
     assert len(args) > 0, 'Usage: ./run [filename]'
