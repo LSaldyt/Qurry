@@ -2,7 +2,7 @@ import sys
 
 from pprint import pprint
 
-from pyquil.gates import STANDARD_INSTRUCTIONS
+from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
 
 from .utils import named_uuid
 from .definitions import update_definitions
@@ -28,7 +28,10 @@ def build(stack, definitions=None):
         expression = ['\n'.join(build([item], definitions)) if isinstance(item, list) else item for item in expression]
         head = expression[0]
         upper = head.upper()
-        if upper in STANDARD_INSTRUCTIONS:
+        print(upper)
+        print(upper in STANDARD_INSTRUCTIONS)
+        print(upper in STANDARD_GATES)
+        if upper in STANDARD_INSTRUCTIONS or upper in STANDARD_GATES:
             expression[0] = upper
             if upper == 'MEASURE':
                 yield '{} {} [{}]'.format(*insert_defs(expression))
