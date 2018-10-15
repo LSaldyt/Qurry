@@ -5,4 +5,4 @@ The official project duration is one year, but the language may be usable before
 
 Robert Tucci has also done very interesting work on quantum bayesian nets, and his work is worth checking out [here](https://github.com/artiste-qb-net/quantum-fog).
 
-I've recently written a [summary](brainstorm.md) of recent progress.
+I've written a [summary](brainstorm.md) of recent progress.
