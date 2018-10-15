@@ -28,9 +28,9 @@ def build(stack, definitions=None):
         expression = ['\n'.join(build([item], definitions)) if isinstance(item, list) else item for item in expression]
         head = expression[0]
         upper = head.upper()
-        print(upper)
-        print(upper in STANDARD_INSTRUCTIONS)
-        print(upper in STANDARD_GATES)
+        #print(upper)
+        #print(upper in STANDARD_INSTRUCTIONS)
+        #print(upper in STANDARD_GATES)
         if upper in STANDARD_INSTRUCTIONS or upper in STANDARD_GATES:
             expression[0] = upper
             if upper == 'MEASURE':
