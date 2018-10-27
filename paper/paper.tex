@@ -1,0 +1,102 @@
+%% Template for a preprint Letter or Article for submission
+%% to the journal Nature.
+%% Written by Peter Czoschke, 26 February 2004
+%%
+
+\documentclass{nature}
+
+%% make sure you have the nature.cls and naturemag.bst files where
+%% LaTeX can find them
+
+\bibliographystyle{naturemag}
+
+\title{Curry: A quantum computer language}
+
+%% Notice placement of commas and superscripts and use of &
+%% in the author list
+
+\author{Lucas Saldyt}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{affiliations}
+ \item Arizona State University
+\end{affiliations}
+
+\begin{abstract}
+For Nature, the abstract is really an introductory paragraph set
+in bold type.  This paragraph must be ``fully referenced`` and
+less than 180 words for Letters.  This is the thing that is
+supposed to be aimed at people from other disciplines and is
+arguably the most important part to getting your paper past the
+editors.  End this paragraph with a sentence like ``Here we
+show...`` or something similar.
+\end{abstract}
+
+\begin{methods}
+Put methods in here.  If you are going to subsection it, use
+\verb|\subsection| commands.  Methods section should be less than
+800 words and if it is less than 200 words, it can be incorporated
+into the main text.
+
+\subsection{Method subsection.}
+
+Here is a description of a specific method used.  Note that the
+subsection heading ends with a full stop (period) and that the
+command is \verb|\subsection{}| not \verb|\subsection*{}|.
+
+\end{methods}
+
+%% Put the bibliography here, most people will use BiBTeX in
+%% which case the environment below should be replaced with
+%% the \bibliography{} command.
+
+% \begin{thebibliography}{1}
+% \bibitem{dummy} Articles are restricted to 50 references, Letters
+% to 30.
+% \bibitem{dummyb} No compound references -- only one source per
+% reference.
+% \end{thebibliography}
+
+\bibliographystyle{naturemag}
+\bibliography{sample}
+
+
+%% Here is the endmatter stuff: Supplementary Info, etc.
+%% Use \item's to separate, default label is "Acknowledgements"
+
+\begin{addendum}
+ \item Put acknowledgements here.
+ \item[Competing Interests] The authors declare that they have no
+competing financial interests.
+ \item[Correspondence] Correspondence and requests for materials
+should be addressed to A.B.C.~(email: myaddress@nowhere.edu).
+\end{addendum}
+
+%%
+%% TABLES
+%%
+%% If there are any tables, put them here.
+%%
+
+\begin{table}
+\centering
+\caption{This is a table with scientific results.}
+\medskip
+\begin{tabular}{ccccc}
+\hline
+1 & 2 & 3 & 4 & 5\\
+\hline
+aaa & bbb & ccc & ddd & eee\\
+aaaa & bbbb & cccc & dddd & eeee\\
+aaaaa & bbbbb & ccccc & ddddd & eeeee\\
+aaaaaa & bbbbbb & cccccc & dddddd & eeeeee\\
+1.000 & 2.000 & 3.000 & 4.000 & 5.000\\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
