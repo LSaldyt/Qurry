@@ -1,5 +1,5 @@
 I noticed the following variability.
-Here's the commands I used:
+Here are the commands I used:
 ```
 grid {curry}: ./compile examples/clear-into.lisp 
 [['x', '0'], ['clear', '0', '0'], ['if', '0', ['x', '1'], ['nop']]]
