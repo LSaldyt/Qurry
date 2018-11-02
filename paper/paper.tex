@@ -401,38 +401,19 @@
     Quantum Computing, Programming Languages
 \end{IEEEkeywords}
 
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
-% The very first letter is a 2 line initial drop letter followed
-% by the rest of the first word in caps.
-% 
-% form to use if the first word consists of a single letter:
-% \IEEEPARstart{A}{demo} file is ....
-% 
-% form to use if you need the single drop letter followed by
-% normal text (unknown if ever used by the IEEE):
-% \IEEEPARstart{A}{}demo file is ....
-% 
-% Some journals put the first two words in caps:
-% \IEEEPARstart{T}{his demo} file is ....
-% 
-% Here we have the typical use of a "T" for an initial drop letter
-% and "HIS" in caps to complete the first word.
+\IEEEPARstart{Q}{uantum} computing is still in a nascent form, especially when it comes to programming interfaces. 
+Many acclaimed quantum programming languages are simply circuit description languages that add superfluous syntax to have the look and feel of a traditional programming language.
+These interfaces generally lack abstraction, which is an absolutely essential feature of any programming language intended for humans.
+For instance, the world of classical programming languages was revolutionized with the invention of the C programming language, which is now ubiquitous in today's software either in either its original or derivative forms [Cite]. 
 
-\IEEEPARstart{P}{robabilistic} programming languages are a recent innovation from the MIT cognitive science community. 
+Since quantum computers are inherently probabilistic, a quantum programming language can draw inspiration from classical probabilistic programming.
+Classical probabilistic programming languages are a recent innovation from the MIT cognitive science community. 
 Essentially, they create a way for non-expert programmers to access the power of Bayesian inference. 
 Users can create simple probabilistic models in standard code, and then run them through an expert-created inference backend.
-Famously, this has resulted in dramatically reduced code complexity, with a famous case where a 50-line probabilistic program could compete with traditional approaches to face recognition [Cite].
-In general, there is evidence to support that highly abstract and specialized languages such as this will be useful both in industry and in scientific research.
+Famously, this has resulted in dramatically reduced code complexity, with a famous case where a 50-line probabilistic program could compete with traditional approaches to face recognition [TODO: Cite].
 
 Both quantum computing and classical probabilistic programming have variables which are probability distributions.
 In quantum computing, measuring a single qubit results in $0$ or $1$, which represents a bernoulli trial, even though the qubits pre-measurement state is richer (because its true representation is a complex probability amplitude).
@@ -441,7 +422,8 @@ Similarly, measuring multiple ($n$) qubits gives a bitstring $(0, 1)^n$.
 If this is repeated multiple times, it creates a multinomial distribution.
 
 Quantum states are richer than standard probability distributions.
-The simplest case is a Bell state, where, for instance, one may measure $00$ or $11$ with equal probability.
+The simplest case is a Bell state, where, for instance, one may measure $00$ or $11$ with equal probability\dots [TODO: Extend]
+
 
 %% These resulting multinomial distributions can, in theory, represent everything, but are often made to amplify a single state such that it can be found with high probability after doing multiple experiments. This is done because $n$ qubits have at most $2^n$ possible measurement outcomes and it is difficult to estimate the true probability distribution?. -> Not certain about this please research more
 
@@ -723,10 +705,6 @@ Subsubsection text here.
 \section{Conclusion}
 The conclusion goes here.
 
-
-
-
-
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
 % or
@@ -739,11 +717,9 @@ The conclusion goes here.
 % you must declare a \section before using any
 % \subsection or using \label (\appendices by itself
 % starts a section numbered zero.)
-%
-
 
 \appendices
-\section{Proof of the First Zonklar Equation}
+\section{}
 Appendix one text goes here.
 
 % you can choose not to have a title for an appendix
@@ -755,9 +731,7 @@ Appendix two text goes here.
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-
-The authors would like to thank...
-
+The author would like to thank Will Zeng of Rigetti computing, who sponsered this project through the unitary fund [LINK].
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
@@ -808,21 +782,8 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}{Michael Shell}
-Biography text here.
-\end{IEEEbiography}
-
-% if you will not have a photo at all:
-\begin{IEEEbiographynophoto}{John Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
-
-% insert where needed to balance the two columns on the last page with
-% biographies
-%\newpage
-
-\begin{IEEEbiographynophoto}{Jane Doe}
-Biography text here.
+\begin{IEEEbiographynophoto}{Lucas Saldyt}
+    is currently a student researcher at Arizona State University, and has previously worked for Sandia National Laboratories and Los Alamos National Laboratories as a student intern in the quantum computing department.
 \end{IEEEbiographynophoto}
 
 % You can push biographies down or up by placing
@@ -836,8 +797,6 @@ Biography text here.
 % Can be used to pull up biographies so that the bottom of the last one
 % is flush with the other column.
 %\enlargethispage{-5in}
-
-
 
 % that's all folks
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.9.25)  1 NOV 2018 19:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.9.25)  1 NOV 2018 19:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -191,13 +191,13 @@ LaTeX Font Info:    ... okay on input line 324.
 
 ] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 1678 strings out of 492642
- 26177 string characters out of 6135566
+ 1679 strings out of 492642
+ 26193 string characters out of 6135566
  96384 words of memory out of 5000000
- 5604 multiletter control sequences out of 15000+600000
+ 5605 multiletter control sequences out of 15000+600000
  44020 words of font info for 81 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 27i,8n,28p,483b,212s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,5n,21p,483b,206s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/publi
@@ -205,7 +205,7 @@ c/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
 ></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dis
 t/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times
 /utmri8a.pfb>
-Output written on paper.pdf (1 page, 75999 bytes).
+Output written on paper.pdf (1 page, 76288 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  26 compressed objects within 1 object stream
