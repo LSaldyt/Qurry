@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.9.25)  1 NOV 2018 19:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.9.25)  1 NOV 2018 18:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**paper.tex
-(./paper.tex
+**ieee.tex
+(./ieee.tex
 LaTeX2e <2018-04-01> patch level 5
 (/usr/share/texmf-dist/tex/latex/IEEEtran/IEEEtran.cls
 Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
@@ -112,100 +112,55 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 \IEEEPARstartletwidth=\dimen125
 \c@IEEEbiography=\count94
 \@IEEEtranrubishbin=\box27
-) (/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2017/09/02 v2.17a AMS math features
-\@mathmargin=\skip44
+) (./ieee.aux)
+\openout1 = `ieee.aux'.
 
-For additional information on amsmath, use the `?' option.
-(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2000/06/29 v2.01 AMS text
-
-(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty
-File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks15
-\ex@=\dimen126
-))
-(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen127
-)
-(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2016/03/08 v2.02 operator names
-)
-\inf@bad=\count95
-LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count96
-\leftroot@=\count97
-LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count98
-\DOTSCASE@=\count99
-LaTeX Info: Redefining \ldots on input line 472.
-LaTeX Info: Redefining \dots on input line 475.
-LaTeX Info: Redefining \cdots on input line 596.
-\Mathstrutbox@=\box28
-\strutbox@=\box29
-\big@size=\dimen128
-LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count100
-\c@MaxMatrixCols=\count101
-\dotsspace@=\muskip10
-\c@parentequation=\count102
-\dspbrk@lvl=\count103
-\tag@help=\toks16
-\row@=\count104
-\column@=\count105
-\maxfields@=\count106
-\andhelp@=\toks17
-\eqnshift@=\dimen129
-\alignsep@=\dimen130
-\tagshift@=\dimen131
-\tagwidth@=\dimen132
-\totwidth@=\dimen133
-\lineht@=\dimen134
-\@envbody=\toks18
-\multlinegap=\skip45
-\multlinetaggap=\skip46
-\mathdisplay@stack=\toks19
-LaTeX Info: Redefining \[ on input line 2817.
-LaTeX Info: Redefining \] on input line 2818.
-) (./paper.aux)
-\openout1 = `paper.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 324.
-LaTeX Font Info:    ... okay on input line 324.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 324.
-LaTeX Font Info:    ... okay on input line 324.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 324.
-LaTeX Font Info:    ... okay on input line 324.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 324.
-LaTeX Font Info:    ... okay on input line 324.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 324.
-LaTeX Font Info:    ... okay on input line 324.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 324.
-LaTeX Font Info:    ... okay on input line 324.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 352.
+LaTeX Font Info:    ... okay on input line 352.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 352.
+LaTeX Font Info:    ... okay on input line 352.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 352.
+LaTeX Font Info:    ... okay on input line 352.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 352.
+LaTeX Font Info:    ... okay on input line 352.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 352.
+LaTeX Font Info:    ... okay on input line 352.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 352.
+LaTeX Font Info:    ... okay on input line 352.
 
 -- Lines per column: 58 (exact).
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 440.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 440.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 440.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 440.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 475.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 857.
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-] (./paper.aux) ) 
+] (./ieee.aux) ) 
 Here is how much of TeX's memory you used:
- 1678 strings out of 492642
- 26177 string characters out of 6135566
- 96384 words of memory out of 5000000
- 5604 multiletter control sequences out of 15000+600000
- 44020 words of font info for 81 fonts, out of 8000000 for 9000
+ 1073 strings out of 492642
+ 19398 string characters out of 6135566
+ 86274 words of memory out of 5000000
+ 5013 multiletter control sequences out of 15000+600000
+ 46732 words of font info for 83 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 27i,8n,28p,483b,212s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
-></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dis
-t/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times
-/utmri8a.pfb>
-Output written on paper.pdf (1 page, 75999 bytes).
+ 26i,8n,28p,482b,208s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
+</usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist
+/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/
+utmri8a.pfb>
+Output written on ieee.pdf (1 page, 78476 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  26 compressed objects within 1 object stream
