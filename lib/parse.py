@@ -1,3 +1,7 @@
+'''
+Parse curry (lisp) code.
+'''
+
 def remove_comment(line):
     if ';' not in line:
         return line
@@ -5,6 +9,10 @@ def remove_comment(line):
         return line[:line.find(';')]
 
 def typify(item):
+    '''
+    Error-free conversion of an abitrary AST element into typed versions
+    i.e. ['X', '1'] becomes ['X', 1] where the second element is converted str->int
+    '''
     try:
         return int(item)
     except ValueError:
@@ -18,6 +26,10 @@ def typify(item):
 def parse(item):
     '''
     item is the raw text of a q-lisp file
+    Comments are removed, and then the parentheses are parsed, i.e.
+          (if (= c0 1) (X 0) (X 1))
+      becomes the python list:
+          ['if', ['=', 'c0', '1'], ['X', '0'], ['X', '1']]
     '''
     cleaned = (remove_comment(line) for line in item.split('\n'))
     item = '\n'.join(line for line in cleaned if line != '') # Strip comments

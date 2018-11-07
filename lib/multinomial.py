@@ -8,18 +8,31 @@ from math import acos, sqrt, log, ceil, floor
 
 from .controlled import bernoulli
 
+'''
+A function and its helpers that define how to produce a multinomial distribution on a quantum computer.
+Uses the "pick sticks?" method:
+    Starting with probability 1 of state 0, split the state into two states of different probabilities using a rotation.
+    Repeat this until all states are represented.
+    For example:
+        1.0
+        |   \
+        0.5  0.5 -----
+        |   \     \   \
+        0.25 0.25 0.25 0.25
+
+    Or a non-uniform distribution:
+        1.0
+        |   \
+        0.8  0.2 -----
+        |   \     \   \
+        0.2  0.6 0.15 0.05
+'''
+
 def flatten(l):
     if isinstance(l, list) and l and isinstance(l[0], list):
         return flatten([subitem for sublist in l for subitem in sublist])
     else:
         return l
-
-#def flatten(l):
-#    if isinstance(l, list) and l and isinstance(l[0], list):
-#        return [subitem for sublist in l for subitem in sublist]
-#    else:
-#        return l
-
 
 def X(theta):
     return np.array([[quil_cos(theta / 2), -1j * quil_sin(theta / 2)], [-1j * quil_sin(theta / 2), quil_cos(theta / 2)]])

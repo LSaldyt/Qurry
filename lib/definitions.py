@@ -1,5 +1,9 @@
 from .block import Block
 
+'''
+Add block definitions (def ..) to a global dictionary.
+'''
+
 def update_definitions(expression, definitions):
     var = expression[1]
     if len(expression) == 3:

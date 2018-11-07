@@ -6,6 +6,12 @@ import numpy as np
 
 from math import acos, sqrt
 
+'''
+Small helper functions that define common controlled gates.
+Should be familiar to anyone if quantum computation.
+The only new part is the "Bernoulli" gate, which is just an RX rotation meant to produce a classical state
+'''
+
 def controlled(U):
     base = np.identity(4).astype(complex)
     base[2:4,2:4] = np.array([[0, 1], [1, 0]])
