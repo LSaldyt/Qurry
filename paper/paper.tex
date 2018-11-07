@@ -406,8 +406,13 @@
 \section{Introduction}
 \IEEEPARstart{Q}{uantum} computing is still in a nascent form, especially when it comes to programming interfaces. 
 Many acclaimed quantum programming languages are simply circuit description languages that add superfluous syntax to have the look and feel of a traditional programming language.
-These interfaces generally lack abstraction, which is an absolutely essential feature of any programming language intended for humans.
-For instance, the world of classical programming languages was revolutionized with the invention of the C programming language, which is now ubiquitous in today's software either in either its original or derivative forms [Cite]. 
+These interfaces generally lack abstraction, which is an essential feature of any programming language.
+In addition, a good number of quantum programming languages do not compile to run on actual hardware.
+A simple circuit language like QASM does not provide the hybrid computation like QUIL does.
+In effect, most quantum languages that do anything non-trivial are still circuit-assembly languages.
+The world of classical programming languages was revolutionized with the invention of the C programming language, which is now ubiquitous in today's software either in either its original or derivative forms [Cite]. 
+When C was created, it replaced assembly and eased the production of many important systems.
+For instance, the unix operating system was re-written in C, which greatly reduced its complexity.
 
 Since quantum computers are inherently probabilistic, a quantum programming language can draw inspiration from classical probabilistic programming.
 Classical probabilistic programming languages are a recent innovation from the MIT cognitive science community. 
@@ -416,7 +421,7 @@ Users can create simple probabilistic models in standard code, and then run them
 Famously, this has resulted in dramatically reduced code complexity, with a famous case where a 50-line probabilistic program could compete with traditional approaches to face recognition [TODO: Cite].
 
 Both quantum computing and classical probabilistic programming have variables which are probability distributions.
-In quantum computing, measuring a single qubit results in $0$ or $1$, which represents a bernoulli trial, even though the qubits pre-measurement state is richer (because its true representation is a complex probability amplitude).
+In quantum computing, measuring a single qubit results in $0$ or $1$, which represents a bernoulli trial, even though the qubit's pre-measurement state is richer (because its true representation is a complex probability amplitude).
 If this is repeated multiple times, it creates a binomial distribution.
 Similarly, measuring multiple ($n$) qubits gives a bitstring $(0, 1)^n$. 
 If this is repeated multiple times, it creates a multinomial distribution.
@@ -424,6 +429,29 @@ If this is repeated multiple times, it creates a multinomial distribution.
 Quantum states are richer than standard probability distributions.
 The simplest case is a Bell state, where, for instance, one may measure $00$ or $11$ with equal probability\dots [TODO: Extend]
 
+\section{Background}
+
+\section{Curry}
+
+Curry builds atop the innovations of Rigetti pyquil.
+Pyquil is simply used as a compilation target for higher level constructs.
+For example, pyquil does not provide a native ``if`` statement, and istead relies on hardcoded jumps.
+The if statement is the simplest element in Curry:
+
+Simply change (if (condition) (branch) (branch))
+into
+``
+Condition
+Measure []
+Jump label
+branch
+branch etc
+``
+
+Curry also supports variable naming, blocks of qubits, classical callbacks, imports, \dots
+Curry can be called as a library and operated from python
+
+The backend for code generation allows different targets, such as google Circ.
 
 %% These resulting multinomial distributions can, in theory, represent everything, but are often made to amplify a single state such that it can be found with high probability after doing multiple experiments. This is done because $n$ qubits have at most $2^n$ possible measurement outcomes and it is difficult to estimate the true probability distribution?. -> Not certain about this please research more
 
@@ -591,116 +619,11 @@ The simplest case is a Bell state, where, for instance, one may measure $00$ or 
 % ...
 % ```
 
-\hfill mds
- 
-\hfill August 26, 2015
+\section{Untitled}
 
-\subsection{Subsection Heading Here}
-Subsection text here.
-
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
-
-
-% An example of a floating figure using the graphicx package.
-% Note that \label must occur AFTER (or within) \caption.
-% For figures, \caption should occur after the \includegraphics.
-% Note that IEEEtran v1.7 and later has special internal code that
-% is designed to preserve the operation of \label within \caption
-% even when the captionsoff option is in effect. However, because
-% of issues like this, it may be the safest practice to put all your
-% \label just after \caption rather than within \caption{}.
-%
-% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
-% option should be used if it is desired that the figures are to be
-% displayed while in draft mode.
-%
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation results for the network.}
-%\label{fig_sim}
-%\end{figure}
-
-% Note that the IEEE typically puts floats only at the top, even when this
-% results in a large percentage of a column being occupied by floats.
-
-
-% An example of a double column floating figure using two subfigures.
-% (The subfig.sty package must be loaded for this to work.)
-% The subfigure \label commands are set within each subfloat command,
-% and the \label for the overall figure must come after \caption.
-% \hfil is used as a separator to get equal spacing.
-% Watch out that the combined width of all the subfigures on a 
-% line do not exceed the text width or a line break will occur.
-%
-%\begin{figure*}[!t]
-%\centering
-%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
-%\label{fig_second_case}}
-%\caption{Simulation results for the network.}
-%\label{fig_sim}
-%\end{figure*}
-%
-% Note that often IEEE papers with subfigures do not employ subfigure
-% captions (using the optional argument to \subfloat[]), but instead will
-% reference/describe all of them (a), (b), etc., within the main caption.
-% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
-% labels, the optional argument to \subfloat must be present. If a
-% subcaption is not desired, just leave its contents blank,
-% e.g., \subfloat[].
-
-
-% An example of a floating table. Note that, for IEEE style tables, the
-% \caption command should come BEFORE the table and, given that table
-% captions serve much like titles, are usually capitalized except for words
-% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
-% and up, which are usually not capitalized unless they are the first or
-% last word of the caption. Table text will default to \footnotesize as
-% the IEEE normally uses this smaller font for tables.
-% The \label must come after \caption as always.
-%
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
-
-
-% Note that the IEEE does not put floats in the very first column
-% - or typically anywhere on the first page for that matter. Also,
-% in-text middle ("here") positioning is typically not used, but it
-% is allowed and encouraged for Computer Society conferences (but
-% not Computer Society journals). Most IEEE journals/conferences use
-% top floats exclusively. 
-% Note that, LaTeX2e, unlike IEEE journals/conferences, places
-% footnotes above bottom floats. This can be corrected via the
-% \fnbelowfloat command of the stfloats package.
-
-
-
+Since quantum computers are generally only better at specialized tasks [TODO: Cite?], it makes more sense for quantum computation to be hybridized: to utilize both classical and quantum computers.
+This philosophy is largely exhibited by Rigetti pyquil, which is callable from the Python programming language, which is widely used in today's software development. 
+While Curry is a standalone language that compiles into Rigetti pyquil, it will also be available as a Python library, such that Python programmers can simply use their existing knowledge
 
 \section{Conclusion}
 The conclusion goes here.

@@ -1,0 +1,3 @@
+#!/bin/bash
+quilc -S &
+qvm -S &
