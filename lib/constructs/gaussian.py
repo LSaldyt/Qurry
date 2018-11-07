@@ -14,5 +14,9 @@ def create_gaussian_cdf(mu, sigma):
     return partial(gaussian_cdf, mu=mu, sigma=sigma)
 
 def create_gaussian(mu, sigma, block, definitions=None):
+    '''
+    Construct to create a discrete approximation of the gaussian distribution using mu and sigma
+    (gaussian 0 1 blocka)
+    '''
     return multinomial(*to_multinomial(-3, 3, 64, create_gaussian_cdf(float(mu), float(sigma))), offset=block, definitions=definitions)
 

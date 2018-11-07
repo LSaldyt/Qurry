@@ -1,6 +1,10 @@
 from ..multinomial import multinomial
 
 def create_uniform(*args, definitions):
+    '''
+    Discrete uniform distribution. Special case of multinomial.
+    (uniform blocka)
+    '''
     try:
         n      = int(args[0])
     except TypeError:

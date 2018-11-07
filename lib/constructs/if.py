@@ -9,6 +9,10 @@ LABEL @{first}
 LABEL @{end}'''
 
 def create_if(cond, a, b, definitions=None):
+    '''
+    Create an if statement using labels and jumps.
+    (if (equal 0 1) (X 1) (X 0))
+    '''
     if definitions is None:
         definitions = dict()
     return if_template.format(
