@@ -6,6 +6,12 @@ from run import run
 from lib.parse    import parse
 from lib.generate import generate
 
+'''
+This script compiles and runs a .lisp (curry) file.
+Its usage is ./compile [filename]
+An auxilary quil file will be output to '.out.quil'
+'''
+
 def main(args):
     assert len(args) > 0, 'Usage: ./compile [filename]'
     filename = args[0]
