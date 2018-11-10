@@ -121,7 +121,7 @@ def create_if(cond, a, b, definitions=None):
 ```
 
 The `if` statement uses a raw quil template that boils down to jump instructions, and the function `create_if` is a reserved name in this file.
-For more on contributing, see `[HACKING.md](HACKING.md)`
+For more on contributing, see [HACKING.md](HACKING.md)
 
 ```
 @misc{saldyt_2018, title={Curry, a probabilistic quantum programming language}, url={https://github.com/LSaldyt/curry}, journal={GitHub}, author={Saldyt, Lucas}, year={2018}, month={Nov}}
