@@ -5,6 +5,9 @@ The official project duration is one year, but the language may be usable before
 
 For more information on the progress of the project, see a [summary](brainstorm.md) (from early October), or an in-progress [paper](paper/paper.pdf). 
 
+If you use curry or are influenced by it, all I ask is that you cite the software. A bibtex citation is available at the end of this file.
+Once a paper is published, please cite that (I will update it here).
+
 ## Installation
 
 Right now, curry can be cloned locally and run from this directory:
@@ -119,3 +122,7 @@ def create_if(cond, a, b, definitions=None):
 
 The `if` statement uses a raw quil template that boils down to jump instructions, and the function `create_if` is a reserved name in this file.
 For more on contributing, see `[HACKING.md](HACKING.md)`
+
+```
+@misc{saldyt_2018, title={Curry, a probabilistic quantum programming language}, url={https://github.com/LSaldyt/curry}, journal={GitHub}, author={Saldyt, Lucas}, year={2018}, month={Nov}}
+```
