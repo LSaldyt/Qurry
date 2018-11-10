@@ -46,7 +46,7 @@ for e in range(E):
 	accept=exp(accept)
 
 	# Accept rho_candidate with probability accept.
-	if uniform.rvs(0,1)<accept:
+	if uniform.rvs(0,1) < accept:
 		rho=rho_candidate
 		accepted_number=accepted_number+1
 	else:
