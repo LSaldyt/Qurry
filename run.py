@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import sys, time
+import subprocess
 
-import seaborn
-import matplotlib.pyplot as plt
+#import seaborn
+#import matplotlib.pyplot as plt
 from math import floor, log
 
 from pyquil import get_qc
@@ -21,11 +22,21 @@ def run(filename):
     with open(filename, 'r') as infile:
         quil = infile.read()
     program = Program(quil)
-    with open('test.tex', 'w') as outfile:
+    with open('circuit.tex', 'w') as outfile:
         outfile.write(to_latex(program))
     qvm = get_qc('9q-square-qvm')
-    result = qvm.run(program)
-    print(result)
+    print('Circuit output to circuit.tex')
+    try:
+        result = qvm.run(program)
+        print(result)
+    except:
+        print('Warning: Program not run due to changing pyquil API. This will be updated in a future version')
+    try:
+        subprocess.check_output(['pdflatex', 'circuit.tex'])
+        subprocess.check_output(['rm', 'circuit.log', 'circuit.aux'])
+        print('Used pdflatex to output circuit to circuit.pdf')
+    except:
+        print('Warning: Install pdflatex to have circuit created as pdf file')
 
 def main(args):
     assert len(args) > 0, 'Usage: ./run [filename]'
