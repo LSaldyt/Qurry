@@ -20,6 +20,8 @@ To run curry from anywhere, simply add this directory to your path:
 export PATH=$PATH:/home/your-username/your-directory/curry
 ```
 
+## Usage
+
 Currently, curry can be used with the entire QUIL spec, as well as some small abstractions.
 To review the QUIL spec and its arguments, call `./quilarity`.
 
@@ -79,3 +81,41 @@ The `if` and `do` statements are intuitive:
     (nop))
 ```
 This circuit will produce `111` and `000` with equal probability (but NOT using entanglement, since there is a possible intermediate state of `00`).
+
+## Hacking
+
+Each language feature is located in `lib/constructs/` under a file that has the same name as the feature.
+Doing this allows language features to be added dynamically.
+The only requirement is that each feature-file have a function `create-feature` where `feature` is the name of the feature (i.e. `create-if`).
+This function should take the arguments that the function does, and return valid QUIL code.  
+
+For instance, the `if` statement is defined as follows:
+`lib/constructs/if.py`:
+```python3
+from ..utils import named_uuid
+
+if_template = '''# Conditional statement
+JUMP-WHEN @{first} [{cond}]
+  {b}
+JUMP @{end}
+LABEL @{first}
+  {a}
+LABEL @{end}'''
+
+def create_if(cond, a, b, definitions=None):
+    '''
+    Create an if statement using labels and jumps.
+    (if (equal 0 1) (X 1) (X 0))
+    '''
+    if definitions is None:
+        definitions = dict()
+    return if_template.format(
+            cond=cond,
+            a=a,
+            b=b,
+            first=named_uuid('first'),
+            end=named_uuid('end'))
+```
+
+The `if` statement uses a raw quil template that boils down to jump instructions, and the function `create_if` is a reserved name in this file.
+For more on contributing, see `[HACKING.md](HACKING.md)`
