@@ -50,7 +50,8 @@ def build(stack, definitions=None):
         # Branch for language constructs defined in the `constructs` directory
         elif hasattr(constructs, head):
             module  = getattr(constructs, head)
-            creator = getattr(module, 'create_' + head)
+            #creator = getattr(module, 'create_' + head)
+            creator = getattr(module, head)
             yield replace_defs(creator(*expression[1:], definitions=definitions))
         else:
             print('No generation branch for:')

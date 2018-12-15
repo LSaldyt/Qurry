@@ -1,6 +1,6 @@
 from ..multinomial import multinomial
 
-def create_uniform(*args, definitions):
+def uniform(*args, definitions):
     '''
     Discrete uniform distribution. Special case of multinomial.
     (uniform blocka)

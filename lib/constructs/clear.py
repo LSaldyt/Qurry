@@ -6,7 +6,7 @@ JUMP-UNLESS @{uuid} [{scratch_bit}]
 X {q}
 LABEL @{uuid}'''
 
-def create_clear(q, scratch=63, definitions=None):
+def clear(q, scratch=63, definitions=None):
     '''
     Clear the qubit q and reset it to the 0 state
     (clear 0)
