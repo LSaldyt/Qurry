@@ -3,6 +3,7 @@ import sys
 from pprint import pprint
 
 from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
+import pyquil
 
 from .utils import named_uuid
 from .definitions import update_definitions
@@ -67,3 +68,6 @@ def generate(stack):
     pprint(stack)
     l = list(build(stack))
     return '\n'.join(l)
+
+def generate_program(stack):
+    return pyquil.Program(generate(stack))

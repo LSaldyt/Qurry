@@ -4,7 +4,7 @@ import sys
 from run import run
 
 from lib.parse    import parse
-from lib.generate import generate
+from lib.generate import generate, generate_program
 
 '''
 This script compiles and runs a .lisp (curry) file.
@@ -18,6 +18,10 @@ def main(args):
     with open(filename, 'r') as infile:
         body = infile.read()
     stack = parse(body)
+    program = generate_program(stack)
+    print(program)
+    1/0
+
     quil  = generate(stack)
     quilfile = '.out.quil'
     with open(quilfile, 'w') as outfile:
