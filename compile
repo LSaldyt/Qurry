@@ -3,8 +3,8 @@ import sys
 
 from run import run
 
-from lib.parse    import parse
-from lib.generate import generate, generate_program
+from curry.parse    import parse
+from curry.generate import generate, generate_program
 
 '''
 This script compiles and runs a .lisp (curry) file.
