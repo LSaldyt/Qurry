@@ -28,6 +28,20 @@ export PATH=$PATH:/home/your-username/your-directory/curry
 Currently, curry can be used with the entire QUIL spec, as well as some small abstractions.
 To review the QUIL spec and its arguments, call `./quilarity`.
 
+### Python bindings
+
+Curry acts as an extension to quil, and is usable in the same way:
+
+```
+>>> from curry.api import *
+>>> program = Program(bernoulli(0.5, 0), H(0))
+>>> str(program)
+'RX(pi/2) 0\nH 0\n'
+>>>
+```
+
+Curry is also usable as a standalone language, which can be converted to the above python syntax at will.  
+
 For example, the trivial Bell-state program is expressed as the following:
 ```lisp
 (h 0)

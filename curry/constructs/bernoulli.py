@@ -1,4 +1,4 @@
-from ..controlled import bernoulli
+from ..controlled import bernoulli as _bern
 
 def bernoulli(p, q, rot='RX', definitions=None):
     '''
@@ -8,4 +8,4 @@ def bernoulli(p, q, rot='RX', definitions=None):
     if definitions is None:
         definitions = dict()
     p = float(p)
-    return bernoulli(p, q, rot=rot)
+    return _bern(p, q, rot=rot)

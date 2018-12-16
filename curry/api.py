@@ -2,6 +2,8 @@ from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
 import pyquil as _pyquil
 from pyquil.gates import *
 
+from pyquil import Program
+
 from .constructs import CONSTRUCTS
 #from . import constructs as _constructs
 
