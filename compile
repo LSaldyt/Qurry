@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 import sys
 
-from run import run
+from pyquil import get_qc
 
 from curry.parse    import parse
 from curry.generate import generate, generate_program
+
+from pprint import pprint
 
 '''
 This script compiles and runs a .lisp (curry) file.
@@ -20,13 +22,14 @@ def main(args):
     stack = parse(body)
     program = generate_program(stack)
     print(program)
-    1/0
+    qc = get_qc('9q-square-qvm')
+    result = qc.run_and_measure(program, trials=10)
+    pprint(result)
 
-    quil  = generate(stack)
+    quil = str(program)
     quilfile = '.out.quil'
     with open(quilfile, 'w') as outfile:
         outfile.write(quil)
-    run(quilfile)
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
