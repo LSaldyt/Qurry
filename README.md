@@ -1,4 +1,5 @@
 # Curry 
+[![Unitary Fund](https://img.shields.io/badge/Supported%20By-UNITARY%20FUND-brightgreen.svg?style=for-the-badge)](http://unitary.fund)  
 
 Curry is a prototype of a quantum probabilistic programming language, done with the [unitary fund](https://unitary.fund).
 The official project duration is one year, but the language may be usable before then (and in fact, can already be used to use all of the QUIL spec with some useful abstractions on top, like if statements, variable names, and so on).
