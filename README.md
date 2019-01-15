@@ -58,7 +58,7 @@ Bernoulli simply rotates a qubit such that it will be measured as `|1>` with a c
 For instance, `(bernoulli 0.5 0)` creates a fair coin from qubit 0. 
 These can be chained together to create more complicated bit-states, which are useful in other algorithms, like Grover's or QFT.
 
-Similary, the `gaussian` function creates a discrete multinomial state which approximates a gaussian distribution.
+Similarly, the `gaussian` function creates a discrete multinomial state which approximates a gaussian distribution.
 It uses the `def` function to create a block of useable qubits:
 ```
 (def gaussblock 0 4) ; block of 5 qubits
