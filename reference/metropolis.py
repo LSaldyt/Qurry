@@ -24,7 +24,7 @@ ax1.scatter(x,y,s=20,c='b',marker='o')
 
 # Gibbs sampler
 E=10000
-BURN_IN=0
+BURN_IN=10
 
 # Initialize the chain.
 rho=0 # as if there's no correlation at all.
@@ -34,33 +34,34 @@ chain_rho=numpy.array([0.]*(E-BURN_IN))
 
 accepted_number=0.
 for e in range(E):
-	print "At iteration "+str(e)
-	# Draw a value from the proposal distribution, Uniform(rho-0.07,rho+0.07); Equation 7
-	rho_candidate=uniform.rvs(rho-0.07,2*0.07)
+    print("At iteration "+str(e))
+    # Draw a value from the proposal distribution, Uniform(rho-0.07,rho+0.07); Equation 7
+    rho_candidate=uniform.rvs(rho-0.07,2*0.07)
 
-	# Compute the acceptance probability, Equation 8 and Equation 6.
-	# We will do both equations in log domain here to avoid underflow.
-	accept=-3./2*log(1.-rho_candidate**2) - N*log((1.-rho_candidate**2)**(1./2)) - sum(1./(2.*(1.-rho_candidate**2))*(x**2-2.*rho_candidate*x*y+y**2))
-	accept=accept-(-3./2*log(1.-rho**2) - N*log((1.-rho**2)**(1./2)) - sum(1./(2.*(1.-rho**2))*(x**2-2.*rho*x*y+y**2)))
-	accept=min([0,accept])
-	accept=exp(accept)
+    # Compute the acceptance probability, Equation 8 and Equation 6.
+    # We will do both equations in log domain here to avoid underflow.
+    calc_accept_prob = lambda r : -3./2*log(1.-r**2) - N*log((1.-r**2)**(1./2)) - sum(1./(2.*(1.-r**2))*(x**2-2.*r*x*y+y**2))
+    accept = calc_accept_prob(rho_candidate)
+    accept = accept - calc_accept_prob(rho)
+    accept=min([0,accept])
+    accept=exp(accept)
 
-	# Accept rho_candidate with probability accept.
-	if uniform.rvs(0,1) < accept:
-		rho=rho_candidate
-		accepted_number=accepted_number+1
-	else:
-		rho=rho
+    # Accept rho_candidate with probability accept.
+    if uniform.rvs(0,1) < accept:
+        rho=rho_candidate
+        accepted_number=accepted_number+1
+    else:
+        rho=rho
 
-	# store
-	if e>=BURN_IN:
-		chain_rho[e-BURN_IN]=rho
+    # store
+    if e >= BURN_IN:
+        chain_rho[e-BURN_IN]=rho
 
-print "...Summary..."
-print "Acceptance ratio is "+str(accepted_number/(E))
-print "Mean rho is "+str(chain_rho.mean())
-print "Std for rho is "+str(chain_rho.std())
-print "Compare with numpy.cov function: "+str(numpy.cov(data.T))
+print("...Summary...")
+print("Acceptance ratio is "+str(accepted_number/(E)))
+print("Mean rho is "+str(chain_rho.mean()))
+print("Std for rho is "+str(chain_rho.std()))
+print("Compare with numpy.cov function: "+str(numpy.cov(data.T)))
 
 # plot things
 ax2.plot(chain_rho,'b')
