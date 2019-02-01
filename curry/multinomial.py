@@ -83,10 +83,15 @@ def write_diag_bernoulli_code(probtree, offset):
                                                    ' '.join(map(str, (offset + n for n in range(n_qubits)))))
     return code
 
-def multinomial(*weights, offset, definitions):
+def multinomial(*weights, offset, definitions=None):
+    print(offset)
+    print(definitions)
     print(weights)
     weights = list(weights)
-    initial, *mid, final = offset.split(' ')
+    block = definitions[offset]
+    initial = block.start
+    final = block.end
+    #initial, *mid, final = definitions[offset].split(' ')
     assert int(final) - int(initial) <= len(weights)
     offset = int(initial)
     n_qubits = ceil(log(len(weights), 2))

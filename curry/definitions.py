@@ -4,12 +4,12 @@ from .block import Block
 Add block definitions (def ..) to a global dictionary.
 '''
 
-def update_definitions(expression, definitions):
-    var = expression[1]
-    if len(expression) == 3:
-        val = expression[2]
+def update_definitions(args, definitions):
+    var = args[0]
+    if len(args) == 2:
+        val = args[1]
         definitions[var] = Block(int(val), int(val))
     else:
-        blocktype = expression[-1] if len(expression) == 5 else 'quantum'
-        start, end = expression[2:4]
+        blocktype = args[-1] if len(args) == 4 else 'quantum'
+        start, end = args[1:3]
         definitions[var] = Block(int(start), int(end), blocktype)

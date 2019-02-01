@@ -39,9 +39,9 @@ def build_expression(expression, definitions=None):
         else:
             return replace_defs(' '.join(expression), definitions)
     # Custom branch for def instructions
-    elif head == 'def':
-        assert len(expression) in [3, 4, 5], 'Def expressions should take the form (def var val) or (def var start end) or (def var start end type)'
-        update_definitions(expression, definitions)
+    #elif head == 'def':
+    #    assert len(expression) in [3, 4, 5], 'Def expressions should take the form (def var val) or (def var start end) or (def var start end type)'
+    #    update_definitions(expression, definitions)
     # Branch for language constructs defined in the `constructs` directory
     elif hasattr(constructs, head):
         module  = getattr(constructs, head)
