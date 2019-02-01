@@ -38,10 +38,6 @@ def build_expression(expression, definitions=None):
             return replace_defs('{} {} [{}]'.format(*expression), definitions)
         else:
             return replace_defs(' '.join(expression), definitions)
-    # Custom branch for def instructions
-    #elif head == 'def':
-    #    assert len(expression) in [3, 4, 5], 'Def expressions should take the form (def var val) or (def var start end) or (def var start end type)'
-    #    update_definitions(expression, definitions)
     # Branch for language constructs defined in the `constructs` directory
     elif hasattr(constructs, head):
         module  = getattr(constructs, head)
@@ -66,13 +62,13 @@ def build(stack, definitions=None):
         yield build_expression(expression, definitions)
 
 # Helper function for debugging a single expression
-def generate_single(expression):
-    return generate([expression])
+def generate_single(expression, definitions=None):
+    return generate([expression], definitions)
 
 # Full function to generate code (quil string) from AST
-def generate(stack):
+def generate(stack, definitions=None):
     pprint(stack)
-    l = list(build(stack))
+    l = list(build(stack, definitions))
     return '\n'.join(l)
 
 def generate_program(stack):
