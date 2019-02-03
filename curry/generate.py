@@ -34,7 +34,6 @@ def build_expression(expression, definitions=None):
     '''
     if definitions is None:
         definitions = dict()
-    #expression = ['\n'.join(build([item], definitions)) if isinstance(item, list) else item for item in expression]
     expression = [expand_property(item) for item in expression]
 
     # Break the expression into parts
