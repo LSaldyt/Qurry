@@ -22,6 +22,12 @@ def replace_defs(code, definitions):
             code = code.replace(item, block.expand())
     return code
 
+def expand_property(word):
+    if isinstance(word, list):
+        return [expand_property(subword) for subword in word]
+    else:
+        return word # TODO
+
 def build_expression(expression, definitions=None):
     '''
     Recursively build sub-expressions in larger expression
@@ -29,6 +35,7 @@ def build_expression(expression, definitions=None):
     if definitions is None:
         definitions = dict()
     #expression = ['\n'.join(build([item], definitions)) if isinstance(item, list) else item for item in expression]
+    expression = [expand_property(item) for item in expression]
 
     # Break the expression into parts
     head = expression[0]
