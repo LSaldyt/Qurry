@@ -18,7 +18,8 @@ This file contains the "meat and potatoes" of the curry.
 
 def replace_defs(code, definitions):
     for item, block in definitions.items():
-        code = code.replace(item, block.expand())
+        if hasattr(block, 'expand'):
+            code = code.replace(item, block.expand())
     return code
 
 def build_expression(expression, definitions=None):
@@ -27,7 +28,8 @@ def build_expression(expression, definitions=None):
     '''
     if definitions is None:
         definitions = dict()
-    expression = ['\n'.join(build([item], definitions)) if isinstance(item, list) else item for item in expression]
+    #expression = ['\n'.join(build([item], definitions)) if isinstance(item, list) else item for item in expression]
+
     # Break the expression into parts
     head = expression[0]
     upper = head.upper()
