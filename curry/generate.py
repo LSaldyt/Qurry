@@ -50,7 +50,7 @@ def build_expression(expression, definitions=None):
     elif hasattr(constructs, head):
         module  = getattr(constructs, head)
         creator = getattr(module, head)
-        return replace_defs(creator(*expression[1:], definitions=definitions), definitions)
+        return replace_defs(creator(*expression[1:], definitions=definitions, builder=build), definitions)
     else:
         print('No generation branch for: {}'.format(expression))
         sys.exit(1)
