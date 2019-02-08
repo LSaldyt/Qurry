@@ -1,47 +1,47 @@
-# Curry 
+# Qurry 
 [![Unitary Fund](https://img.shields.io/badge/Supported%20By-UNITARY%20FUND-brightgreen.svg?style=for-the-badge)](http://unitary.fund)  
 
-Curry is a prototype of a quantum probabilistic programming language, done with the [unitary fund](https://unitary.fund).
+Qurry is a prototype of a quantum probabilistic programming language, done with the [unitary fund](https://unitary.fund).
 The official project duration is one year, but the language may be usable before then (and in fact, can already be used to use all of the QUIL spec with some useful abstractions on top, like if statements, variable names, and so on).
 
 For more information on the progress of the project, see a [summary](brainstorm.md) (from early October), or an in-progress [paper](paper/paper.pdf). 
 
-If you use curry or are influenced by it, all I ask is that you cite the software. A bibtex citation is available at the end of this file.
+If you use Qurry or are influenced by it, all I ask is that you cite the software. A bibtex citation is available at the end of this file.
 Once a paper is published, please cite that (I will update it here).
 
 ## Installation
 
-Right now, curry can be cloned locally and run from this directory:
+Right now, Qurry can be cloned locally and run from this directory:
 
 ```bash
-git clone https://github.com/LSaldyt/curry
-cd curry
+git clone https://github.com/LSaldyt/qurry
+cd qurry
 ./compile examples/bell.lisp # Compile the bell state generator into a circuit
 ```
 
-To run curry from anywhere, simply add this directory to your path:
+To run Qurry from anywhere, simply add this directory to your path:
 ```
-export PATH=$PATH:/home/your-username/your-directory/curry
+export PATH=$PATH:/home/your-username/your-directory/qurry
 ```
 
 ## Usage
 
-Currently, curry can be used with the entire QUIL spec, as well as some small abstractions.
+Currently, Qurry can be used with the entire QUIL spec, as well as some small abstractions.
 To review the QUIL spec and its arguments, call `./quilarity`.
 
 ### Python bindings
 
-Curry acts as an extension to quil, and is usable in the same way:
+Qurry acts as an extension to quil, and is usable in the same way:
 
 ```
->>> from curry.api import *
+>>> from qurry.api import *
 >>> program = Program(bernoulli(0.5, 0), H(0))
 >>> str(program)
 'RX(pi/2) 0\nH 0\n'
 >>>
 ```
 
-Curry is also usable as a standalone language, which can be converted to the above python syntax at will.  
+Qurry is also usable as a standalone language, which can be converted to the above python syntax at will.  
 
 For example, the trivial Bell-state program is expressed as the following:
 ```lisp
@@ -51,7 +51,7 @@ For example, the trivial Bell-state program is expressed as the following:
 
 Gate names can be either upper-case or lower-case.
 
-The following are new instructions that curry offers:
+The following are new instructions that Qurry offers:
 `def`, `bernoulli`, `clear`, `do`, `gaussian`, `if`, `map`, `multinomial`, `uniform`
 
 First there are the simple classical-probabilistic structures `bernoulli`, `gaussian`, `multinomial`, and `uniform`.
@@ -139,5 +139,5 @@ The `if` statement uses a raw quil template that boils down to jump instructions
 For more on contributing, see [HACKING.md](HACKING.md)
 
 ```
-@misc{saldyt_2018, title={Curry, a probabilistic quantum programming language}, url={https://github.com/LSaldyt/curry}, journal={GitHub}, author={Saldyt, Lucas}, year={2018}, month={Nov}}
+@misc{saldyt_2018, title={Qurry, a probabilistic quantum programming language}, url={https://github.com/LSaldyt/qurry}, journal={GitHub}, author={Saldyt, Lucas}, year={2018}, month={Nov}}
 ```
