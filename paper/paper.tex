@@ -329,7 +329,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Curry: A quantum programming language}
+\title{Qurry: A quantum programming language}
 %
 %
 % author names and IEEE memberships
@@ -342,7 +342,7 @@
 %
 
 \author{Lucas~Saldyt,~\IEEEmembership{Arizona State University}
-\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
+\thanks{TODO}}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -388,12 +388,12 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-    Programming quantum computers currently requires specialized knowledge. 
-    This project aims to prototype a higher-level, quantum-classical-hybrid programming language for expressing probabilistic computations easily.
-    The MIT cognitive science community has produced many developments using probabilistic programming languages [TODO: Cite]. 
-    Classical probabilistic programming builds models from building blocks called exchangeable random primitives. 
-    Similarly, quantum programming uses qubits, which are have complex probability amplitudes and may similarly be building blocks for models.
-    This paper presents the prototype for a quantum programming language which offers novel abstractions not yet available in existing quantum programming languages.
+    % Programming quantum computers currently requires specialized knowledge. 
+    % This project aims to prototype a higher-level, quantum-classical-hybrid programming language for expressing probabilistic computations easily.
+    % The MIT cognitive science community has produced many developments using probabilistic programming languages [TODO: Cite]. 
+    % Classical probabilistic programming builds models from building blocks called exchangeable random primitives. 
+    % Similarly, quantum programming uses qubits, which are have complex probability amplitudes and may similarly be building blocks for models.
+    % This paper presents the prototype for a quantum programming language which offers novel abstractions not yet available in existing quantum programming languages.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -404,54 +404,54 @@
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
-\IEEEPARstart{Q}{uantum} computing is still in a nascent form, especially when it comes to programming interfaces. 
-Many acclaimed quantum programming languages are simply circuit description languages that add superfluous syntax to have the look and feel of a traditional programming language.
-These interfaces generally lack abstraction, which is an essential feature of any programming language.
-In addition, a good number of quantum programming languages do not compile to run on actual hardware.
-A simple circuit language like QASM does not provide the hybrid computation like QUIL does.
-In effect, most quantum languages that do anything non-trivial are still circuit-assembly languages.
-The world of classical programming languages was revolutionized with the invention of the C programming language, which is now ubiquitous in today's software either in either its original or derivative forms [Cite]. 
-When C was created, it replaced assembly and eased the production of many important systems.
-For instance, the unix operating system was re-written in C, which greatly reduced its complexity.
+% \IEEEPARstart{Q}{uantum} computing is still in a nascent form, especially when it comes to programming interfaces. 
+% Many acclaimed quantum programming languages are simply circuit description languages that add superfluous syntax to have the look and feel of a traditional programming language.
+% These interfaces generally lack abstraction, which is an essential feature of any programming language.
+% In addition, a good number of quantum programming languages do not compile to run on actual hardware.
+% A simple circuit language like QASM does not provide the hybrid computation like QUIL does.
+% In effect, most quantum languages that do anything non-trivial are still circuit-assembly languages.
+% The world of classical programming languages was revolutionized with the invention of the C programming language, which is now ubiquitous in today's software either in either its original or derivative forms [Cite]. 
+% When C was created, it replaced assembly and eased the production of many important systems.
+% For instance, the unix operating system was re-written in C, which greatly reduced its complexity.
+% 
+% Since quantum computers are inherently probabilistic, a quantum programming language can draw inspiration from classical probabilistic programming.
+% Classical probabilistic programming languages are a recent innovation from the MIT cognitive science community. 
+% Essentially, they create a way for non-expert programmers to access the power of Bayesian inference. 
+% Users can create simple probabilistic models in standard code, and then run them through an expert-created inference backend.
+% Famously, this has resulted in dramatically reduced code complexity, with a famous case where a 50-line probabilistic program could compete with traditional approaches to face recognition [TODO: Cite].
+% 
+% Both quantum computing and classical probabilistic programming have variables which are probability distributions.
+% In quantum computing, measuring a single qubit results in $0$ or $1$, which represents a bernoulli trial, even though the qubit's pre-measurement state is richer (because its true representation is a complex probability amplitude).
+% If this is repeated multiple times, it creates a binomial distribution.
+% Similarly, measuring multiple ($n$) qubits gives a bitstring $(0, 1)^n$. 
+% If this is repeated multiple times, it creates a multinomial distribution.
+% 
+% Quantum states are richer than standard probability distributions.
+% The simplest case is a Bell state, where, for instance, one may measure $00$ or $11$ with equal probability\dots [TODO: Extend]
 
-Since quantum computers are inherently probabilistic, a quantum programming language can draw inspiration from classical probabilistic programming.
-Classical probabilistic programming languages are a recent innovation from the MIT cognitive science community. 
-Essentially, they create a way for non-expert programmers to access the power of Bayesian inference. 
-Users can create simple probabilistic models in standard code, and then run them through an expert-created inference backend.
-Famously, this has resulted in dramatically reduced code complexity, with a famous case where a 50-line probabilistic program could compete with traditional approaches to face recognition [TODO: Cite].
-
-Both quantum computing and classical probabilistic programming have variables which are probability distributions.
-In quantum computing, measuring a single qubit results in $0$ or $1$, which represents a bernoulli trial, even though the qubit's pre-measurement state is richer (because its true representation is a complex probability amplitude).
-If this is repeated multiple times, it creates a binomial distribution.
-Similarly, measuring multiple ($n$) qubits gives a bitstring $(0, 1)^n$. 
-If this is repeated multiple times, it creates a multinomial distribution.
-
-Quantum states are richer than standard probability distributions.
-The simplest case is a Bell state, where, for instance, one may measure $00$ or $11$ with equal probability\dots [TODO: Extend]
-
-\section{Background}
-
-\section{Curry}
-
-Curry builds atop the innovations of Rigetti pyquil.
-Pyquil is simply used as a compilation target for higher level constructs.
-For example, pyquil does not provide a native ``if`` statement, and istead relies on hardcoded jumps.
-The if statement is the simplest element in Curry:
-
-Simply change (if (condition) (branch) (branch))
-into
-``
-Condition
-Measure []
-Jump label
-branch
-branch etc
-``
-
-Curry also supports variable naming, blocks of qubits, classical callbacks, imports, \dots
-Curry can be called as a library and operated from python
-
-The backend for code generation allows different targets, such as google Circ.
+% \section{Background}
+% 
+% \section{Curry}
+% 
+% Curry builds atop the innovations of Rigetti pyquil.
+% Pyquil is simply used as a compilation target for higher level constructs.
+% For example, pyquil does not provide a native ``if`` statement, and istead relies on hardcoded jumps.
+% The if statement is the simplest element in Curry:
+% 
+% Simply change (if (condition) (branch) (branch))
+% into
+% ``
+% Condition
+% Measure []
+% Jump label
+% branch
+% branch etc
+% ``
+% 
+% Curry also supports variable naming, blocks of qubits, classical callbacks, imports, \dots
+% Curry can be called as a library and operated from python
+% 
+% The backend for code generation allows different targets, such as google Circ.
 
 %% These resulting multinomial distributions can, in theory, represent everything, but are often made to amplify a single state such that it can be found with high probability after doing multiple experiments. This is done because $n$ qubits have at most $2^n$ possible measurement outcomes and it is difficult to estimate the true probability distribution?. -> Not certain about this please research more
 
@@ -619,11 +619,11 @@ The backend for code generation allows different targets, such as google Circ.
 % ...
 % ```
 
-\section{Untitled}
-
-Since quantum computers are generally only better at specialized tasks [TODO: Cite?], it makes more sense for quantum computation to be hybridized: to utilize both classical and quantum computers.
-This philosophy is largely exhibited by Rigetti pyquil, which is callable from the Python programming language, which is widely used in today's software development. 
-While Curry is a standalone language that compiles into Rigetti pyquil, it will also be available as a Python library, such that Python programmers can simply use their existing knowledge
+% \section{Untitled}
+% 
+% Since quantum computers are generally only better at specialized tasks [TODO: Cite?], it makes more sense for quantum computation to be hybridized: to utilize both classical and quantum computers.
+% This philosophy is largely exhibited by Rigetti pyquil, which is callable from the Python programming language, which is widely used in today's software development. 
+% While Curry is a standalone language that compiles into Rigetti pyquil, it will also be available as a Python library, such that Python programmers can simply use their existing knowledge
 
 \section{Conclusion}
 The conclusion goes here.
