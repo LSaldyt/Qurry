@@ -388,12 +388,11 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-    % Programming quantum computers currently requires specialized knowledge. 
-    % This project aims to prototype a higher-level, quantum-classical-hybrid programming language for expressing probabilistic computations easily.
-    % The MIT cognitive science community has produced many developments using probabilistic programming languages [TODO: Cite]. 
-    % Classical probabilistic programming builds models from building blocks called exchangeable random primitives. 
-    % Similarly, quantum programming uses qubits, which are have complex probability amplitudes and may similarly be building blocks for models.
-    % This paper presents the prototype for a quantum programming language which offers novel abstractions not yet available in existing quantum programming languages.
+Quantum programming languages are largely still in early development. 
+However, many lack true \emph{abstraction} and are simply proxies to circuit languages. 
+There is reason for this, primarily because the desired semantics of a quantum programming language are not yet completely crystalized. 
+This paper focuses on the creation of ``lightweight abstractions,'' which allow human-level understanding without sacrificing low level control.
+Additionally, this paper describes a testbed, which is meant to catalyze the development of quantum programming languages.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -403,7 +402,27 @@
 
 \IEEEpeerreviewmaketitle
 
+
 \section{Introduction}
+\IEEEPARstart{Q}{uantum} programming \dots
+
+Essentially, innovation in near-term quantum programming requires the use of lightweight abstractions. 
+Because the field is (comparatively) nascent, some transparency is crucial.
+However, there are already plenty of abstractions in quantum programming. 
+Theorists will be familiar with a linear algebra matrix-operator model, which is an abstract scaffold over true hardware implementations, such as [Citation: superconducting implementations using microwave pulses etc].
+Given these facts, current term quantum programming languages are analogous to classical assembly languages, and the next stage of development is to create the equivalent of C for quantum programming.
+When C was invented for classical programming, it revolutionized [Summarize the effects].
+Even in modern times, C++ is used for a [large part] of software development.
+The term ``lightweight abstraction'' comes from the C++ community, in particular [that one paper by stroustrup that I read like 1/8 of].
+
+Additionally, it is necessary to rapidly test new ideas in quantum programming from the bottom up and simply collect data on them, as opposed to architecting a top-down ``perfect'' language.
+As can be seen in the natural language attempt to create Esperanto as a universal language, this is unlikely to work.
+In general, evolution will create a much more robust system.
+Thus, Qurry offers a framework in which programmers can easily create new syntax features.
+This framework works similarly to macros in lisp, but has a simplified interface as well.
+
+
+
 % \IEEEPARstart{Q}{uantum} computing is still in a nascent form, especially when it comes to programming interfaces. 
 % Many acclaimed quantum programming languages are simply circuit description languages that add superfluous syntax to have the look and feel of a traditional programming language.
 % These interfaces generally lack abstraction, which is an essential feature of any programming language.
