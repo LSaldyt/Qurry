@@ -404,16 +404,23 @@ Additionally, this paper describes a testbed, which is meant to catalyze the dev
 
 
 \section{Introduction}
-\IEEEPARstart{Q}{uantum} programming \dots
+\IEEEPARstart{I}{nnovation} in near-term quantum programming requires the use of lightweight abstractions. 
+Because the field is (comparatively) nascent, transparency is crucial, but so is usability.
+Of course, there are already plenty of abstractions in quantum programming. 
+Theorists will be familiar with a linear algebra matrix-operator model, which is an abstract scaffold over true hardware implementations, such as superconducting implementations using microwave pulses.
+In general, quantum algorithms can look over certain implementation details, such as wether the substrate is superconducting or ion trap based. 
+However, there are other implementation details which are far more important, such as the entanglement topology (See google's talk).
 
-Essentially, innovation in near-term quantum programming requires the use of lightweight abstractions. 
-Because the field is (comparatively) nascent, some transparency is crucial.
-However, there are already plenty of abstractions in quantum programming. 
-Theorists will be familiar with a linear algebra matrix-operator model, which is an abstract scaffold over true hardware implementations, such as [Citation: superconducting implementations using microwave pulses etc].
+Some abstract programming interfaces do exist, such as IBM's qiskit for universal gate set computing and a prolog interface for DWave's adiabatic model.
+However, an important aspect that these lack is true generality.
+Instead, there is a general tendency to create a list of algorithmic classes, and simply provide frameworks for each class of algorithm.
+It may very much be possible that specialized interfaces like this are an efficient method of quantum programming, but creation of a general language is also important
+
 Given these facts, current term quantum programming languages are analogous to classical assembly languages, and the next stage of development is to create the equivalent of C for quantum programming.
-When C was invented for classical programming, it revolutionized [Summarize the effects].
-Even in modern times, C++ is used for a [large part] of software development.
-The term ``lightweight abstraction'' comes from the C++ community, in particular [that one paper by stroustrup that I read like 1/8 of].
+When C was invented for classical programming, it revolutionized software (and is still used for essentially all modern operating systems, games, and other significant software). 
+C++, despite its age, actually has one of the most innovative communities of any programming language.
+In particular, the term ``lightweight abstraction'' originates for Bjarne Stroustrup, the creator of C++. 
+This term is used to describe what Stroustrup considers the fundamental ideaology behind C++.
 
 Additionally, it is necessary to rapidly test new ideas in quantum programming from the bottom up and simply collect data on them, as opposed to architecting a top-down ``perfect'' language.
 As can be seen in the natural language attempt to create Esperanto as a universal language, this is unlikely to work.
@@ -421,7 +428,9 @@ In general, evolution will create a much more robust system.
 Thus, Qurry offers a framework in which programmers can easily create new syntax features.
 This framework works similarly to macros in lisp, but has a simplified interface as well.
 
-
+Since quantum computers are simply special probabilistic computers, Qurry also attempts to create a statistical library for high-level modeling. 
+This is particularly useful in the same way that a classical probabilistic programming language is, namely for modeling anything statistical, and especially for bayesian machine learning.
+For instance, the R. Tucci and H. group have shown uses for this through their software, Bayesforge.
 
 % \IEEEPARstart{Q}{uantum} computing is still in a nascent form, especially when it comes to programming interfaces. 
 % Many acclaimed quantum programming languages are simply circuit description languages that add superfluous syntax to have the look and feel of a traditional programming language.
