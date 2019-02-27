@@ -342,7 +342,7 @@
 %
 
 \author{Lucas~Saldyt,~\IEEEmembership{Arizona State University}
-\thanks{TODO}}
+\thanks{}}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -422,15 +422,31 @@ C++, despite its age, actually has one of the most innovative communities of any
 In particular, the term ``lightweight abstraction'' originates for Bjarne Stroustrup, the creator of C++. 
 This term is used to describe what Stroustrup considers the fundamental ideaology behind C++.
 
+Since quantum computers are simply special probabilistic computers, Qurry also attempts to create a statistical library for high-level modeling. 
+This is particularly useful in the same way that a classical probabilistic programming language is, namely for modeling anything statistical, and especially for bayesian machine learning.
+For instance, the R. Tucci and H. group have shown uses for this through their software, Bayesforge.
+Creating a statistical library will complement these approaches, allowing richer modeling.
+
+Lastly, the matrix operator model of quantum computing actually lends itself to functional programming paradigms quite nicely.
+Since each unitary linear operator is essentially a function, constructs such as mapping or composition can be used to create higher order functions (and, in the most abstract terms, a quantum program in total is simply one of these higher order functions).
+Additionally, the general inability to query state mid-operations also lends itself to a pure functional paradigm.
+Thus, Qurry draws a large influence from Haskell, as well as LISP (and Clojure in particular,which, like C++, has an incredible innovative community).
+
 Additionally, it is necessary to rapidly test new ideas in quantum programming from the bottom up and simply collect data on them, as opposed to architecting a top-down ``perfect'' language.
 As can be seen in the natural language attempt to create Esperanto as a universal language, this is unlikely to work.
 In general, evolution will create a much more robust system.
 Thus, Qurry offers a framework in which programmers can easily create new syntax features.
-This framework works similarly to macros in lisp, but has a simplified interface as well.
+This framework works similarly to macros in LISP, but has a simplified interface as well.
 
-Since quantum computers are simply special probabilistic computers, Qurry also attempts to create a statistical library for high-level modeling. 
-This is particularly useful in the same way that a classical probabilistic programming language is, namely for modeling anything statistical, and especially for bayesian machine learning.
-For instance, the R. Tucci and H. group have shown uses for this through their software, Bayesforge.
+\section{Conclusion}
+
+In the creation of a Qurry and its corresponding framework, it is hoped that this will aid the development of quantum algorithms, as algorithm designers will have a new, richer, more abstract vocabulary with which to express themselves.
+To recap, this goal is approached in the following N ways.
+By introduction of lightweight abstractions from the C++ school of thought, efficient and transparent programming interfaces are created.
+Through specialized libraries, Qurry can claim to be a generalized library, while still offering powerful sub-frameworks for specific tasks.
+With functional programming paradigms, Qurry can move towards higher levels of abstraction as the semantics of quantum programming become better understood.
+Lastly, by creating a rapid prototyping framework, new language features can be developed in a bottom-up style, which will allow Qurry to be created naturally, instead of artificially.
+
 
 % \IEEEPARstart{Q}{uantum} computing is still in a nascent form, especially when it comes to programming interfaces. 
 % Many acclaimed quantum programming languages are simply circuit description languages that add superfluous syntax to have the look and feel of a traditional programming language.
@@ -653,8 +669,6 @@ For instance, the R. Tucci and H. group have shown uses for this through their s
 % This philosophy is largely exhibited by Rigetti pyquil, which is callable from the Python programming language, which is widely used in today's software development. 
 % While Curry is a standalone language that compiles into Rigetti pyquil, it will also be available as a Python library, such that Python programmers can simply use their existing knowledge
 
-\section{Conclusion}
-The conclusion goes here.
 
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
@@ -669,20 +683,20 @@ The conclusion goes here.
 % \subsection or using \label (\appendices by itself
 % starts a section numbered zero.)
 
-\appendices
-\section{}
-Appendix one text goes here.
-
-% you can choose not to have a title for an appendix
-% if you want by leaving the argument blank
-\section{}
-Appendix two text goes here.
+ %\appendices
+ %\section{}
+ %Appendix one text goes here.
+ %
+ %% you can choose not to have a title for an appendix
+ %% if you want by leaving the argument blank
+ %\section{}
+ %Appendix two text goes here.
 
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-The author would like to thank Will Zeng of Rigetti computing, who sponsered this project through the unitary fund [LINK].
+The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer of the Unitary Fund, Dr. Ajay Bansal of Arizona State University, PLoS and other donators to the unitary fund, and ASU's FURI program.
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
