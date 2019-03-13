@@ -1,4 +1,4 @@
-(def workspace 1 2)
+(define workspace 1 2)
 (bernoulli 0.5 0) ; Deciding NP or VP
 (clear 0 0)
 (if 0 

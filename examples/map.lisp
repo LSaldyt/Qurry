@@ -1,2 +1,2 @@
-(def blocka 1 3)
+(define blocka 1 3)
 (map x blocka)
