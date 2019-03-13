@@ -1,7 +1,7 @@
 from ..utils import named_uuid
 from ..datatype import Datatype
 
-def datatype(name, *fields, definitions=None):
+def datatype(name, *fields, definitions=None, builder=None):
     '''
     Define a qubit-based datatype
     i.e.

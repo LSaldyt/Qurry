@@ -4,7 +4,7 @@ macro_template = '''
 {body}
 '''
 
-def macro(name, arguments, *body, definitions=None):
+def macro(name, arguments, *body, definitions=None, builder=None):
     end_id = named_uuid(name + '-end')
     f_id   = named_uuid(name)
 

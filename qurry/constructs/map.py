@@ -1,6 +1,6 @@
 from ..utils import named_uuid
 
-def map(operator, blockname, definitions=None):
+def map(operator, blockname, definitions=None, builder=None):
     '''
     Apply a single-qubit operator to every qubit in a block
     (map H blocka)

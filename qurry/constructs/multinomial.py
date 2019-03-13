@@ -1,6 +1,6 @@
 from ..multinomial import multinomial as lib_multinomial
 
-def multinomial(*args, definitions):
+def multinomial(*args, definitions, builder=None):
     '''
     Create a discrete multinomial distribution across several qubits
     (multinomial 0.1 0.1 0.8 blockb) # Use two qubits to create the multinomial
