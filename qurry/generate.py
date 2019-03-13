@@ -7,6 +7,7 @@ import pyquil
 
 from .utils import named_uuid
 from .definitions import update_definitions
+from .datatype import Datatype
 
 from . import constructs
 
@@ -53,6 +54,7 @@ def build_expression(expression, definitions=None):
         return replace_defs(creator(*expression[1:], definitions=definitions, builder=build), definitions)
     else:
         print('No generation branch for: {}'.format(expression))
+        pprint(definitions)
         sys.exit(1)
 
 def build_python_expression(expression, definitions=None):
