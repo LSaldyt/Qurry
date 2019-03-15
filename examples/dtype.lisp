@@ -1,5 +1,6 @@
-(datatype mytype
+(datatype entanglion
           (a qubit)
-          (b bit))
+          (b qubit)
+          (c (block 2 qubit)))
 
-(define a (mytype 0 0))
+(define e (entanglion 0 0))

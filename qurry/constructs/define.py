@@ -1,6 +1,8 @@
 from ..definitions import update_definitions
 from ..datatype import Datatype
 
+from pprint import pprint
+
 def process_type(body, definitions, builder):
     if len(body) == 1:
         body = body[0]
@@ -14,6 +16,7 @@ def define(*expression, definitions=None, builder=None):
     name, *rest = expression
     if name not in definitions:
         definitions[name] = process_type(rest, definitions, builder)
+        pprint(definitions)
     else:
         raise ValueError('{} is already defined'.format(name))
     return ''
