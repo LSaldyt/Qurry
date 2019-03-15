@@ -17,4 +17,4 @@ These are defined in-program using the following syntax:
         (c 3))
 '''
 
-Datatype = namedtuple('Datatype', ['fields'])
+Datatype = namedtuple('Datatype', ['fields', 'qubitmap'])
