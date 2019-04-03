@@ -1,6 +1,6 @@
 from ..multinomial import multinomial
 
-def uniform(*args, definitions, builder=None):
+def uniform(*args, kernel=None):
     '''
     Discrete uniform distribution. Special case of multinomial.
     (uniform blocka)
@@ -10,4 +10,4 @@ def uniform(*args, definitions, builder=None):
     except TypeError:
         raise TypeError('(uniform n) expects an integer argument')
     offset = args[1]
-    return multinomial(*(1/n for _ in range(n)), offset=offset, definitions=definitions)
+    return multinomial(*(1/n for _ in range(n)), offset=offset, definitions=kernel.definitions)

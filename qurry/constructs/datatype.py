@@ -7,7 +7,7 @@ from ..memory   import Memory
 # types = {'bit', 'bits', 'qubit', 'qubits'}
 types = {'qubit', 'qubits'}
 
-def datatype(name, *fields, definitions=None, builder=None):
+def datatype(name, *fields, kernel):
     '''
     Define a qubit-based datatype
     i.e.
@@ -24,8 +24,6 @@ def datatype(name, *fields, definitions=None, builder=None):
         (c 3))
     '''
     dtype = Datatype(dict(), dict())
-    if definitions is None:
-        definitions = dict()
     for field in fields:
         field_name, kind = field
         if isinstance(kind, list):
@@ -34,9 +32,8 @@ def datatype(name, *fields, definitions=None, builder=None):
         else:
             assert kind in types, 'Data field ({} {}) does not use a valid type'.format(*field)
             dtype.fields[field_name] = kind
-    if name in definitions:
+    if name in kernel.definitions:
         raise ValueError('Redefinition of {}'.format(name))
-    memory = Memory(64)
-    dtype.qubitmap.update(memory.allocate(dtype))
-    definitions[name] = dtype
+    dtype.qubitmap.update(kernel.memory.allocate(dtype))
+    kernel.definitions[name] = dtype
     return ''

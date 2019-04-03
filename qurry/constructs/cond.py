@@ -8,7 +8,7 @@ LABEL @{first}
   {a}
 LABEL @{end}'''
 
-def cond(cond, a, b, definitions=None, builder=None):
+def cond(cond, a, b, kernel=None):
     '''
     Create an if statement using labels and jumps.
     (cond 0 (X 1) (X 0))

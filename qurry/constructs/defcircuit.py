@@ -3,7 +3,7 @@ from collections import namedtuple
 
 Circuit = namedtuple('Circuit', ['arguments', 'expressions'])
 
-def defcircuit(name, argdef, expressions, definitions=None, builder=None):
+def defcircuit(name, argdef, expressions, kernel=None):
     '''
     Create a repeatable circuit
     '''

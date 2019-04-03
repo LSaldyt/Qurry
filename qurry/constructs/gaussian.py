@@ -13,10 +13,10 @@ def gaussian_cdf(x, mu, sigma):
 def gaussian_cdfp(mu, sigma):
     return partial(gaussian_cdf, mu=mu, sigma=sigma)
 
-def gaussian(mu, sigma, block, definitions=None, builder=None):
+def gaussian(mu, sigma, block, kernel=None):
     '''
     Construct to create a discrete approximation of the gaussian distribution using mu and sigma
     (gaussian 0 1 blocka)
     '''
-    return multinomial(*to_multinomial(-3, 3, 64, gaussian_cdfp(float(mu), float(sigma))), offset=block, definitions=definitions)
+    return multinomial(*to_multinomial(-3, 3, 64, gaussian_cdfp(float(mu), float(sigma))), offset=block, definitions=kernel.definitions)
 

@@ -33,8 +33,7 @@ def build_expression(expression, definitions=None):
     '''
     Recursively build sub-expressions in larger expression
     '''
-    if definitions is None:
-        definitions = dict()
+    kernel = Kernel(build_expression)
     expression = [expand_property(item) for item in expression]
 
     # Break the expression into parts
@@ -44,14 +43,14 @@ def build_expression(expression, definitions=None):
     if upper in STANDARD_INSTRUCTIONS or upper in STANDARD_GATES:
         expression[0] = upper
         if upper == 'MEASURE':
-            return replace_defs('{} {} [{}]'.format(*expression), definitions)
+            return replace_defs('{} {} [{}]'.format(*expression), kernel.definitions)
         else:
-            return replace_defs(' '.join(expression), definitions)
+            return replace_defs(' '.join(expression), kernel.definitions)
     # Branch for language constructs defined in the `constructs` directory
     elif hasattr(constructs, head):
         module  = getattr(constructs, head)
         creator = getattr(module, head)
-        return replace_defs(creator(*expression[1:], definitions=definitions, builder=build), definitions)
+        return replace_defs(creator(*expression[1:], kernel=kernel), kernel.definitions)
     else:
         print('No generation branch for: {}'.format(expression))
         pprint(definitions)
