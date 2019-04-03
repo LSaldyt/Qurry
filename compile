@@ -4,7 +4,8 @@ import sys
 from pyquil import get_qc
 
 from qurry.parse    import parse
-from qurry.generate import generate, generate_program
+from qurry.generate import generate, generate_program, build_expression
+from qurry.kernel   import Kernel
 
 from pprint import pprint
 
@@ -20,7 +21,8 @@ def main(args):
     with open(filename, 'r') as infile:
         body = infile.read()
     stack = parse(body)
-    program = generate_program(stack)
+    kernel = Kernel(build_expression, 64)
+    program = generate_program(stack, kernel)
     print('Program:')
     print(program)
     print('End')

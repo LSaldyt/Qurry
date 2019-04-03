@@ -1,4 +1,4 @@
-from memory import Memory
+from .memory import Memory
 
 class Kernel():
     def __init__(self, builder, size=64):

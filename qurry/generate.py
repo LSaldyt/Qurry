@@ -8,6 +8,7 @@ import pyquil
 from .utils import named_uuid
 from .definitions import update_definitions
 from .datatype import Datatype
+from .kernel import Kernel
 
 from . import constructs
 
@@ -29,11 +30,10 @@ def expand_property(word):
     else:
         return word # TODO
 
-def build_expression(expression, definitions=None):
+def build_expression(expression, kernel):
     '''
     Recursively build sub-expressions in larger expression
     '''
-    kernel = Kernel(build_expression)
     expression = [expand_property(item) for item in expression]
 
     # Break the expression into parts
@@ -56,29 +56,26 @@ def build_expression(expression, definitions=None):
         pprint(definitions)
         sys.exit(1)
 
-def build_python_expression(expression, definitions=None):
+def build_python_expression(expression, kernel):
     return pyquil.Program(build_expression(expression, definitions))
 
-def build(stack, definitions=None):
+def build(stack, kernel):
     '''
     Create quil code from a curry abstract syntax tree
     '''
-    if definitions is None:
-        definitions = dict()
-
     for expression in stack:
         assert len(expression) > 0, 'Error: parsed empty list {}'.format(expression)
-        yield build_expression(expression, definitions)
+        yield build_expression(expression, kernel)
 
 # Helper function for debugging a single expression
 def generate_single(expression, definitions=None):
     return generate([expression], definitions)
 
 # Full function to generate code (quil string) from AST
-def generate(stack, definitions=None):
+def generate(stack, kernel):
     pprint(stack)
-    l = list(build(stack, definitions))
+    l = list(build(stack, kernel))
     return '\n'.join(l)
 
-def generate_program(stack):
-    return pyquil.Program(generate(stack))
+def generate_program(stack, kernel):
+    return pyquil.Program(generate(stack, kernel))

@@ -14,8 +14,9 @@ def process_type(body, kernel):
 
 def define(*expression, kernel=None):
     name, *rest = expression
-    if name not in definitions:
-        definitions[name] = process_type(rest, kernel)
+    if name not in kernel.definitions:
+        kernel.definitions[name] = process_type(rest, kernel)
+        print(kernel.definitions)
     else:
         raise ValueError('{} is already defined'.format(name))
     return ''
