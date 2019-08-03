@@ -1,2 +1,2 @@
-from ..block import Block
+from ..datatypes.block import Block
 

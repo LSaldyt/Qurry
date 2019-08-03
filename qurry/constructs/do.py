@@ -1,4 +1,4 @@
-from ..utils import named_uuid
+from ..compiler.utils import named_uuid
 
 do_template = '''# Do block
 {}

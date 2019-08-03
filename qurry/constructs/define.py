@@ -1,5 +1,5 @@
-from ..definitions import update_definitions
-from ..datatype import Datatype
+from ..datatypes import update_definitions
+from ..datatypes import Datatype
 
 from pprint import pprint
 

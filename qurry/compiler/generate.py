@@ -6,16 +6,16 @@ from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
 import pyquil
 
 from .utils import named_uuid
-from .definitions import update_definitions
-from .datatype import Datatype
-from .kernel import Kernel
+from ..datatypes import update_definitions
+from ..datatypes import Datatype
+from ..kernel import Kernel
 
-from . import constructs
+from .. import constructs
 
 from math import acos, asin, sin, cos, sqrt
 
 '''
-This file contains the "meat and potatoes" of the curry.
+This file contains the "meat and potatoes" of Qurry.
 '''
 
 def replace_defs(code, definitions):

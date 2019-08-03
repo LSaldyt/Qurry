@@ -1,4 +1,4 @@
-from ..utils import named_uuid
+from ..compiler.utils import named_uuid
 
 clear_template = '''# Clearing qubit {q}
 MEASURE {q} [{scratch_bit}]

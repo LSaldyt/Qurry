@@ -3,9 +3,9 @@ import sys
 
 from pyquil import get_qc
 
-from qurry.parse    import parse
-from qurry.generate import generate, generate_program, build_expression
-from qurry.kernel   import Kernel
+from qurry.compiler.parse    import parse
+from qurry.compiler.generate import generate, generate_program, build_expression
+from qurry.kernel            import Kernel
 
 from pprint import pprint
 

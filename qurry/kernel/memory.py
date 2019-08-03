@@ -1,9 +1,9 @@
-from .block import Block
+from ..datatypes.block import Block
 
 class Memory:
     '''
     A dirt-simple quantum memory tracker that literally breaks up an array of qubits and tracks which are used.
-    Qubits are always allocated contiguously (to have a hope of mapping onto a real topology), and it is assumed they are never de-allocated
+    Qubits are always allocated contiguously, and it is assumed they are never de-allocated
     '''
     def __init__(self, size):
         self.head = 0

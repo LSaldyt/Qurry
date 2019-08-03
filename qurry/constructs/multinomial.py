@@ -1,4 +1,4 @@
-from ..multinomial import multinomial as lib_multinomial
+from ..construct_helpers.multinomial import multinomial as lib_multinomial
 
 def multinomial(*args, kernel=None):
     '''
