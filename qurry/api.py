@@ -1,17 +1,34 @@
-from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
-import pyquil as _pyquil
-from pyquil.gates import *
-from pyquil import Program
+#!/usr/bin/env python3
 
-from functools import wraps
+import sys
+from pyquil import get_qc
 
-from .constructs import CONSTRUCTS
+from .compiler.parse    import parse
+from .compiler.generate import generate, generate_program, build_expression
+from .kernel            import Kernel, Topology
 
-def pyquilify(f):
-    @wraps(f)
-    def f(*args, **kwargs):
-        return f(*args, **kwargs)
-    return f
+from pprint import pprint
 
-for k, v in CONSTRUCTS.items():
-    vars()[k] = getattr(v, k)
+def run(filename, computer='9q-square-qvm', topology=None, indir='examples', outdir='examples/quil/', trials=10):
+
+    if topology is None:
+        topology = Topology(64, None)
+
+    with open(indir + '/' + filename + '.lisp', 'r') as infile:
+        body = infile.read()
+
+    stack   = parse(body)
+    kernel  = Kernel(build_expression, topology)
+    program = generate_program(stack, kernel)
+
+    print('Program:')
+    print(program)
+    print('End')
+
+    qc = get_qc(computer)
+    result = qc.run_and_measure(program, trials=trials)
+    pprint(result)
+
+    quil = str(program)
+    with open(outdir + '/' + filename + '.quil', 'w') as outfile:
+        outfile.write(quil)

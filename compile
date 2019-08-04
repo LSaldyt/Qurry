@@ -1,39 +1,21 @@
 #!/usr/bin/env python3
 import sys
 
-from pyquil import get_qc
+from qurry import run
 
-from qurry.compiler.parse    import parse
-from qurry.compiler.generate import generate, generate_program, build_expression
-from qurry.kernel            import Kernel
-
-from pprint import pprint
-
-'''
+usage = '''
+================================================================================
 This script compiles and runs a .lisp (qurry) file.
 Its usage is ./compile [filename]
-An auxilary quil file will be output to '.out.quil'
+An auxilary quil file will be output to [filename].quil
+By default, this script uses the 'examples' directory, but can point elsewhere.
+================================================================================
 '''
 
 def main(args):
-    assert len(args) > 0, 'Usage: ./compile [filename]'
+    assert len(args) > 0, usage
     filename = args[0]
-    with open(filename, 'r') as infile:
-        body = infile.read()
-    stack = parse(body)
-    kernel = Kernel(build_expression, 64)
-    program = generate_program(stack, kernel)
-    print('Program:')
-    print(program)
-    print('End')
-    qc = get_qc('9q-square-qvm')
-    result = qc.run_and_measure(program, trials=10)
-    pprint(result)
-
-    quil = str(program)
-    quilfile = '.out.quil'
-    with open(quilfile, 'w') as outfile:
-        outfile.write(quil)
+    run(filename)
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
