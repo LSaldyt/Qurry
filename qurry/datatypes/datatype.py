@@ -17,4 +17,9 @@ These are defined in-program using the following syntax:
         (c 3))
 '''
 
-Datatype = namedtuple('Datatype', ['fields', 'qubitmap'])
+class Datatype(namedtuple('Datatype', ['fields', 'qubitmap'])):
+    __slots__ = ()
+    def __new__(cls, fields=None, qubitmap=None):
+        fields = dict() if fields is None else fields
+        qubitmap = dict() if qubitmap is None else qubitmap
+        return super(Datatype, cls).__new__(cls, fields, qubitmap)

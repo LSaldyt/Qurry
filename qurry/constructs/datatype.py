@@ -23,7 +23,7 @@ def datatype(name, *fields, kernel):
         (b)
         (c 3))
     '''
-    dtype = Datatype(dict(), dict())
+    dtype = Datatype()
     for field in fields:
         field_name, kind = field
         if isinstance(kind, list):

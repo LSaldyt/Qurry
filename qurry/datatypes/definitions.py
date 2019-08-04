@@ -1,9 +1,8 @@
 from .block import Block
 
 '''
-Add block definitions (def ..) to a global dictionary.
+Add definitions (define ..) to a global dictionary.
 '''
-
 def update_definitions(args, definitions):
     var = args[0]
     if len(args) == 2:
