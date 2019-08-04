@@ -1,4 +1,4 @@
-from ..construct_helpers.controlled import bernoulli as _bern
+from ..library.controlled import bernoulli as _bern
 
 def bernoulli(p, q, rot='RX', kernel=None):
     '''

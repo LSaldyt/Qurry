@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import sys, time
 from math import erf, sqrt
 
@@ -21,12 +20,3 @@ def discrete_multinomial_probabilities(a, b, step, phi):
     probabilities.append(phi(b) - sum(probabilities))
     probabilities.append(phi(float('inf')) - sum(probabilities))
     return probabilities
-
-def main(args):
-    start = time.time()
-    print(to_multinomial(-3, 3, 100, phi_normal))
-    end = time.time()
-    print(round((end - start) * 1000, 3), 'ms')
-
-if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))

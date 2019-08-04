@@ -1,8 +1,8 @@
 from math import erf, sqrt
 from functools import partial
 
-from ..construct_helpers.multinomial import multinomial
-from ..construct_helpers.to_multinomial import to_multinomial
+from ..library.multinomial import multinomial
+from ..library.to_multinomial import to_multinomial
 
 def gaussian_cdf(x, mu, sigma):
     y = (1.0 + erf((x - mu) / (sigma * sqrt(2.0)))) / 2.0

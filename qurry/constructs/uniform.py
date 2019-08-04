@@ -1,4 +1,4 @@
-from ..construct_helpers.multinomial import multinomial
+from ..library.multinomial import multinomial
 
 def uniform(*args, kernel=None):
     '''
