@@ -23,12 +23,11 @@ class Instance(namedtuple('Instance', ['typename', 'data', 'mapping'])):
         return super(Instance, cls).__new__(cls, typename, dict(), mapping)
     pass
 
-class Datatype(namedtuple('Datatype', ['fields', 'qubitmap'])):
+class Datatype(namedtuple('Datatype', ['fields'])):
     __slots__ = ()
     def __new__(cls, fields=None, qubitmap=None):
         fields = dict() if fields is None else fields
-        qubitmap = dict() if qubitmap is None else qubitmap
-        return super(Datatype, cls).__new__(cls, fields, qubitmap)
+        return super(Datatype, cls).__new__(cls, fields)
 
     def instance(cls, typename, *args, kernel=None, memmap=None):
         assert kernel is not None, 'Must initialize new structures with a valid kernel (got None)'

@@ -34,6 +34,5 @@ def datatype(name, *fields, kernel):
             dtype.fields[field_name] = kind
     if name in kernel.definitions:
         raise ValueError('Redefinition of {}'.format(name))
-    dtype.qubitmap.update(kernel.memory.allocate(dtype))
     kernel.definitions[name] = dtype
     return ''
