@@ -1,8 +1,7 @@
 from math import erf, sqrt
 from functools import partial
 
-from ..library.multinomial import multinomial
-from ..library.to_multinomial import to_multinomial
+from ..library.multinomial import multinomial, to_multinomial
 
 def gaussian_cdf(x, mu, sigma):
     y = (1.0 + erf((x - mu) / (sigma * sqrt(2.0)))) / 2.0
@@ -18,5 +17,5 @@ def gaussian(mu, sigma, block, kernel=None):
     Construct to create a discrete approximation of the gaussian distribution using mu and sigma
     (gaussian 0 1 blocka)
     '''
-    return multinomial(*to_multinomial(-3, 3, 64, gaussian_cdfp(float(mu), float(sigma))), offset=block, definitions=kernel.definitions)
+    return multinomial(*multinomial(-3, 3, 64, gaussian_cdfp(float(mu), float(sigma))), offset=block, definitions=kernel.definitions)
 

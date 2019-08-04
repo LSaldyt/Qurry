@@ -4,7 +4,8 @@ import pyquil
 
 import numpy as np
 
-from math import acos, sqrt, log, ceil, floor
+from math import acos, sqrt, log, ceil, floor, erf
+import sys, time
 
 from .controlled import bernoulli
 
@@ -108,3 +109,23 @@ def multinomial(*weights, offset, definitions=None):
     code += write_diag_bernoulli_code(probtree, offset)
 
     return code
+
+def phi_normal(x):
+    #'Cumulative distribution function for the standard normal distribution'
+    return (1.0 + erf(x / sqrt(2.0))) / 2.0
+
+def to_multinomial(a, b, n, phi):
+    assert n >= 3, 'Minimum three discrete divisions required'
+    n -= 2
+    step  = (b - a) / n
+    return discrete_multinomial_probabilities(a, b, step, phi)
+
+def discrete_multinomial_probabilities(a, b, step, phi):
+    probabilities = []
+    i = a
+    while i < b:
+        probabilities.append(phi(i) - sum(probabilities))
+        i += step
+    probabilities.append(phi(b) - sum(probabilities))
+    probabilities.append(phi(float('inf')) - sum(probabilities))
+    return probabilities
