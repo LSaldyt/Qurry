@@ -31,7 +31,7 @@ def datatype(name, *fields, kernel):
             dtype.fields[field_name] = Block(0, int(kind[1]), *kind[2:])
         else:
             assert kind in types, 'Data field ({} {}) does not use a valid type'.format(*field)
-            dtype.fields[field_name] = kind
+            dtype.fields[field_name] = Block(0, 1, kind)
     if name in kernel.definitions:
         raise ValueError('Redefinition of {}'.format(name))
     kernel.definitions[name] = dtype

@@ -19,7 +19,7 @@ def define(*expression, kernel=None):
     if name not in kernel.definitions:
         kernel.definitions[name] = process_type(rest, kernel)
         print('Kernel definitions:')
-        print(kernel.definitions)
+        pprint(kernel.definitions)
     else:
         raise ValueError('{} is already defined'.format(name))
     return ''
