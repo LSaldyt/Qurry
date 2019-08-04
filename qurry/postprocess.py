@@ -16,7 +16,4 @@ def transform_results(results):
 
 def postprocess(results):
     results = transform_results(results)
-    for k, v in results.items():
-        print(str(k) + ': ' +  ' '.join(map(str, v.values())))
-    #pprint(results)
     histogram(results)
