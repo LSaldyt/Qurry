@@ -6,8 +6,7 @@ from pyquil import get_qc
 from .compiler.parse    import parse
 from .compiler.generate import generate, generate_program, build_expression
 from .kernel            import Kernel, Topology
-
-from pprint import pprint
+from .postprocess       import postprocess
 
 def run(filename, computer='9q-square-qvm', topology=None, indir='examples', outdir='examples/quil/', trials=10):
 
@@ -27,7 +26,7 @@ def run(filename, computer='9q-square-qvm', topology=None, indir='examples', out
 
     qc = get_qc(computer)
     result = qc.run_and_measure(program, trials=trials)
-    pprint(result)
+    postprocess(result)
 
     quil = str(program)
     with open(outdir + '/' + filename + '.quil', 'w') as outfile:
