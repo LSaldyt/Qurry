@@ -7,9 +7,10 @@ def process_type(body, kernel):
     if len(body) == 1:
         body = body[0]
     head, *rest = body
-    if head in kernel.definitions and isinstance(kernel.definitions[head], Datatype):
-        print(kernel.definitions[head])
-        return kernel.definitions[head].instance(head, *rest)
+    if head in kernel.definitions:
+        dtype = kernel.definitions[head]
+        assert isinstance(dtype, Datatype), 'The type {} is not a valid Datatype'.format(head)
+        return dtype.instance(head, *rest, kernel=kernel, memmap=kernel.memory.allocate(dtype))
     else:
         raise ValueError('Cannot process type {}'.format(head))
 
