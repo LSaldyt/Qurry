@@ -1,2 +1,5 @@
 pyquil
 numpy
+pandas
+seaborn
+matplotlib
