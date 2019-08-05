@@ -29,6 +29,8 @@ def datatype(name, *fields, kernel):
         if isinstance(kind, list):
             assert kind[0] == 'block'
             dtype.fields[field_name] = Block(0, int(kind[1]), *kind[2:])
+        elif kind in kernel.definitions and isinstance(kernel.definitions[kind], Datatype):
+            dtype.fields[field_name] = kernel.definitions[kind]
         else:
             assert kind in types, 'Data field ({} {}) does not use a valid type'.format(*field)
             dtype.fields[field_name] = Block(0, 1, kind)

@@ -1,4 +1,5 @@
 from ..datatypes.block import Block
+from ..datatypes import Datatype
 
 from pprint import pprint
 
@@ -23,14 +24,15 @@ class Memory:
     def allocate(self, datatype):
         qubitmap = dict()
         for field, fieldtype in datatype.fields.items():
-            if isinstance(fieldtype, Block):
-                block = fieldtype
-                nqubits = block.end - block.start
-            elif fieldtype == 'qubit':
-                nqubits = 1
-            qubitmap[field] = self._inner_allocate(nqubits)
-        #print('Preallocation map:')
-        #pprint(qubitmap)
+            if isinstance(fieldtype, Datatype):
+                qubitmap.update(self.allocate(fieldtype))
+            else:
+                if isinstance(fieldtype, Block):
+                    block = fieldtype
+                    nqubits = block.end - block.start
+                elif fieldtype == 'qubit':
+                    nqubits = 1
+                qubitmap[field] = self._inner_allocate(nqubits)
         return qubitmap
 
 

@@ -7,3 +7,8 @@
 (x e.a)
 (x e.b)
 (cnot e.c)
+
+(datatype supertanglion
+          (a entanglion))
+
+(define d (supertanglion a e))
