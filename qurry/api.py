@@ -24,11 +24,11 @@ def run(filename, computer='9q-square-qvm', topology=None, indir='examples', out
     print(program)
     print('End')
 
+    quil = str(program)
+    with open(outdir + '/' + filename + '.quil', 'w') as outfile:
+        outfile.write(quil)
+
     qc = get_qc(computer)
     result = qc.run_and_measure(program, trials=trials)
     if postprocess:
         postprocess(result)
-
-    quil = str(program)
-    with open(outdir + '/' + filename + '.quil', 'w') as outfile:
-        outfile.write(quil)

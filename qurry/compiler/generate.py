@@ -24,17 +24,31 @@ def replace_defs(code, definitions):
             code = code.replace(item, block.expand())
     return code
 
-def expand_property(word):
+def lookup(expr, definitions):
+    root, *terms = expr.split('.')
+    assert root in definitions, '{} is not defined properly'.format(root)
+    root = definitions[root]
+    for term in terms:
+        if hasattr(root, 'fields') and term in root.fields:
+            root = root.fields[term]
+        else:
+            root = root.mapping[term]
+    return root
+
+def expand_property(word, definitions):
     if isinstance(word, list):
-        return [expand_property(subword) for subword in word]
+        return [expand_property(subword, definitions) for subword in word]
+    elif '.' in word:
+        return lookup(word, definitions).expand()
     else:
-        return word # TODO
+        return word
+        #return word # TODO
 
 def build_expression(expression, kernel):
     '''
     Recursively build sub-expressions in larger expression
     '''
-    expression = [expand_property(item) for item in expression]
+    expression = [expand_property(item, kernel.definitions) for item in expression]
 
     # Break the expression into parts
     head = expression[0]
@@ -78,4 +92,6 @@ def generate(stack, kernel):
     return '\n'.join(l)
 
 def generate_program(stack, kernel):
-    return pyquil.Program(generate(stack, kernel))
+    intermediate = generate(stack, kernel)
+    print(intermediate)
+    return pyquil.Program(intermediate)

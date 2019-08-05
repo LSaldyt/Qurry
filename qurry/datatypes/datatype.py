@@ -21,7 +21,6 @@ class Instance(namedtuple('Instance', ['typename', 'data', 'mapping'])):
     __slots__ = ()
     def __new__(cls, typename, data, mapping=None):
         return super(Instance, cls).__new__(cls, typename, dict(), mapping)
-    pass
 
 class Datatype(namedtuple('Datatype', ['fields'])):
     __slots__ = ()
