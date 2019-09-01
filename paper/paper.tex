@@ -388,16 +388,12 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-
-    The core philosophy of Qurry is that, while quantum computation is a relatively difficult field, software engineering and programming language design is not.
-    Simple language features, in aggregate, can make quantum programming significantly easier. 
-
-[Old Abstract]
-Quantum programming languages are largely still in early development. 
-However, many lack true \emph{abstraction} and are simply proxies to circuit languages. 
-There is reason for this, primarily because the desired semantics of a quantum programming language are not yet completely crystalized. 
-This paper focuses on the creation of ``lightweight abstractions,'' which allow human-level understanding without sacrificing low level control.
-Additionally, this paper describes a testbed, which is meant to catalyze the development of quantum programming languages.
+    The core philosophy of Qurry is that simple language features, in aggregate, can make quantum programming significantly easier, by offering lightweight abstractions in the spirit of modern C++.
+    This allows users to implement quantum algorithms cleanly, without glossing over necessary lower-level details of quantum computing, such as the abstract topology of a particular computer.
+    Qurry takes a top-down approach, moving from the abstract goal of creating higher-order functions and datatypes to the level of individual language features.
+    While the desired semantics of a true quantum programming language are not yet completely crystalized, the creation of simple language abstractions will elevate the level at which quantum programs are thought about, potentially enlightening the creation of a true quantum programming language.
+    Many existing quantum programming languages are truly circuit languages, with few features above the level of gates, and sometimes rudimentary functions or macros, and there is currently a tendency not to stray very far from this model.
+    Lastly, Qurry is not just a language, but a software ecosystem which is meant to catalyze the development of quantum programming languages.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -407,41 +403,43 @@ Additionally, this paper describes a testbed, which is meant to catalyze the dev
 
 \IEEEpeerreviewmaketitle
 
-
 \section{Introduction}
+
 \IEEEPARstart{I}{nnovation} in near-term quantum programming requires the use of lightweight abstractions. 
-Because the field is (comparatively) nascent, transparency is crucial, but so is usability.
-Of course, there are already plenty of abstractions in quantum programming. 
-Theorists will be familiar with a linear algebra matrix-operator model, which is an abstract scaffold over true hardware implementations, such as superconducting implementations using microwave pulses.
-In general, quantum algorithms can look over certain implementation details, such as wether the substrate is superconducting or ion trap based. 
-However, there are other implementation details which are far more important, such as the entanglement topology (See google's talk).
+Lightweight abstractions, as defined by Bjarne Stroustrup [TODO: Cite], are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code.
+Layers of abstraction are a fundamental idea in all of computer science, and quantum computing is no different.
+Currently, quantum computing operates on the abstraction that is the gate-level, where programs are defined by gates acting sequentially on particular qubits, instead of, for instance, specific microwave pulses (or another implementation-specific low-level mechanism).
+The universal gate model of quantum computing generally allows a quantum programmer to ignore many details of the quantum computer they are running on: Sources of error aside, modeling the bond energy of molecular hydrogen should be the same on an ion-trap quantum computer as on a superconducting quantum computer.
+However, some have argued for the importance of hardware, as in Google's phrase ``hardware aware, not hardware agnostic``. [TODO: Cite]
+Many aspects of hardware are particularly important, for instance, topology, which will potentially result in a programmer needing to modify a quantum algorithm for it to run on two separate computers.
 
-Some abstract programming interfaces do exist, such as IBM's qiskit for universal gate set computing and a prolog interface for DWave's adiabatic model.
-However, an important aspect that these lack is true generality.
-Instead, there is a general tendency to create a list of algorithmic classes, and simply provide frameworks for each class of algorithm.
-It may very much be possible that specialized interfaces like this are an efficient method of quantum programming, but creation of a general language is also important
+Lastly, the matrix operator model of quantum computing actually lends itself to functional programming paradigms quite nicely, because quantum programs and quantum operators are functions in a sense.
+Additionally, since quantum states are fixed once measured, and are generally measured at the end of a program, in a sense memory is not truly mutated (even though it appears to be). 
+[i.e. $result = Pv$, not $result = 0; Pv$].
+A quantum program itself is simply a higher order function, which operates on an initial state vector.
+In turn, a particular quantum program is composed further of simpler matrix-functions, which operate on their own vectors, or are composed with other matrices.
+For instance, consider a bell state program. 
+As a whole, we may call the bell state program which creates the $+$ state $B$, and know that $B 0$ [TODO: Dirac notation] is the application of the program $B$ to a two-element zero vector.
+However, this program will further be composed as a Hadamard operator, $H$, and entanglement operator, $CNOT$, where $H$ will operate on one qubit, and then $CNOT$ will operate on both qubits. [TODO: Math writeup]
 
-Given these facts, current term quantum programming languages are analogous to classical assembly languages, and the next stage of development is to create the equivalent of C for quantum programming.
-When C was invented for classical programming, it revolutionized software (and is still used for essentially all modern operating systems, games, and other significant software). 
-C++, despite its age, actually has one of the most innovative communities of any programming language.
-In particular, the term ``lightweight abstraction'' originates for Bjarne Stroustrup, the creator of C++. 
-This term is used to describe what Stroustrup considers the fundamental ideaology behind C++.
+In a traditional circuit language, these operators are composed by simply listing which qubits they operate on, and ordering them correctly in a circuit definition file.
+However, with higher-order functions, quantum operators can be composed in mariad helpful ways, as is common in function languages like Haskell or LISP (from which Qurry draws many influences).
 
-Since quantum computers are simply special probabilistic computers, Qurry also attempts to create a statistical library for high-level modeling. 
+In addition to being a prototype quantum programming language, Qurry defines a software stack surrounding the language, which is intended to make development more pleasant.
+For instance, this software stack makes it exceptionally easy to add new language features and libraries to Qurry.
+This allows one to rapidly test new ideas in quantum programming and let the language evolve on its own as opposed to architecting a top-down ``perfect'' language.
+
+Since quantum computers are simply special probabilistic computers, Qurry also attempts to create a classical statistical library for high-level modeling. 
 This is particularly useful in the same way that a classical probabilistic programming language is, namely for modeling anything statistical, and especially for bayesian machine learning.
-For instance, the R. Tucci and H. group have shown uses for this through their software, Bayesforge.
-Creating a statistical library will complement these approaches, allowing richer modeling.
+For instance, the R. Tucci and H. Dekant's group have shown uses for this through their software, Bayesforge [TODO: Cite].
+Qurry includes simple statistical packages for creating states, but no inference engine.
+[However, Qurry might allow one to interface with Bayesforge]
 
-Lastly, the matrix operator model of quantum computing actually lends itself to functional programming paradigms quite nicely.
-Since each unitary linear operator is essentially a function, constructs such as mapping or composition can be used to create higher order functions (and, in the most abstract terms, a quantum program in total is simply one of these higher order functions).
-Additionally, the general inability to query state mid-operations also lends itself to a pure functional paradigm.
-Thus, Qurry draws a large influence from Haskell, as well as LISP (and Clojure in particular,which, like C++, has an incredible innovative community).
+\section{Features}
 
-Additionally, it is necessary to rapidly test new ideas in quantum programming from the bottom up and simply collect data on them, as opposed to architecting a top-down ``perfect'' language.
-As can be seen in the natural language attempt to create Esperanto as a universal language, this is unlikely to work.
-In general, evolution will create a much more robust system.
-Thus, Qurry offers a framework in which programmers can easily create new syntax features.
-This framework works similarly to macros in LISP, but has a simplified interface as well.
+\section{Standard Library}
+
+\section{Comparisons}
 
 \section{Conclusion}
 
