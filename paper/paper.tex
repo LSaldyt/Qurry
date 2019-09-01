@@ -419,6 +419,77 @@ Quantum computing [motivations]
 [TODO: General motivations, cite Rigetti, cite Haskell/LISP/Rich Hickey, cite Probabilistic programming languages]
 [Cite Peter Selinger's papers]
 
+At time of writing, Rigetti pyquil contains the following quantum gates and operations:
+
+Single qubit gates:
+
+\begin{itemize}
+    \item RESET ['qubit\_index']
+    \item I ['qubit']
+    \item X ['qubit']
+    \item Y ['qubit']
+    \item Z ['qubit']
+    \item H ['qubit']
+    \item S ['qubit']
+    \item T ['qubit']
+\end{itemize}
+
+Angle, qubit gates:
+
+\begin{itemize}
+    \item RX ['angle', 'qubit']
+    \item RY ['angle', 'qubit']
+    \item RZ ['angle', 'qubit']
+\end{itemize}
+
+\begin{itemize}
+    \item SWAP ['q1', 'q2']
+    \item ISWAP ['q1', 'q2']
+    \item PSWAP ['angle', 'q1', 'q2']
+\end{itemize}
+
+\begin{itemize}
+    \item PHASE ['angle', 'qubit']
+    \item MEASURE ['qubit', 'classical\_reg']
+    \item CZ ['control', 'target']
+    \item CNOT ['control', 'target']
+    \item CCNOT ['control1', 'control2', 'target']
+    \item CPHASE00 ['angle', 'control', 'target']
+    \item CPHASE01 ['angle', 'control', 'target']
+    \item CPHASE10 ['angle', 'control', 'target']
+    \item CPHASE ['angle', 'control', 'target']
+    \item CSWAP ['control', 'target\_1', 'target\_2']
+\end{itemize}
+
+And also contains the following classical operations:
+
+\begin{itemize}
+    \item TRUE ['classical\_reg']
+    \item FALSE ['classical\_reg']
+    \item NOT ['classical\_reg']
+    \item AND ['classical\_reg1', 'classical\_reg2']
+    \item OR ['classical\_reg1', 'classical\_reg2']
+    \item MOVE ['classical\_reg1', 'classical\_reg2']
+    \item EXCHANGE ['classical\_reg1', 'classical\_reg2']
+    \item IOR ['classical\_reg1', 'classical\_reg2']
+    \item XOR ['classical\_reg1', 'classical\_reg2']
+    \item NEG ['classical\_reg']
+    \item ADD ['classical\_reg', 'right']
+    \item SUB ['classical\_reg', 'right']
+    \item MUL ['classical\_reg', 'right']
+    \item DIV ['classical\_reg', 'right']
+    \item EQ ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
+    \item GT ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
+    \item GE ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
+    \item LE ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
+    \item LT ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
+    \item LOAD ['target\_reg', 'region\_name', 'offset\_reg']
+    \item STORE ['region\_name', 'offset\_reg', 'source']
+    \item CONVERT ['classical\_reg1', 'classical\_reg2']
+
+\end{itemize}
+
+
 Lastly, the matrix operator model of quantum computing actually lends itself to functional programming paradigms quite nicely, because quantum programs and quantum operators are functions in a sense.
 Additionally, since quantum states are fixed once measured, and are generally measured at the end of a program, in a sense memory is not truly mutated (even though it appears to be). 
 [i.e. $result = Pv$, not $result = 0; Pv$].
@@ -486,6 +557,12 @@ Qurry includes simple statistical packages for creating states, but no inference
 
     Recursively composed higher-order datatypes, in combination with recursively composed higher-order functions are the foundation for creating a more abstract programming language.
 
+    [TODO: Elaborate on everything currently in lists]
+
+\section{Standard Library}
+
+    Explain how the statistics library can be easily implemented.
+
     At time of writing, Qurry contains the following constructs:  	
     \begin{itemize}
 	    \item gaussian 	
@@ -494,11 +571,6 @@ Qurry includes simple statistical packages for creating states, but no inference
 	    \item uniform
     \end{itemize}
 
-    [TODO: Elaborate on each]
-
-\section{Standard Library}
-
-    Explain how the statistics library can be easily implemented.
 
 \section{Comparisons}
 
