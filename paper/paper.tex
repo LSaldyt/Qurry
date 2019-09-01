@@ -537,6 +537,9 @@ Qurry includes simple statistical packages for creating states, but no inference
 
 \section{Standard Library}
 
+    Qurry contains mechanisms which enable easy inclusion of qurry code in the form of libraries.
+    As an example, Qurry's standard library is implemented in this fashion.
+
     Explain how the statistics library can be easily implemented.
 
     At time of writing, Qurry contains the following constructs:  	
@@ -546,6 +549,9 @@ Qurry includes simple statistical packages for creating states, but no inference
 	    \item multinomial 	
 	    \item uniform
     \end{itemize}
+
+    Similarly to in a classical probabilistic programming language, these enable the creation of classical probabilistic states, which can then be used in quantum programs.
+    For instance, it is possible to create a multi-dimensional gaussian distribution, and then entangle an auxillary qubit with the state of the gaussian distribution.
 
 
 \section{Comparisons}
