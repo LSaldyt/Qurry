@@ -421,72 +421,48 @@ Quantum computing [motivations]
 
 At time of writing, Rigetti pyquil contains the following quantum gates and operations:
 
-Single qubit gates:
+Single qubit gates and operations:
 
 \begin{itemize}
-    \item RESET ['qubit\_index']
-    \item I ['qubit']
-    \item X ['qubit']
-    \item Y ['qubit']
-    \item Z ['qubit']
-    \item H ['qubit']
-    \item S ['qubit']
-    \item T ['qubit']
+    \item RESET, I, X, Y, Z, H, S, T
 \end{itemize}
 
-Angle, qubit gates:
+Qubit gates taking an angle as the the parameter and qubit as the second:
 
 \begin{itemize}
-    \item RX ['angle', 'qubit']
-    \item RY ['angle', 'qubit']
-    \item RZ ['angle', 'qubit']
+    \item RX, RY, RZ, PHASE
 \end{itemize}
 
-\begin{itemize}
-    \item SWAP ['q1', 'q2']
-    \item ISWAP ['q1', 'q2']
-    \item PSWAP ['angle', 'q1', 'q2']
-\end{itemize}
+Swap operators, where each takes two qubits, and PSWAP takes an additional angle as a first argument:
 
 \begin{itemize}
-    \item PHASE ['angle', 'qubit']
-    \item MEASURE ['qubit', 'classical\_reg']
-    \item CZ ['control', 'target']
-    \item CNOT ['control', 'target']
-    \item CCNOT ['control1', 'control2', 'target']
-    \item CPHASE00 ['angle', 'control', 'target']
-    \item CPHASE01 ['angle', 'control', 'target']
-    \item CPHASE10 ['angle', 'control', 'target']
-    \item CPHASE ['angle', 'control', 'target']
+    \item SWAP, ISWAP, and PSWAP
+\end{itemize}
+
+Controlled operators:
+
+\begin{itemize}
+    \item CZ, CNOT ['control', 'target']
     \item CSWAP ['control', 'target\_1', 'target\_2']
+    \item CPHASE00, CPHASE01, CPHASE10, CPHASE ['angle', 'control', 'target']
+\end{itemize}
+
+And of course the hybrid measurement instruction, which takes a qubit as the first argument, and a classical register as the second:
+
+\begin{itemize}
+    \item MEASURE
 \end{itemize}
 
 And also contains the following classical operations:
 
 \begin{itemize}
-    \item TRUE ['classical\_reg']
-    \item FALSE ['classical\_reg']
-    \item NOT ['classical\_reg']
-    \item AND ['classical\_reg1', 'classical\_reg2']
-    \item OR ['classical\_reg1', 'classical\_reg2']
-    \item MOVE ['classical\_reg1', 'classical\_reg2']
-    \item EXCHANGE ['classical\_reg1', 'classical\_reg2']
-    \item IOR ['classical\_reg1', 'classical\_reg2']
-    \item XOR ['classical\_reg1', 'classical\_reg2']
-    \item NEG ['classical\_reg']
-    \item ADD ['classical\_reg', 'right']
-    \item SUB ['classical\_reg', 'right']
-    \item MUL ['classical\_reg', 'right']
-    \item DIV ['classical\_reg', 'right']
-    \item EQ ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
-    \item GT ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
-    \item GE ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
-    \item LE ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
-    \item LT ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
+    \item TRUE, FALSE, NOT, NEG ['classical\_reg']
+    \item AND, OR, MOVE, EXCHANGE, IOR, XOR ['classical\_reg1', 'classical\_reg2']
+    \item ADD, SUB, MUL, DIV ['classical\_reg', 'right']
+    \item EQ, GT, GE, LE, LT ['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
     \item LOAD ['target\_reg', 'region\_name', 'offset\_reg']
     \item STORE ['region\_name', 'offset\_reg', 'source']
     \item CONVERT ['classical\_reg1', 'classical\_reg2']
-
 \end{itemize}
 
 
