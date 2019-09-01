@@ -11,6 +11,7 @@ class Memory:
     def __init__(self, size):
         self.head = 0
         self.size = size
+        self.static = 0
 
     def _inner_allocate(self, nqubits):
         begin = self.head
@@ -23,16 +24,21 @@ class Memory:
 
     def allocate(self, datatype):
         qubitmap = dict()
-        for field, fieldtype in datatype.fields.items():
-            if isinstance(fieldtype, Datatype):
-                qubitmap.update(self.allocate(fieldtype))
-            else:
-                if isinstance(fieldtype, Block):
-                    block = fieldtype
-                    nqubits = block.end - block.start
-                elif fieldtype == 'qubit':
-                    nqubits = 1
-                qubitmap[field] = self._inner_allocate(nqubits)
+        if isinstance(datatype, Block):
+            print(datatype)
+            qubitmap['block{}'.format(self.static)] = self._inner_allocate(datatype.end - datatype.start)
+            self.static += 1
+        else:
+            for field, fieldtype in datatype.fields.items():
+                if isinstance(fieldtype, Datatype):
+                    qubitmap.update(self.allocate(fieldtype))
+                else:
+                    if isinstance(fieldtype, Block):
+                        block = fieldtype
+                        nqubits = block.end - block.start
+                    elif fieldtype == 'qubit':
+                        nqubits = 1
+                    qubitmap[field] = self._inner_allocate(nqubits)
         return qubitmap
 
 
