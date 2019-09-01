@@ -405,6 +405,8 @@
 
 \section{Introduction}
 
+[TODO: General motivations, cite Rigetti, cite Haskell/LISP/Rich Hickey, cite Probabilistic programming languages]
+
 \IEEEPARstart{I}{nnovation} in near-term quantum programming requires the use of lightweight abstractions. 
 Lightweight abstractions, as defined by Bjarne Stroustrup [TODO: Cite], are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code.
 Layers of abstraction are a fundamental idea in all of computer science, and quantum computing is no different.
@@ -437,9 +439,38 @@ Qurry includes simple statistical packages for creating states, but no inference
 
 \section{Features}
 
+    Qurry as a language is simply a circuit language with an overlay of higher-order functions.
+    [Explain circuit languages and the functionality Qurry includes here, through pyquil]
+
+    The simplest overlay is quite trivial. It is the $map$ function, which allows an arbitrary quantum operator to be applied to several qubits.
+
+    At time of writing, Qurry contains the following constructs:  	
+    \begin{itemize}
+        \item bernoulli
+        \item block 	    
+	    \item cascade 	    
+	    \item clear 	    
+	    \item cond 	    
+	    \item datatype 	
+	    \item defcircuit 	
+	    \item define 	    
+	    \item do 	        
+	    \item gaussian 	
+	    \item macro 	    
+	    \item map 	        
+	    \item multinomial 	
+	    \item uniform
+    \end{itemize}
+
+    [TODO: Elaborate on each]
+
 \section{Standard Library}
 
+    Explain how the statistics library can be easily implemented.
+
 \section{Comparisons}
+
+    Draw examples from Nielsen and Chuang, and the general literature.
 
 \section{Conclusion}
 
