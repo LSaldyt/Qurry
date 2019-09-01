@@ -329,7 +329,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Qurry: A quantum programming language}
+\title{Qurry: A prototype quantum programming language}
 %
 %
 % author names and IEEE memberships
@@ -405,15 +405,19 @@
 
 \section{Introduction}
 
-[TODO: General motivations, cite Rigetti, cite Haskell/LISP/Rich Hickey, cite Probabilistic programming languages]
-
 \IEEEPARstart{I}{nnovation} in near-term quantum programming requires the use of lightweight abstractions. 
 Lightweight abstractions, as defined by Bjarne Stroustrup [TODO: Cite], are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code.
 Layers of abstraction are a fundamental idea in all of computer science, and quantum computing is no different.
 Currently, quantum computing operates on the abstraction that is the gate-level, where programs are defined by gates acting sequentially on particular qubits, instead of, for instance, specific microwave pulses (or another implementation-specific low-level mechanism).
-The universal gate model of quantum computing generally allows a quantum programmer to ignore many details of the quantum computer they are running on: Sources of error aside, modeling the bond energy of molecular hydrogen should be the same on an ion-trap quantum computer as on a superconducting quantum computer.
+The universal gate model of quantum computing generally allows a quantum programmer to ignore many details of the quantum computer they are running on: Sources of error aside, modeling the bond energy of molecular hydrogen is hypothetically the same on an ion-trap quantum computer as on a superconducting quantum computer.
 However, some have argued for the importance of hardware, as in Google's phrase ``hardware aware, not hardware agnostic``. [TODO: Cite]
 Many aspects of hardware are particularly important, for instance, topology, which will potentially result in a programmer needing to modify a quantum algorithm for it to run on two separate computers.
+The goal of lightweight abstractions is to preserve these concerns, while still taking burden off of the programmer, and giving them a richer language with which to express themselves.
+
+Quantum computing [motivations]
+
+[TODO: General motivations, cite Rigetti, cite Haskell/LISP/Rich Hickey, cite Probabilistic programming languages]
+[Cite Peter Selinger's papers]
 
 Lastly, the matrix operator model of quantum computing actually lends itself to functional programming paradigms quite nicely, because quantum programs and quantum operators are functions in a sense.
 Additionally, since quantum states are fixed once measured, and are generally measured at the end of a program, in a sense memory is not truly mutated (even though it appears to be). 
@@ -442,22 +446,50 @@ Qurry includes simple statistical packages for creating states, but no inference
     Qurry as a language is simply a circuit language with an overlay of higher-order functions.
     [Explain circuit languages and the functionality Qurry includes here, through pyquil]
 
-    The simplest overlay is quite trivial. It is the $map$ function, which allows an arbitrary quantum operator to be applied to several qubits.
+    \subsection{Higher Order Functions}
+
+    The simplest overlay is quite trivial. It is the $map$ function, which allows an arbitrary quantum operator to be applied to several qubits. 
+    For instance, the operation $(map H myqubits)$ does a hadamard state preparation, which is common in the beginning of some quantum algorithms.
+    While simple, this example is important because $map$ is a higher-order function.
+    Namely, $map$ takes two arguments: first, a linear operator on qubits, and second, a block of qubits where the linear operator is applied to each qubit in the block.
+    Because this first argument is itself a linear operator (a function of sorts [TODO: Verify]), $map$ is a higher-order function.
+    Higher-order functions are already used implicitly when composing linear operators to create a quantum program, so it makes sense to expose them.
+    [Discuss the $map$ construct].
+
+    Additionally, many constructs are defined in terms of unitary gates. Any of these is also a higher-order function.
+    A still simple but more useful example is a controlled unitary.
+    First, consider a unitary that is controlled from one bit:
+
+
+    \begin{itemize}
+        \item cascade 	    
+        \item clear 	    
+        \item cond 	    
+        \item do 	        
+        \item macro 	    
+    \end{itemize}
+
+    \subsection{Higher Order Datatypes}
+
+    [discuss define [TODO: memory model]]
+
+    Equally important is the ability to create higher-order datatypes.
+    Instead of operating on the level of qubits, are able to arrange raw datatypes into more complex structures.
+    The simplest, which is common in any quantum circuit language, is the ability to create arrays of qubits.
+    [Discuss the $block$ construct].
+
+    However, for full completeness, one must be able to arrange qubits into special structures, in the sense of C++ structs.
+    Further, in object oriented programming, classes are essentially equivalent to structs, and then collections of functions that operate on a struct.
+    For simplicity, elegance, and robustness, Qurry does not implement encapsulation or inheritance, but instead uses public access by default (in the spirit of Python, since after all, Qurry has a Python interface), and relies on composition instead of inheritance.
+    [Discuss the $datatype$ construct].
+    With the inclusion of composable data structures, users are able to create arbitrarily nested structures of qubits with semantically named fields.
+
+    Recursively composed higher-order datatypes, in combination with recursively composed higher-order functions are the foundation for creating a more abstract programming language.
 
     At time of writing, Qurry contains the following constructs:  	
     \begin{itemize}
-        \item bernoulli
-        \item block 	    
-	    \item cascade 	    
-	    \item clear 	    
-	    \item cond 	    
-	    \item datatype 	
-	    \item defcircuit 	
-	    \item define 	    
-	    \item do 	        
 	    \item gaussian 	
-	    \item macro 	    
-	    \item map 	        
+        \item bernoulli
 	    \item multinomial 	
 	    \item uniform
     \end{itemize}
