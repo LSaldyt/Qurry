@@ -18,6 +18,12 @@ def controlled(U):
     base[2:4,2:4] = U
     return base
 
+def controlled_i(U):
+    base = np.identity(4).astype(complex)
+    base[2:4,2:4] = U
+    base[2:4,2:4] = np.array([[0, 1], [1, 0]])
+    return base
+
 def bernoulli(p, q, rot='RX'):
     if p < 0:
         raise Warning('Bernoulli was called with negative probability: {}'.format(p))
@@ -26,13 +32,13 @@ def bernoulli(p, q, rot='RX'):
 
 def controlled_X(n, a, b):
     theta = Parameter('theta')
-    crx = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, quil_cos(theta / 2), -1j * quil_sin(theta / 2)], [0, 0, -1j * quil_sin(theta / 2), quil_cos(theta / 2)]])
+    crx = controlled(np.array([[quil_cos(theta / 2), -1j * quil_sin(theta / 2)], [-1j * quil_sin(theta / 2), quil_cos(theta / 2)]]))
     CRX = DefGate('CRX', crx, [theta])
     return str(CRX) + '\n' + str(CRX.get_constructor()(n)(a, b))
 
 def controlled_i_X(n, a, b):
     theta = Parameter('theta')
-    cirx = np.array([[quil_cos(theta / 2), -1j * quil_sin(theta / 2), 0, 0], [-1j * quil_sin(theta / 2), quil_cos(theta / 2), 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+    cirx = controlled_i(np.array([[quil_cos(theta / 2), -1j * quil_sin(theta / 2)], [-1j * quil_sin(theta / 2), quil_cos(theta / 2)]]))
     CIRX = DefGate('CIRX', cirx, [theta])
     return str(CIRX) + '\n' + str(CIRX.get_constructor()(n)(a, b))
 
