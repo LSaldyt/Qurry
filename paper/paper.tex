@@ -184,6 +184,26 @@ Qurry includes simple statistical packages for creating states, but no inference
     Similarly to in a classical probabilistic programming language, these enable the creation of classical probabilistic states, which can then be used in quantum programs.
     For instance, it is possible to create a multi-dimensional gaussian distribution, and then entangle an auxillary qubit with the state of the gaussian distribution.
 
+    \section{Extension}
+
+    Making additions to Qurry is particularly easy:
+    For instance, the $map$ feature is defined using the following python code:
+
+    \begin{verbatim}
+from ..compiler.utils import named_uuid
+
+def map(operator, blockname, kernel=None):
+    '''
+    Apply a single-qubit operator to every qubit in a block
+    (map H blocka)
+    '''
+    try:
+        block = kernel.definitions[blockname]
+    except KeyError:
+        raise ValueError('The block {} is not defined'.format(blockname))
+    return '\n'.join('{} {}'.format(operator, i)
+            for i in range(block.start, block.end + 1))
+    \end{verbatim}
 
 \section{Comparisons}
 
@@ -361,6 +381,3 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 \end{IEEEbiographynophoto}
 
 \end{document}
-
-
-
