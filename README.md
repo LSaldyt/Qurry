@@ -9,6 +9,10 @@ For more information on the progress of the project, see a [summary](brainstorm.
 If you use Qurry or are influenced by it, all I ask is that you cite the software. A bibtex citation is available at the end of this file.
 Once a paper is published, please cite that (I will update it here).
 
+Since Qurry is currently in major rework (until `September 16th, 2019`), the instructions and description previously available on this readme have been commented out.
+
+<!--
+
 ## Installation
 
 Right now, Qurry can be cloned locally and run from this directory:
@@ -137,6 +141,8 @@ def create_if(cond, a, b, definitions=None):
 
 The `if` statement uses a raw quil template that boils down to jump instructions, and the function `create_if` is a reserved name in this file.
 For more on contributing, see [HACKING.md](HACKING.md)
+
+-->
 
 ```
 @misc{saldyt_2018, title={Qurry, a probabilistic quantum programming language}, url={https://github.com/LSaldyt/qurry}, journal={GitHub}, author={Saldyt, Lucas}, year={2018}, month={Nov}}
