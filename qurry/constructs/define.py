@@ -2,7 +2,6 @@ from ..datatypes import update_definitions
 from ..datatypes import Datatype, Block
 
 from .block import block
-
 from pprint import pprint
 
 def process_type(body, kernel):
@@ -16,7 +15,10 @@ def process_type(body, kernel):
     elif head == 'block':
         return block(*rest, kernel=kernel)
     else:
-        raise ValueError('Cannot process type {}'.format(head))
+        try:
+            return kernel.builder(body, kernel)
+        except:
+            raise ValueError('Cannot process type {}'.format(head))
 
 def define(*expression, kernel=None):
     name, *rest = expression

@@ -58,35 +58,16 @@ def build_expression(expression, kernel):
     elif hasattr(constructs, head):
         module  = getattr(constructs, head)
         creator = getattr(module, head)
-        #curry(creator, *expression[1:], kernel=kernel)
-        return creator(*expression[1:], kernel=kernel)
+        return curry(creator, *expression[1:], kernel=kernel)
+    elif head in kernel.definitions:
+        return curry(kernel.definitions[head], *expression[1:], kernel=kernel)
     else:
-        print('No generation branch for: {}'.format(expression))
+        print('No generation branch for: {} (head={})'.format(expression, head))
+        pprint(kernel.definitions)
         sys.exit(1)
 
-def build_python_expression(expression, kernel):
-    return pyquil.Program(build_expression(expression, definitions))
-
-def build(stack, kernel):
-    '''
-    Create quil code from a curry abstract syntax tree
-    '''
-    for expression in stack:
-        assert len(expression) > 0, 'Error: parsed empty list {}'.format(expression)
-        yield build_expression(expression, kernel)
-
-# Helper function for debugging a single expression
-def generate_single(expression, definitions=None):
-    return generate([expression], definitions)
-
-# Full function to generate code (quil string) from AST
-def generate(stack, kernel):
-    pprint(stack)
-    l = list(build(stack, kernel))
-    return '\n'.join(map(str, l))
-
 def generate_program(stack, kernel):
-    pprint(dir(constructs))
-    intermediate = generate(stack, kernel)
-    print(intermediate)
+    pprint(stack)
+    l = [build_expression(expression, kernel) for expression in stack]
+    intermediate = '\n'.join(map(str, l))
     return pyquil.Program(intermediate)

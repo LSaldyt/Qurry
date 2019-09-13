@@ -4,7 +4,7 @@ import sys
 from pyquil import get_qc
 
 from .compiler.parse    import parse
-from .compiler.generate import generate, generate_program, build_expression
+from .compiler.generate import generate_program, build_expression
 from .kernel            import Kernel, Topology
 from .postprocess       import postprocess
 
