@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from functools import wraps
+
 import inspect
 
 def curry(creator, *args, kernel=None):
@@ -7,9 +9,7 @@ def curry(creator, *args, kernel=None):
     if len(arguments) == len(args):
         return creator(*args, kernel=kernel)
     else:
-        print(arguments)
-        print(args)
-        # TODO Wrap
+        @wraps(creator)
         def curried_function(*remaining):
             return creator(*args, *remaining, kernel=kernel)
         return curried_function

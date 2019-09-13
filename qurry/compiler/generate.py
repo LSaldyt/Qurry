@@ -19,12 +19,6 @@ from math import acos, asin, sin, cos, sqrt
 This file contains the "meat and potatoes" of Qurry.
 '''
 
-def replace_defs(code, definitions):
-    for item, block in definitions.items():
-        if hasattr(block, 'expand'):
-            code = code.replace(item, block.expand())
-    return code
-
 def lookup(expr, definitions):
     root, *terms = expr.split('.')
     assert root in definitions, '{} is not defined properly'.format(root)
@@ -57,18 +51,17 @@ def build_expression(expression, kernel):
     if upper in STANDARD_INSTRUCTIONS or upper in STANDARD_GATES or upper in {'DAGGER', 'CONTROLLED'}:
         expression[0] = upper
         if upper == 'MEASURE':
-            return replace_defs('{} {} [{}]'.format(*expression), kernel.definitions)
+            return '{} {} [{}]'.format(*expression)
         else:
-            return replace_defs(' '.join(expression), kernel.definitions)
+            return ' '.join(expression)
     # Branch for language constructs defined in the `constructs` directory
     elif hasattr(constructs, head):
         module  = getattr(constructs, head)
         creator = getattr(module, head)
-        curry(creator, *expression[1:], kernel=kernel)
-        return replace_defs(creator(*expression[1:], kernel=kernel), kernel.definitions)
+        #curry(creator, *expression[1:], kernel=kernel)
+        return creator(*expression[1:], kernel=kernel)
     else:
         print('No generation branch for: {}'.format(expression))
-        pprint(kernel.definitions)
         sys.exit(1)
 
 def build_python_expression(expression, kernel):
@@ -93,6 +86,7 @@ def generate(stack, kernel):
     return '\n'.join(l)
 
 def generate_program(stack, kernel):
+    pprint(dir(constructs))
     intermediate = generate(stack, kernel)
     print(intermediate)
     return pyquil.Program(intermediate)
