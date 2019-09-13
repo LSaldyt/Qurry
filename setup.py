@@ -9,7 +9,7 @@ setuptools.setup(
 
      version='0.0',
 
-     scripts=['compile', 'quilarity', 'server'] ,
+     scripts=['compile-qurry', 'quilarity', 'qurry-server'] ,
 
      author="Lucas Saldyt",
 
@@ -23,7 +23,7 @@ setuptools.setup(
 
      url="https://github.com/LSaldyt/qurry",
 
-     packages=setuptools.find_packages(),
+     packages=['qurry'],#setuptools.find_packages(),
 
      classifiers=[
 
