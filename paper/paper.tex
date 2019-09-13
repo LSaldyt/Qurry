@@ -1,4 +1,4 @@
-\documentclass[journal]{IEEEtran}
+\documentclass[journal]{article}
 
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -6,8 +6,8 @@
 \begin{document}
 \title{Qurry: A prototype quantum programming language}
 
-\author{Lucas~Saldyt,~\IEEEmembership{Arizona State University}
-\thanks{}}
+\author{Lucas~Saldyt}%,~\IEEEmembership{Arizona State University}
+%\thanks{}
 
 \markboth{Second International Conference On Quantum Compilation}%
 {Second International Conference On Quantum Compilation}
@@ -23,15 +23,16 @@
     Lastly, Qurry is not just a language, but a software ecosystem which is meant to catalyze the development of quantum programming languages.
 \end{abstract}
 
-\begin{IEEEkeywords}
-    Quantum Computing, Programming Languages
-\end{IEEEkeywords}
+%\begin{IEEEkeywords}
+%    Quantum Computing, Programming Languages
+%\end{IEEEkeywords}
 
-\IEEEpeerreviewmaketitle
+%\IEEEpeerreviewmaketitle
 
 \section{Introduction}
 
-\IEEEPARstart{I}{nnovation} in near-term quantum programming requires the use of lightweight abstractions. 
+%\IEEEPARstart{I}{nnovation} 
+Innovation in near-term quantum programming requires the use of lightweight abstractions. 
 Lightweight abstractions, as defined by Bjarne Stroustrup [TODO: Cite], are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code.
 Layers of abstraction are a fundamental idea in all of computer science, and quantum computing is no different.
 Currently, quantum computing operates on the abstraction that is the gate-level, where programs are defined by gates acting sequentially on particular qubits, instead of, for instance, specific microwave pulses (or another implementation-specific low-level mechanism).
@@ -333,7 +334,7 @@ With functional programming paradigms, Qurry can move towards higher levels of a
 Lastly, by creating a rapid prototyping framework, new language features can be developed in a bottom-up style, which will allow Qurry to be created naturally, instead of artificially.
 
 
- \appendices
+ %\appendices
  \section{Appendix one}
 Appendix content
 
@@ -344,9 +345,9 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
-\ifCLASSOPTIONcaptionsoff
-  \newpage
-\fi
+% \ifCLASSOPTIONcaptionsoff
+%   \newpage
+% \fi
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
@@ -373,14 +374,14 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
 
 \begin{thebibliography}{1}
 
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+% \bibitem{IEEEhowto:kopka}
+% H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+%   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
 
 \end{thebibliography}
 
-\begin{IEEEbiographynophoto}{Lucas Saldyt}
-    is currently a student researcher at Arizona State University, and has previously worked for Sandia National Laboratories and Los Alamos National Laboratories as a student intern in the quantum computing department.
-\end{IEEEbiographynophoto}
+% \begin{IEEEbiographynophoto}{Lucas Saldyt}
+%     is currently a student researcher at Arizona State University, and has previously worked for Sandia National Laboratories and Los Alamos National Laboratories as a student intern in the quantum computing department.
+% \end{IEEEbiographynophoto}
 
 \end{document}
