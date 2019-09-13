@@ -23,7 +23,8 @@ setuptools.setup(
 
      url="https://github.com/LSaldyt/qurry",
 
-     packages=['qurry'],#setuptools.find_packages(),
+     # I manually typed these, but there must be a better way! TODO I guess.
+     packages=['qurry', 'qurry.library', 'qurry.compiler', 'qurry.constructs', 'qurry.datatypes', 'qurry.kernel', 'qurry.library', 'qurry.visualization'],
 
      classifiers=[
 
