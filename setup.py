@@ -7,7 +7,7 @@ setuptools.setup(
 
      name='qurry',
 
-     version='0.0',
+     version='0.0.0',
 
      scripts=['compile-qurry', 'quilarity', 'qurry-server'] ,
 
@@ -24,7 +24,8 @@ setuptools.setup(
      url="https://github.com/LSaldyt/qurry",
 
      # I manually typed these, but there must be a better way! TODO I guess.
-     packages=['qurry', 'qurry.library', 'qurry.compiler', 'qurry.constructs', 'qurry.datatypes', 'qurry.kernel', 'qurry.library', 'qurry.visualization'],
+     #packages=['qurry', 'qurry.library', 'qurry.compiler', 'qurry.constructs', 'qurry.datatypes', 'qurry.kernel', 'qurry.library', 'qurry.visualization'],
+     packages=setuptools.find_packages(),
 
      classifiers=[
 
