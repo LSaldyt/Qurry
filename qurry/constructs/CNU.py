@@ -1,3 +1,4 @@
+from .CU import CU
 
 def CNU(control_qubits, work_qubits, unitary, unitary_block, kernel=None):
     '''
@@ -10,5 +11,5 @@ def CNU(control_qubits, work_qubits, unitary, unitary_block, kernel=None):
     for i in range(control_qubits.start, control_qubits.end - 1):
         j = work_qubits.start + i
         code += 'CNOT {} {}\n'.format(i, j)
-    code += 'CONTROLLED {} {} {}'.format(unitary, unitary_block, work_qubits.end - 1)
+    code += CU(unitary, unitary_block, work_qubits.end - 1, kernel=kernel)
     return code
