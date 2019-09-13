@@ -26,8 +26,9 @@ class Memory:
         qubitmap = dict()
         if isinstance(datatype, Block):
             print(datatype)
-            qubitmap['block{}'.format(self.static)] = self._inner_allocate(datatype.end - datatype.start)
+            ret = qubitmap['block{}'.format(self.static)] = self._inner_allocate(datatype.end - datatype.start)
             self.static += 1
+            return qubitmap, ret
         else:
             for field, fieldtype in datatype.fields.items():
                 if isinstance(fieldtype, Datatype):
@@ -39,6 +40,6 @@ class Memory:
                     elif fieldtype == 'qubit':
                         nqubits = 1
                     qubitmap[field] = self._inner_allocate(nqubits)
-        return qubitmap
+        return qubitmap, None
 
 
