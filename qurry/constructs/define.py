@@ -1,6 +1,8 @@
 from ..datatypes import update_definitions
 from ..datatypes import Datatype, Block
 
+from .block import block
+
 from pprint import pprint
 
 def process_type(body, kernel):
@@ -12,12 +14,7 @@ def process_type(body, kernel):
         assert isinstance(defined, Datatype), '{} is not a valid Datatype'.format(defined)
         return defined.instance(head, *rest, kernel=kernel, memmap=kernel.memory.allocate(dtype)[0])
     elif head == 'block':
-        assert len(rest) > 0
-        first = rest[0]
-        rest  = rest[1:]
-        defined = Block(0, int(first) + 1, *rest)
-        _, defined = kernel.memory.allocate(defined)
-        return defined
+        return block(*rest, kernel=kernel)
     else:
         raise ValueError('Cannot process type {}'.format(head))
 

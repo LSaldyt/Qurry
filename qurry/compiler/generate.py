@@ -83,7 +83,7 @@ def generate_single(expression, definitions=None):
 def generate(stack, kernel):
     pprint(stack)
     l = list(build(stack, kernel))
-    return '\n'.join(l)
+    return '\n'.join(map(str, l))
 
 def generate_program(stack, kernel):
     pprint(dir(constructs))

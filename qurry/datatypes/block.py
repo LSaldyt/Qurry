@@ -12,3 +12,4 @@ These are defined in-program using the following syntax:
 Block = namedtuple('Block', ['start', 'end', 'type'])
 Block.__new__.__defaults__ = ('quantum',)
 Block.expand = lambda self : ' '.join(map(str, range(int(self.start), int(self.end))))
+Block.__str__ = lambda self : self.expand()
