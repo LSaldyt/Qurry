@@ -9,6 +9,7 @@ from .utils import named_uuid
 from ..datatypes import update_definitions
 from ..datatypes import Datatype
 from ..kernel import Kernel
+from ..library.curry import curry
 
 from .. import constructs
 
@@ -63,6 +64,7 @@ def build_expression(expression, kernel):
     elif hasattr(constructs, head):
         module  = getattr(constructs, head)
         creator = getattr(module, head)
+        curry(creator, *expression[1:], kernel=kernel)
         return replace_defs(creator(*expression[1:], kernel=kernel), kernel.definitions)
     else:
         print('No generation branch for: {}'.format(expression))
