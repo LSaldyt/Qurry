@@ -42,7 +42,6 @@ def expand_property(word, definitions):
         return lookup(word, definitions).expand()
     else:
         return word
-        #return word # TODO
 
 def build_expression(expression, kernel):
     '''
@@ -54,7 +53,7 @@ def build_expression(expression, kernel):
     head = expression[0]
     upper = head.upper()
     # Use instructions from the QUIL spec
-    if upper in STANDARD_INSTRUCTIONS or upper in STANDARD_GATES:
+    if upper in STANDARD_INSTRUCTIONS or upper in STANDARD_GATES or upper in {'DAGGER', 'CONTROLLED'}:
         expression[0] = upper
         if upper == 'MEASURE':
             return replace_defs('{} {} [{}]'.format(*expression), kernel.definitions)
@@ -67,7 +66,7 @@ def build_expression(expression, kernel):
         return replace_defs(creator(*expression[1:], kernel=kernel), kernel.definitions)
     else:
         print('No generation branch for: {}'.format(expression))
-        pprint(definitions)
+        pprint(kernel.definitions)
         sys.exit(1)
 
 def build_python_expression(expression, kernel):
