@@ -70,4 +70,5 @@ def generate_program(stack, kernel):
     pprint(stack)
     l = [build_expression(expression, kernel) for expression in stack]
     intermediate = '\n'.join(map(str, l))
+    print(intermediate)
     return pyquil.Program(intermediate)

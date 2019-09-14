@@ -9,7 +9,7 @@ class CurriedFunction:
         self.__name__ = f.__name__
 
     def __call__(self, *args, kernel=None):
-        return self.f(*args)
+        return self.f(*args, kernel=kernel)
 
     def __str__(self):
         return ''
