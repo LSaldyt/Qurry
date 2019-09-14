@@ -6,8 +6,7 @@
 \begin{document}
 \title{Qurry: A prototype quantum programming language}
 
-\author{Lucas~Saldyt}%,~\IEEEmembership{Arizona State University}
-%\thanks{}
+\author{Lucas~Saldyt}
 
 \markboth{Second International Conference On Quantum Compilation}%
 {Second International Conference On Quantum Compilation}
@@ -23,15 +22,8 @@
     Lastly, Qurry is not just a language, but a software ecosystem which is meant to catalyze the development of quantum programming languages.
 \end{abstract}
 
-%\begin{IEEEkeywords}
-%    Quantum Computing, Programming Languages
-%\end{IEEEkeywords}
-
-%\IEEEpeerreviewmaketitle
-
 \section{Introduction}
 
-%\IEEEPARstart{I}{nnovation} 
 Innovation in near-term quantum programming requires the use of lightweight abstractions. 
 Lightweight abstractions, as defined by Bjarne Stroustrup [TODO: Cite], are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code.
 Layers of abstraction are a fundamental idea in all of computer science, and quantum computing is no different.
@@ -42,9 +34,24 @@ Many aspects of hardware are particularly important, for instance, topology, whi
 The goal of lightweight abstractions is to preserve these concerns, while still taking burden off of the programmer, and giving them a richer language with which to express themselves.
 
 Quantum computing [motivations]
-
 [TODO: General motivations, cite Rigetti, cite Haskell/LISP/Rich Hickey, cite Probabilistic programming languages]
 [Cite Peter Selinger's papers]
+
+\subsection{Core}
+
+The matrix operator model of quantum computing actually lends itself to functional programming paradigms quite nicely, because quantum programs and quantum operators are functions in a sense.
+Additionally, since quantum states are fixed once measured, and are generally measured at the end of a program, in a sense memory is not truly mutated (even though it appears to be). 
+[i.e. $result = Pv$, not $result = 0; Pv$].
+A quantum program itself is simply a higher order function, which operates on an initial state vector.
+In turn, a particular quantum program is composed further of simpler matrix-functions, which operate on their own vectors, or are composed with other matrices.
+For instance, consider a bell state program. 
+As a whole, we may call the bell state program which creates the $+$ state $B$, and know that $B 0$ [TODO: Dirac notation] is the application of the program $B$ to a two-element zero vector.
+However, this program will further be composed as a Hadamard operator, $H$, and entanglement operator, $CNOT$, where $H$ will operate on one qubit, and then $CNOT$ will operate on both qubits. [TODO: Math writeup]
+
+In a traditional circuit language, these operators are composed by simply listing which qubits they operate on, and ordering them correctly in a circuit definition file.
+However, with higher-order functions, quantum operators can be composed in mariad helpful ways, as is common in function languages like Haskell or LISP (from which Qurry draws many influences).
+
+\subsection{Circuit Languages}
 
 At time of writing, Rigetti pyquil contains the following quantum gates and operations:
 
@@ -92,34 +99,12 @@ And also contains the following classical operations:
     \item CONVERT ['classical\_reg1', 'classical\_reg2']
 \end{itemize}
 
-
-Lastly, the matrix operator model of quantum computing actually lends itself to functional programming paradigms quite nicely, because quantum programs and quantum operators are functions in a sense.
-Additionally, since quantum states are fixed once measured, and are generally measured at the end of a program, in a sense memory is not truly mutated (even though it appears to be). 
-[i.e. $result = Pv$, not $result = 0; Pv$].
-A quantum program itself is simply a higher order function, which operates on an initial state vector.
-In turn, a particular quantum program is composed further of simpler matrix-functions, which operate on their own vectors, or are composed with other matrices.
-For instance, consider a bell state program. 
-As a whole, we may call the bell state program which creates the $+$ state $B$, and know that $B 0$ [TODO: Dirac notation] is the application of the program $B$ to a two-element zero vector.
-However, this program will further be composed as a Hadamard operator, $H$, and entanglement operator, $CNOT$, where $H$ will operate on one qubit, and then $CNOT$ will operate on both qubits. [TODO: Math writeup]
-
-In a traditional circuit language, these operators are composed by simply listing which qubits they operate on, and ordering them correctly in a circuit definition file.
-However, with higher-order functions, quantum operators can be composed in mariad helpful ways, as is common in function languages like Haskell or LISP (from which Qurry draws many influences).
+\subsection{Classical Probabilistic Languages}
 
  Classical probabilistic programming languages are a recent innovation from the MIT cognitive science community. 
  Essentially, they create a way for non-expert programmers to access the power of Bayesian inference. 
  Users can create simple probabilistic models in standard code, and then run them through an expert-created inference backend.
  Famously, this has resulted in dramatically reduced code complexity, with a famous case where a 50-line probabilistic program could compete with traditional approaches to face recognition [TODO: Cite].
- 
-
-In addition to being a prototype quantum programming language, Qurry defines a software stack surrounding the language, which is intended to make development more pleasant.
-For instance, this software stack makes it exceptionally easy to add new language features and libraries to Qurry.
-This allows one to rapidly test new ideas in quantum programming and let the language evolve on its own as opposed to architecting a top-down ``perfect'' language.
-
-Since quantum computers are simply special probabilistic computers, Qurry also attempts to create a classical statistical library for high-level modeling. 
-This is particularly useful in the same way that a classical probabilistic programming language is, namely for modeling anything statistical, and especially for bayesian machine learning.
-For instance, the R. Tucci and H. Dekant's group have shown uses for this through their software, Bayesforge [TODO: Cite].
-Qurry includes simple statistical packages for creating states, but no inference engine.
-[However, Qurry might allow one to interface with Bayesforge]
 
 \section{Features}
 
@@ -168,6 +153,129 @@ Qurry includes simple statistical packages for creating states, but no inference
 
     [TODO: Elaborate on everything currently in lists]
 
+% \section{Comparisons}
+% 
+% \includegraphics{teleport.pdf}
+% 
+%     Draw examples from Nielsen and Chuang, and the general literature.
+% 
+%  Simply change (if (condition) (branch) (branch))
+%  into
+%  ``
+%  Condition
+%  Measure []
+%  Jump label
+%  branch
+%  branch etc
+%  ``
+%  
+%  Curry also supports variable naming, blocks of qubits, classical callbacks, imports, \dots
+%  Curry can be called as a library and operated from python
+%  
+%  There are some easy targets for providing abstraction: common things like functions, conditionals, loops, integer data types, and so on. 
+%  However, let's jump into the quantum/probabilistic side of things.
+%  
+%  Models will fundamentally be composed of, generally, wave functions: Superpositions over all possible states.
+%  First, consider modeling a classical distribution. 
+%  We can successfully produce sampleable classical distributions on a quantum computer.
+%  For instance, consider the following model from the Church programming language tutorial.
+%  This code is specifying a probabilistic grammar for simple sentences about cooking.
+%  
+%  ```scheme
+%  (define (transition nonterminal)
+%    (case nonterminal
+%          (('D) (multinomial(list (list (terminal 'the))
+%                                  (list (terminal 'a)))
+%                            (list (/ 1 2) (/ 1 2))))
+%          (('N) (multinomial (list (list (terminal 'chef))
+%                                   (list (terminal 'soup))
+%                                   (list (terminal 'omelet)))
+%                             (list (/ 1 3) (/ 1 3) (/ 1 3))))
+%          (('V) (multinomial (list (list (terminal 'cooks))
+%                                   (list (terminal 'works)))
+%                             (list (/ 1 2) (/ 1 2))))
+%          (('A) (multinomial (list (list (terminal 'diligently)))
+%                             (list (/ 1 1))))
+%          (('AP) (multinomial (list (list 'A))
+%                              (list (/ 1 1))))
+%          (('NP) (multinomial (list (list 'D 'N))
+%                              (list (/ 1 1))))
+%          (('VP) (multinomial (list (list 'V 'AP)
+%                                    (list 'V 'NP))
+%                              (list (/ 1 2) (/ 1 2))))
+%          (('S) (multinomial (list (list 'NP 'VP))
+%                             (list (/ 1 1))))
+%          (else 'error)))
+%  ```
+%  
+%  More succinctly, this is specifying the following (toy) language model:
+%  ```scheme
+%  D(eterminer):      (uniform 'the' 'a')
+%  N(oun):            (uniform 'chef' 'omelet' 'soup')
+%  V(erb):            (uniform 'cooks' 'works')
+%  A(dverb):          (uniform 'diligently')
+%  AP(Adverb Phrase): (uniform A)
+%  NP(Noun Phrase):   (D, N)
+%  VP(Verb Phrase):   (uniform (V AP) (V NP))
+%  S(entence):        (NP, VP)
+%  ```
+%  
+%  To make things even simpler, let's first just consider modeling a randomly sampled Noun-Phrase (which is the first part in sampling a full toy sentence).
+%  The noun-phrase is a concatenation of a determiner and a noun. In our toy example, we have two determiners and three nouns, both uniformly sampled, which makes for a total of six options with equal probability.
+%  So, we'll need three qubits to model this. Curry has builtins for these distributions.
+%  ```scheme
+%  (def determiner-qubit 0)
+%  (def noun-qubits 1 2)
+%  (bernoulli 0.5 determiner-qubit)
+%  (multinomial 0.33 0.33 0.34 noun-qubits)
+%  ```
+%  
+%  The output is the following (using a local simulator):
+%  ```
+%  grid {curry}: ./compile examples/test.lisp
+%  
+%  [['def', 'determiner-qubit', '0'],
+%   ['def', 'noun-qubits', '1', '2'],
+%   ['bernoulli', '0.5', 'determiner-qubit'],
+%   ['multinomial', '0.33', '0.33', '0.34', 'noun-qubits']]
+%  
+%  {'000': 0.17, '001': 0.16, '010': 0.17, '011': 0.17, '100': 0.16, '101': 0.16}
+%  
+%  277.4035930633545 ms simulated runtime
+%  ```
+%  
+%  In our output, the rightmost bit is representing the determiner, and the other two bits are representing the noun.
+%  So the output is:
+%  ```python3
+%  {'the chef' : 1/6, 'a chef' : 1/6, 'the omelet' : 1/6, 'a omelet' : 1/6, 'the soup' : 1/6, 'a soup' : 1/6}
+%  ```
+%  Now, let's consider the rest of the model.
+%  When we sample a Verb Phrase, it contains recursive elements.
+%  So, it will branch (with equal probabilities) to either (V AP) or (V NP).
+%  Before diving in, let's look at branching in quantum computers.
+%  
+%  Consider preparing a bell state:
+%  ```
+%  (h 0)
+%  (cnot 0 1)
+%  ```
+%  And distinguish this from the following, which will produce the same classical measurements, but no entanglement (because the state of the first qubit is known before producing the state in the second qubit). 
+%  In this case, the state 01 is possible, because the first qubit may be measured in the 1 state, and the second qubit is unprepared, and in the zero state.
+%  ```
+%  (bernoulli 0.5 0)
+%  (measure 0 0)
+%  (if 0 (x 1) (nop))
+%  ```
+%  
+%  So, when creating a probabilistic model which branches, we distinguish between these two types of branching, because only one truly creates an entangled state.
+%  However, this makes representing information slightly more difficult, because we will not know which bits correspond to which states (unless we encode this, which we will).
+
+\section{Software Ecosystem}
+
+In addition to being a prototype quantum programming language, Qurry defines a software stack surrounding the language, which is intended to make development more pleasant.
+For instance, this software stack makes it exceptionally easy to add new language features and libraries to Qurry.
+This allows one to rapidly test new ideas in quantum programming and let the language evolve on its own as opposed to architecting a top-down ``perfect'' language.
+
 \section{Standard Library}
 
     Qurry contains mechanisms which enable easy inclusion of qurry code in the form of libraries.
@@ -207,122 +315,13 @@ def map(operator, blockname, kernel=None):
             for i in range(block.start, block.end + 1))
     \end{verbatim}
 
-\section{Comparisons}
+\section{Statistical Libraries}
 
-\includegraphics{teleport.pdf}
-
-    Draw examples from Nielsen and Chuang, and the general literature.
-
- Simply change (if (condition) (branch) (branch))
- into
- ``
- Condition
- Measure []
- Jump label
- branch
- branch etc
- ``
- 
- Curry also supports variable naming, blocks of qubits, classical callbacks, imports, \dots
- Curry can be called as a library and operated from python
- 
- There are some easy targets for providing abstraction: common things like functions, conditionals, loops, integer data types, and so on. 
- However, let's jump into the quantum/probabilistic side of things.
- 
- Models will fundamentally be composed of, generally, wave functions: Superpositions over all possible states.
- First, consider modeling a classical distribution. 
- We can successfully produce sampleable classical distributions on a quantum computer.
- For instance, consider the following model from the Church programming language tutorial.
- This code is specifying a probabilistic grammar for simple sentences about cooking.
- 
- ```scheme
- (define (transition nonterminal)
-   (case nonterminal
-         (('D) (multinomial(list (list (terminal 'the))
-                                 (list (terminal 'a)))
-                           (list (/ 1 2) (/ 1 2))))
-         (('N) (multinomial (list (list (terminal 'chef))
-                                  (list (terminal 'soup))
-                                  (list (terminal 'omelet)))
-                            (list (/ 1 3) (/ 1 3) (/ 1 3))))
-         (('V) (multinomial (list (list (terminal 'cooks))
-                                  (list (terminal 'works)))
-                            (list (/ 1 2) (/ 1 2))))
-         (('A) (multinomial (list (list (terminal 'diligently)))
-                            (list (/ 1 1))))
-         (('AP) (multinomial (list (list 'A))
-                             (list (/ 1 1))))
-         (('NP) (multinomial (list (list 'D 'N))
-                             (list (/ 1 1))))
-         (('VP) (multinomial (list (list 'V 'AP)
-                                   (list 'V 'NP))
-                             (list (/ 1 2) (/ 1 2))))
-         (('S) (multinomial (list (list 'NP 'VP))
-                            (list (/ 1 1))))
-         (else 'error)))
- ```
- 
- More succinctly, this is specifying the following (toy) language model:
- ```scheme
- D(eterminer):      (uniform 'the' 'a')
- N(oun):            (uniform 'chef' 'omelet' 'soup')
- V(erb):            (uniform 'cooks' 'works')
- A(dverb):          (uniform 'diligently')
- AP(Adverb Phrase): (uniform A)
- NP(Noun Phrase):   (D, N)
- VP(Verb Phrase):   (uniform (V AP) (V NP))
- S(entence):        (NP, VP)
- ```
- 
- To make things even simpler, let's first just consider modeling a randomly sampled Noun-Phrase (which is the first part in sampling a full toy sentence).
- The noun-phrase is a concatenation of a determiner and a noun. In our toy example, we have two determiners and three nouns, both uniformly sampled, which makes for a total of six options with equal probability.
- So, we'll need three qubits to model this. Curry has builtins for these distributions.
- ```scheme
- (def determiner-qubit 0)
- (def noun-qubits 1 2)
- (bernoulli 0.5 determiner-qubit)
- (multinomial 0.33 0.33 0.34 noun-qubits)
- ```
- 
- The output is the following (using a local simulator):
- ```
- grid {curry}: ./compile examples/test.lisp
- 
- [['def', 'determiner-qubit', '0'],
-  ['def', 'noun-qubits', '1', '2'],
-  ['bernoulli', '0.5', 'determiner-qubit'],
-  ['multinomial', '0.33', '0.33', '0.34', 'noun-qubits']]
- 
- {'000': 0.17, '001': 0.16, '010': 0.17, '011': 0.17, '100': 0.16, '101': 0.16}
- 
- 277.4035930633545 ms simulated runtime
- ```
- 
- In our output, the rightmost bit is representing the determiner, and the other two bits are representing the noun.
- So the output is:
- ```python3
- {'the chef' : 1/6, 'a chef' : 1/6, 'the omelet' : 1/6, 'a omelet' : 1/6, 'the soup' : 1/6, 'a soup' : 1/6}
- ```
- Now, let's consider the rest of the model.
- When we sample a Verb Phrase, it contains recursive elements.
- So, it will branch (with equal probabilities) to either (V AP) or (V NP).
- Before diving in, let's look at branching in quantum computers.
- 
- Consider preparing a bell state:
- ```
- (h 0)
- (cnot 0 1)
- ```
- And distinguish this from the following, which will produce the same classical measurements, but no entanglement (because the state of the first qubit is known before producing the state in the second qubit). 
- In this case, the state 01 is possible, because the first qubit may be measured in the 1 state, and the second qubit is unprepared, and in the zero state.
- ```
- (bernoulli 0.5 0)
- (measure 0 0)
- (if 0 (x 1) (nop))
- ```
- 
- So, when creating a probabilistic model which branches, we distinguish between these two types of branching, because only one truly creates an entangled state.
- However, this makes representing information slightly more difficult, because we will not know which bits correspond to which states (unless we encode this, which we will).
+Since quantum computers are simply special probabilistic computers, Qurry also attempts to create a classical statistical library for high-level modeling. 
+This is particularly useful in the same way that a classical probabilistic programming language is, namely for modeling anything statistical, and especially for bayesian machine learning.
+For instance, the R. Tucci and H. Dekant's group have shown uses for this through their software, Bayesforge [TODO: Cite].
+Qurry includes simple statistical packages for creating states, but no inference engine.
+[However, Qurry might allow one to interface with Bayesforge]
 
 \section{Conclusion}
 
@@ -333,55 +332,15 @@ Through specialized libraries, Qurry can claim to be a generalized library, whil
 With functional programming paradigms, Qurry can move towards higher levels of abstraction as the semantics of quantum programming become better understood.
 Lastly, by creating a rapid prototyping framework, new language features can be developed in a bottom-up style, which will allow Qurry to be created naturally, instead of artificially.
 
-
- %\appendices
  \section{Appendix one}
 Appendix content
 
-% use section* for acknowledgment
 \section*{Acknowledgment}
 
 The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer of the Unitary Fund, Dr. Ajay Bansal of Arizona State University, PLoS and other donators to the unitary fund, and ASU's FURI program.
 
-% Can use something like this to put references on a page
-% by themselves when using endfloat and the captionsoff option.
-% \ifCLASSOPTIONcaptionsoff
-%   \newpage
-% \fi
-
-% trigger a \newpage just before the given reference
-% number - used to balance the columns on the last page
-% adjust value as needed - may need to be readjusted if
-% the document is modified later
-%\IEEEtriggeratref{8}
-% The "triggered" command can be changed if desired:
-%\IEEEtriggercmd{\enlargethispage{-5in}}
-
-% references section
-
-% can use a bibliography generated by BibTeX as a .bbl file
-% BibTeX documentation can be easily obtained at:
-% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
-% The IEEEtran BibTeX style support page is at:
-% http://www.michaelshell.org/tex/ieeetran/bibtex/
-%\bibliographystyle{IEEEtran}
-% argument is your BibTeX string definitions and bibliography database(s)
-%\bibliography{IEEEabrv,../bib/paper}
-%
-% <OR> manually copy in the resultant .bbl file
-% set second argument of \begin to the number of references
-% (used to reserve space for the reference number labels box)
-
 \begin{thebibliography}{1}
 
-% \bibitem{IEEEhowto:kopka}
-% H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-%   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
 \end{thebibliography}
-
-% \begin{IEEEbiographynophoto}{Lucas Saldyt}
-%     is currently a student researcher at Arizona State University, and has previously worked for Sandia National Laboratories and Los Alamos National Laboratories as a student intern in the quantum computing department.
-% \end{IEEEbiographynophoto}
 
 \end{document}
