@@ -8,27 +8,77 @@
 
 \author{Lucas~Saldyt}
 
-\markboth{Second International Conference On Quantum Compilation}%
-{Second International Conference On Quantum Compilation}
+\markboth{Journal}
+{Journal}
 
 \maketitle
 
 \begin{abstract}
-    The core philosophy of Qurry is that simple language features, in aggregate, can make quantum programming significantly easier, by offering lightweight abstractions in the spirit of modern C++.
-    This allows users to implement quantum algorithms cleanly, without glossing over necessary lower-level details of quantum computing, such as the abstract topology of a particular computer.
-    Qurry takes a top-down approach, moving from the abstract goal of creating higher-order functions and datatypes to the level of individual language features.
-    While the desired semantics of a true quantum programming language are not yet completely crystalized, the creation of simple language abstractions will elevate the level at which quantum programs are thought about, potentially enlightening the creation of a true quantum programming language.
-    Many existing quantum programming languages are truly circuit languages, with few features above the level of gates, and sometimes rudimentary functions or macros, and there is currently a tendency not to stray very far from this model.
-    Lastly, Qurry is not just a language, but a software ecosystem which is meant to catalyze the development of quantum programming languages.
+    [Abstract commented out for now, will edit last]
+    % The core philosophy of Qurry is that simple language features, in aggregate, can make quantum programming significantly easier, by offering lightweight abstractions in the spirit of modern C++.
+    % This allows users to implement quantum algorithms cleanly, without glossing over necessary lower-level details of quantum computing, such as the abstract topology of a particular computer.
+    % Qurry takes a top-down approach, moving from the abstract goal of creating higher-order functions and datatypes to the level of individual language features.
+    % While the desired semantics of a true quantum programming language are not yet completely crystalized, the creation of simple language abstractions will elevate the level at which quantum programs are thought about, potentially enlightening the creation of a true quantum programming language.
+    % Many existing quantum programming languages are truly circuit languages, with few features above the level of gates, and sometimes rudimentary functions or macros, and there is currently a tendency not to stray very far from this model.
+    % Lastly, Qurry is not just a language, but a software ecosystem which is meant to catalyze the development of quantum programming languages.
 \end{abstract}
 
 \section{Introduction}
 
-Innovation in near-term quantum programming requires the use of lightweight abstractions. 
-Lightweight abstractions, as defined by Bjarne Stroustrup [TODO: Cite], are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code.
+Innovation in near-term quantum programming requires the use of lightweight abstractions [Cite], which allow users to easily exploit the power of quantum computing while still understanding its fundamental mechanisms.
+In 1981, Richard Feynman noted that quantum physics appears to be impossible to simulate using a classical computer, but that quantum computers appeared to be perfectly capable of simulating quantum physics [Cite].
+Effectively, quantum computation potentially allows new problems to be computed efficiently: in particular, this includes literal simulations of the physical world, but also abstract algorithms which may receive a superpolynomial change in time complexity.
+[Qurry allows quantum programmers to access the power of quantum computers, without sacrificing performance or understanding of the underlying mechanisms]
+
+\subsection{Motivation}
+
+Stephen Jordan, of Microsoft, keeps a nearly exhaustive list of quantum algorithms and the speedups that they offer: https://quantumalgorithmzoo.org/ [Cite].
+According to this list at time of writing, there are thirty-five distinct algorithms which offer a potential superpolynomial speedup.
+This famously includes Peter Shor's factoring and discrete log algorithms, as well as, fundamentally, quantum simulation.
+Interestingly, many quantum algorithms such as the Deutsch-Jozsa algorithm are matched (at least practically, and sometimes theoretically) by probabilistic algorithms, and even some algorithms with superpolynomial speedups are based on older probabilistic versions.
+For instance, machine learning does not appear to have superpolynomial improvements at time of writing.
+The most promising application of quantum computing in the near term is in molecular simulation. 
+At time of writing, quantum computers have been used to simulate di-Hydrogen, Be-H2, and [Other small molecules, Cite]
+[Qurry aims to assist in the development and implementation of each of these algorithms...]
+
+\subsection{Main}
+
+
+
+\subsection{Background}
+
+The absolute basics of quantum computing are not nearly as intimidating as they are sometimes made out to be.
+The main requirement is linear algebra, but complex numbers and probability are also helpful. 
+Conventionally, quantum data is represented on qubits.
+When measured, qubits will be in *either* of two states: $0$ or $1$.
+However, more generally, qubits are in a combination of these two states, which is known as a superposition.
+A particular active qubit's state is described by two complex numbers, $\alpha$ and $\beta$, which are collected in a vector.
+This is written in the simple equation $\psi = \alpha0 + \beta1$.
+However, the state vector $\alpha, \beta$ is not directly examinable.
+Instead, when a qubit is measured, one measures $0$ with probability $|\alpha|^2$, and $1$ with probability $|\beta|^2$, which must sum to $1$.
+For single qubits, a state is evolved in the model simply by multiplying the state vector for a qubit by a $2x2$ unitary matrix, known as a one-qubit gate. This is written as $Av$.
+[Enumerate common one-qubit gates]
+
+For $n$ qubits, the state is simply a complex vector of length $2^n$, and a $n$ qubit gate is a $2^n by 2^n$ matrix.
+Importantly, though, past a single qubit, quantum states can be entangled.
+Two states are entangled when the measurement outcome of one qubit is correlated with the measurement outcome of other qubits.
+The simplest, most famous example of this is the Bell states, also known as EPR pairs.
+For instance, in one Bell state, two qubits are either measured both as $0$, or both as $1$, but there is no probability for them to differ.
+[Enumerate $n$ qubit gates]
+
+\subsection{Parallels to C++ and its role in the classical software ecosystem}
+
+Lightweight abstractions, as defined by Bjarne Stroustrup [TODO: Cite], are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code. 
+
+In Bjarne's words:
+"The aim [of C++] is to allow a programmer to work at the highest feasible level of abstraction by providing
+A simple and direct mapping to hardware and
+Zero -overhead abstraction mechanisms"
+
 Layers of abstraction are a fundamental idea in all of computer science, and quantum computing is no different.
-Currently, quantum computing operates on the abstraction that is the gate-level, where programs are defined by gates acting sequentially on particular qubits, instead of, for instance, specific microwave pulses (or another implementation-specific low-level mechanism).
+Currently, quantum computing operates on the abstraction that is the gate-level, where programs are defined by gates acting sequentially on particular qubits, instead of, for instance, specific microwave pulses (or another implementation-specific low-level mechanism [TODO: Expand on this]).
 The universal gate model of quantum computing generally allows a quantum programmer to ignore many details of the quantum computer they are running on: Sources of error aside, modeling the bond energy of molecular hydrogen is hypothetically the same on an ion-trap quantum computer as on a superconducting quantum computer.
+For instance, classical programmers using C++ generally need not worry about the specific [datatypes..].
 However, some have argued for the importance of hardware, as in Google's phrase ``hardware aware, not hardware agnostic``. [TODO: Cite]
 Many aspects of hardware are particularly important, for instance, topology, which will potentially result in a programmer needing to modify a quantum algorithm for it to run on two separate computers.
 The goal of lightweight abstractions is to preserve these concerns, while still taking burden off of the programmer, and giving them a richer language with which to express themselves.
