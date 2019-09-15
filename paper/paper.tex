@@ -178,7 +178,7 @@ However, it is obvious that \emph{eventual} hardware independence is desirable -
 
     \subsection{Higher Order Functions}
 
-    The simplest illustration of a higher order function is trivial, but surprisingly neglected from any existing quantum language: it is the tensor operator, known to functional programmers as the higher-order function, \emph{map}.
+    The simplest illustration of a higher order function is trivial, but surprisingly neglected from any existing quantum language: it is the tensor operator ($U^{\otimes n}$), known to functional programmers as the higher-order function, \emph{map}.
     Many quantum algorithms will begin with a change of basis, effectively a state preparation. 
     Commonly, this is to the Hadamard basis, and is done by applying the Hadamard operator to a block of qubits.
     In a conventional circuit language, this is done as the following:
@@ -197,6 +197,15 @@ However, it is obvious that \emph{eventual} hardware independence is desirable -
     (define initialize_basis (map H))
     (define workspace (block n qubit))
     (initialize_basis workspace)\end{verbatim}
+
+    Of course, Qurry utilizes the two existing higher-order functions defined by QUIL: DAGGER, and more importantly, CONTROLLED.
+    For brevity, Qurry redefines CONTROLLED to CU.
+    Effectively, this allows the creation of arbitrary controlled operators, for instance the redefinition of CNOT:
+    \begin{verbatim}
+    (define custom_cnot (CU X))
+    (H 0)
+    (custom_cnot 0 1)
+    \end{verbatim}
 
 
 
