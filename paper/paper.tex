@@ -26,15 +26,15 @@
 
 \section{Introduction}
 
-Innovation in near-term quantum programming requires the use of lightweight abstractions [Cite], which allow users to easily exploit the power of quantum computing while still understanding its fundamental mechanisms.
-In 1981, Richard Feynman noted that quantum physics appears to be impossible to simulate using a classical computer, but that quantum computers appeared to be perfectly capable of simulating quantum physics [Cite].
+Innovation in near-term quantum programming requires the use of lightweight abstractions, which allow users to easily exploit the power of quantum computing while still understanding its fundamental mechanisms \cite{stroustrup}.
+In 1981, Richard Feynman noted that quantum physics appears to be impossible to simulate using a classical computer, but that quantum computers appeared to be perfectly capable of simulating quantum physics \cite{feynman_1981}.
 Effectively, quantum computation potentially allows new problems to be computed efficiently: in particular, this includes literal simulations of the physical world, but also abstract algorithms which may receive a superpolynomial change in time complexity.
 [Qurry allows quantum programmers to access the power of quantum computers, without sacrificing performance or understanding of the underlying mechanisms]
 
 \subsection{Motivation}
 
-Stephen Jordan, of Microsoft, keeps a nearly exhaustive list of quantum algorithms and the speedups that they offer: https://quantumalgorithmzoo.org/ [Cite].
-According to this list at time of writing, there are thirty-five distinct algorithms which offer a potential superpolynomial speedup.
+Stephen Jordan, of Microsoft, keeps a nearly exhaustive list of quantum algorithms and the speedups that they offer \cite{jordan}.
+According to this list at time of writing, there are thirty-five distinct quantum algorithms which offer a potential superpolynomial speedup.
 This famously includes Peter Shor's factoring and discrete log algorithms, as well as, fundamentally, quantum simulation.
 Interestingly, many quantum algorithms such as the Deutsch-Jozsa algorithm are matched (at least practically, and sometimes theoretically) by probabilistic algorithms, and even some algorithms with superpolynomial speedups are based on older probabilistic versions.
 For instance, machine learning does not appear to have superpolynomial improvements at time of writing.
@@ -69,7 +69,8 @@ For instance, in one Bell state, two qubits are either measured both as $0$, or 
 
 \subsection{Parallels to C++ and its role in the classical software ecosystem}
 
-Lightweight abstractions, as defined by Bjarne Stroustrup [TODO: Cite], are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code. 
+Lightweight abstractions, as defined by Bjarne Stroustrup, are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code \cite{stroustrup}.
+
 
 In Bjarne's words:
 "The aim [of C++] is to allow a programmer to work at the highest feasible level of abstraction by providing
@@ -390,9 +391,7 @@ Appendix content
 
 The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer of the Unitary Fund, Dr. Ajay Bansal of Arizona State University, PLoS and other donators to the unitary fund, and ASU's FURI program.
 
-\cite{jordan}
-\cite{stroustrup}
-\cite{feynman_1981}
+\newpage
 
 \bibliographystyle{unsrt}
 \bibliography{sources}
