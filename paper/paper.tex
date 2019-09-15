@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[english]{babel}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
@@ -206,43 +207,67 @@ However, it is obvious that \emph{eventual} hardware independence is desirable -
     (H 0)
     (custom_cnot 0 1)
     \end{verbatim}
+    Qurry calls functions like CU controlled higher level operators.
+    This list includes:
+    \begin{itemize}
+        \item CU 
+        \item CNU
+        \item Cascade, CascadeU
+        \item ReverseCascade, ReverseCascadeU
+        \item Collect, CollectU
+        \item Expand, ExpandU
+        \item SimU
+    \end{itemize}
+    Interestingly, many of these are defined through composition of simpler gates.
+    For instance, CNU takes a block of control qubits and a block of work qubits, and entangles pairs of control and work qubits, and finally entangles a target qubit, which a unitary is controlled by:
+    [TODO: Circuit Diagram]
+    A ``Cascade" is simply a chain of shifted CNOT gates, and a ``CascadeU" is simply a ``Cascade" which in turn controls the operation of a unitary gate.
+    [Circuit Diagram]
+    ReverseCascade:
+    [Circuit Diagram]
+    Now consider the circuit used for the simulation of a hamiltonian:
+    [Circuit Diagram]
+    Clearly, this circuit contains repeated information, which can be abstracted into the form of another function: ``SimU", which in turn is a "collect" operation, an "expand" operation, and a controlled unitary in between them.
+    [Circuit Diagram]
 
+    \subsection{Higher Order Datatypes}
 
+    Qurry's memory model is simple: an array of $n$ qubits, and $m$ classical bits.
+    However, in programmer-space, these arrays are cut up and defined using semantic datatypes.
 
-    Additionally, many constructs are defined in terms of unitary gates. Any of these is also a higher-order function.
-    A still simple but more useful example is a controlled unitary.
-    First, consider a unitary that is controlled from one bit:
+    The previous section discussed the \emph{block} type, and the \emph{define} command.
+    The \emph{block} command will automatically select appropriate qubits in the array, and map to these when used.
 
+    In terms of datatypes, not much more is needed, except for the \emph{datatype} command, which mimics C++'s \emph{struct} or \emph{class}.
+    For simplicity, elegance, and robustness, Qurry does not implement encapsulation or inheritance, but instead uses public access by default (in the spirit of Python, since after all, Qurry has a Python interface), and relies on composition instead of inheritance.
+    A \emph{datatype} is nothing more than a contiguous collection of other Qurry datatypes, with names for each field.
+    Like \emph{block} objects, \emph{datatype}s automatically map to qubits and bits in Qurry's memory model.
+    These can be \emph{block}s, single qubits, single bits, and other defined \emph{datatype} objects, allowing for recursive types.
+    Fields within a datatype are simply accessed with the dot operator:
+    % TODO: should functions be possible as datatype fields?
+    \begin{verbatim}
+        (datatype entanglion
+                  (a qubit)
+                  (b qubit))
+        (define e (entanglion))
+        (H e.a)
+        (CNOT e.a e.b)
+    \end{verbatim}
+
+    Recursively composed higher-order datatypes, in combination with recursively composed higher-order functions are the foundation for creating a more abstract programming language.
+
+    \subsection{Other Features}
 
     \begin{itemize}
-        \item cascade 	    
         \item clear 	    
         \item cond 	    
         \item do 	        
         \item macro 	    
     \end{itemize}
 
-    \subsection{Higher Order Datatypes}
 
-    [discuss define [TODO: memory model]]
-
-    Equally important is the ability to create higher-order datatypes.
-    Instead of operating on the level of qubits, are able to arrange raw datatypes into more complex structures.
-    The simplest, which is common in any quantum circuit language, is the ability to create arrays of qubits.
-    [Discuss the $block$ construct].
-
-    However, for full completeness, one must be able to arrange qubits into special structures, in the sense of C++ structs.
-    Further, in object oriented programming, classes are essentially equivalent to structs, and then collections of functions that operate on a struct.
-    For simplicity, elegance, and robustness, Qurry does not implement encapsulation or inheritance, but instead uses public access by default (in the spirit of Python, since after all, Qurry has a Python interface), and relies on composition instead of inheritance.
-    [Discuss the $datatype$ construct].
-    With the inclusion of composable data structures, users are able to create arbitrarily nested structures of qubits with semantically named fields.
-
-    Recursively composed higher-order datatypes, in combination with recursively composed higher-order functions are the foundation for creating a more abstract programming language.
-
-    [TODO: Elaborate on everything currently in lists]
-
-% \section{Comparisons}
-% 
+ \section{Comparisons}
+    This section is currently commented out.
 % \includegraphics{teleport.pdf}
 % 
 %     Draw examples from Nielsen and Chuang, and the general literature.
