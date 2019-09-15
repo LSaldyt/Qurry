@@ -11,7 +11,7 @@ def process_type(body, kernel):
     if head in kernel.definitions:
         defined = kernel.definitions[head]
         assert isinstance(defined, Datatype), '{} is not a valid Datatype'.format(defined)
-        return defined.instance(head, *rest, kernel=kernel, memmap=kernel.memory.allocate(dtype)[0])
+        return defined.instance(head, *rest, kernel=kernel, memmap=kernel.memory.allocate(defined)[0])
     elif head == 'block':
         return block(*rest, kernel=kernel)
     else:
