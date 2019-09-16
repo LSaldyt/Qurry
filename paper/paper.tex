@@ -151,7 +151,7 @@ These are the following:
 
  Qurry is inspired by the effects these languages have had, and in fact there is some overlap between quantum programming and classical probabilistic languages.
  For instance, quantum bayesian inference has been conceptualized since the 70s-90s [Cite].
- There are 10-billion cool libraries that use quantum bayesian inference [Cite].
+ %There are 10-billion cool libraries that use quantum bayesian inference [Cite].
 
 \subsection{Parallels to C++ and its role in the classical software ecosystem}
 
@@ -219,16 +219,30 @@ However, it is obvious that \emph{eventual} hardware independence is desirable -
         \item SimU
     \end{itemize}
     Interestingly, many of these are defined through composition of simpler gates.
-    For instance, CNU takes a block of control qubits and a block of work qubits, and entangles pairs of control and work qubits, and finally entangles a target qubit, which a unitary is controlled by:
-    [TODO: Circuit Diagram]
-    A ``Cascade" is simply a chain of shifted CNOT gates, and a ``CascadeU" is simply a ``Cascade" which in turn controls the operation of a unitary gate.
-    [Circuit Diagram]
-    ReverseCascade:
-    [Circuit Diagram]
-    Now consider the circuit used for the simulation of a hamiltonian:
-    [Circuit Diagram]
-    Clearly, this circuit contains repeated information, which can be abstracted into the form of another function: ``SimU", which in turn is a "collect" operation, an "expand" operation, and a controlled unitary in between them.
-    [Circuit Diagram]
+    For instance, CNU takes a block of control qubits and a block of work qubits, and entangles pairs of control and work qubits, and finally entangles a target qubit, which a unitary is controlled by.
+    Essentially, each of these operators performs some control operations (through a composition of CNOT gates, conventionally), and then performs an arbitrary unitary operation which is controlled by the result of the previous control operations.
+    (This section will contain circuits and more in-depth explanations, but this is currently commented out).
+    %[TODO: Circuit Diagram]
+    %A ``Cascade" is simply a chain of shifted CNOT gates, and a ``CascadeU" is simply a ``Cascade" which in turn controls the operation of a unitary gate.
+    %[Circuit Diagram]
+    %ReverseCascade:
+    %[Circuit Diagram]
+    %Now consider the circuit used for the simulation of a hamiltonian ():
+    %[Circuit Diagram]
+    %Clearly, this circuit contains repeated information, which can be abstracted into the form of another function: ``SimU", which in turn is a "collect" operation, an "expand" operation, and a controlled unitary in between them.
+    %[Circuit Diagram]
+
+    Lastly, Qurry implements lambda expressions, which allow arbitrary re-use and composition of other operators, and natively support currying.
+    Since the $\lambda$ character is unavailable on most conventional keyboards, lambda expressions are denoted with an $l$, and can be used to create named functions, such as:
+    \begin{verbatim}
+    (define create-bell (l (a b) ((H a) (CNOT a b))))
+    \end{verbatim}
+    And of course they support currying:
+    \begin{verbatim}
+    (define partial ((l (a b c) ((X a) (X b) (CCNOT a b c))) 0 1))
+    (partial 2)
+    \end{verbatim}
+    Obviously, Qurry's lisp interface will have plenty of parentheses.
 
     \subsection{Higher Order Datatypes}
 
@@ -258,11 +272,11 @@ However, it is obvious that \emph{eventual} hardware independence is desirable -
 
     \subsection{Other Features}
 
+    Lastly, Qurry features rudimentary classical features meant to complement the hybrid model used by QUIL.
+
     \begin{itemize}
-        \item clear 	    
         \item cond 	    
         \item do 	        
-        \item macro 	    
     \end{itemize}
 
 
