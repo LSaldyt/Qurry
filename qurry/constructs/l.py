@@ -1,9 +1,17 @@
 from ..library.curry import curry, CurriedFunction
 
-def l(argnames, body, kernel=None):
-    def lambda_function(*argvalues):
+def l(argnames, outer_body, kernel=None):
+    def lambda_function(*argvalues, kernel=kernel):
         if len(argvalues) == len(argnames):
-            body = [kernel.builder(element) for element in body]
+            for k, v in zip(argnames, argvalues):
+                kernel.define(k, v)
+            body = [kernel.builder(element, kernel=kernel) for element in outer_body]
+            for k in argnames:
+                kernel.definitions.pop(k)
+            return '\n'.join(body)
         else:
-            body = []
+            @wraps(lambda_function)
+            def curried_function(*remaining, kernel=kernel):
+                return lambda_function(*args, *remaining, kernel=kernel)
+            return CurriedFunction(curried_function)
     return CurriedFunction(lambda_function)
