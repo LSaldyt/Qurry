@@ -6,4 +6,3 @@ def block(*rest, kernel=None):
     defined = Block(0, int(first) + 1, *rest)
     _, defined = kernel.memory.allocate(defined)
     return defined
-
