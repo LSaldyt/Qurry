@@ -28,7 +28,8 @@ def run(filename, computer='9q-square-qvm', topology=None, indir='examples', out
     with open(outdir + '/' + filename + '.quil', 'w') as outfile:
         outfile.write(quil)
 
-    qc = get_qc(computer)
-    result = qc.run_and_measure(program, trials=trials)
-    if postprocess:
-        postprocess(result)
+    if not unset:
+        qc = get_qc(computer)
+        result = qc.run_and_measure(program, trials=trials)
+        if postprocess:
+            postprocess(result)
