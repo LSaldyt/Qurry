@@ -4,7 +4,7 @@ import sys
 from pyquil import get_qc
 
 from .compiler.parse    import parse
-from .compiler.generate import generate, generate_program, build_expression
+from .compiler.generate import generate_program, build_expression
 from .kernel            import Kernel, Topology
 from .postprocess       import postprocess
 
@@ -28,8 +28,8 @@ def run(filename, computer='9q-square-qvm', topology=None, indir='examples', out
     with open(outdir + '/' + filename + '.quil', 'w') as outfile:
         outfile.write(quil)
 
-    if not unset:
-        qc = get_qc(computer)
-        result = qc.run_and_measure(program, trials=trials)
-        if postprocess:
-            postprocess(result)
+    # Commented out temp
+    # qc = get_qc(computer)
+    # result = qc.run_and_measure(program, trials=trials)
+    # if postprocess:
+    #     postprocess(result)

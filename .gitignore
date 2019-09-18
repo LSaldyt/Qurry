@@ -3,3 +3,6 @@ circuit*
 .out.quil
 *.log
 *.aux
+build
+dist
+qurry.egg-info
