@@ -9,7 +9,7 @@ For more information on the progress of the project, see a [summary](brainstorm.
 If you use Qurry or are influenced by it, all I ask is that you cite the software. A bibtex citation is available at the end of this file.
 Once a paper is published, please cite that (I will update it here).
 
-Since Qurry is currently in major rework (until `September 16th, 2019`), the instructions and description previously available on this readme have been commented out.
+Since Qurry is currently in major rework (until `September 29th, 2019`), the instructions and description previously available on this readme have been commented out.
 
 <!--
 
