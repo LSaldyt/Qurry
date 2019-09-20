@@ -1,8 +1,6 @@
-from ..datatypes import update_definitions
 from ..datatypes import Datatype, Block
 
 from .block import block
-from pprint import pprint
 
 def process_type(body, kernel):
     if len(body) == 1:
@@ -22,10 +20,5 @@ def process_type(body, kernel):
 
 def define(*expression, kernel=None):
     name, *rest = expression
-    if name not in kernel.definitions:
-        kernel.definitions[name] = process_type(rest, kernel)
-        print('Kernel definitions:')
-        pprint(kernel.definitions)
-    else:
-        raise ValueError('{} is already defined'.format(name))
+    kernel.define(name, process_type(rest, kernel))
     return ''
