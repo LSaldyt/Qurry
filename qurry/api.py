@@ -17,7 +17,7 @@ def run(filename, computer='9q-square-qvm', topology=None, indir='examples', out
         body = infile.read()
 
     stack   = parse(body)
-    kernel  = Kernel(build_expression, topology)
+    kernel  = Kernel(build_expression, topology, ['standard_library', 'test_library'])
     program = generate_program(stack, kernel)
 
     print('Program:')

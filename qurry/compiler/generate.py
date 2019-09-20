@@ -5,11 +5,9 @@ from pprint import pprint
 from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
 import pyquil
 
-from ..kernel import Kernel
-
 from ..standard_library.datatypes import Datatype
-from ..standard_library.library.curry import curry
 from ..standard_library import constructs
+from ..standard_library.library.curry import curry
 
 from math import acos, asin, sin, cos, sqrt
 
