@@ -1,5 +1,3 @@
-from ..compiler.utils import named_uuid
-
 def map(operator, blockname, kernel=None):
     '''
     Apply a single-qubit operator to every qubit in a block

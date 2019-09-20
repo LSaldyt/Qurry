@@ -1,5 +1,3 @@
-from ..compiler.utils import named_uuid
-
 if_template = '''# Conditional statement
 JUMP-WHEN @{first} [{cond}]
   {b}
@@ -23,5 +21,5 @@ def cond(cond, a, b, kernel=None):
             cond=cond,
             a=a,
             b=b,
-            first=named_uuid('first'),
-            end=named_uuid('end'))
+            first=kernel.named_uuid('first'),
+            end=kernel.named_uuid('end'))

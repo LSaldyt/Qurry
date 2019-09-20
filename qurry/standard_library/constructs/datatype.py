@@ -1,7 +1,5 @@
-from ..compiler.utils  import named_uuid
 from ..datatypes       import Datatype
 from ..datatypes.block import Block
-from ..kernel.memory   import Memory
 
 # Eventually support classical types, but no need just yet
 # types = {'bit', 'bits', 'qubit', 'qubits'}
