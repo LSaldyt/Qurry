@@ -1,5 +1,6 @@
 from .memory import Memory
 from .library import Library
+
 import uuid
 
 class Kernel():
@@ -18,3 +19,15 @@ class Kernel():
     def named_uuid(self, name):
         # Create a named label, which is very useful in jump instructs and other control-flow
         return '{}-{}'.format(name, str(uuid.uuid4()))
+
+    def is_construct(self, name):
+        for library in self.libraries:
+            if name in library:
+                return True
+        return False
+
+    def get_construct(self, name):
+        for library in self.libraries:
+            if name in library:
+                return library[name]
+        return None

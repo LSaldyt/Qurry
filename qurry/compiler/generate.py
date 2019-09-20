@@ -5,9 +5,8 @@ from pprint import pprint
 from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
 import pyquil
 
-from ..standard_library.datatypes import Datatype
-from ..standard_library import constructs
-from ..standard_library.library.curry import curry
+#from ..standard_library import constructs
+from ..libraries.standard_library.library.curry import curry
 
 from math import acos, asin, sin, cos, sqrt
 
@@ -50,10 +49,12 @@ def build_expression(expression, kernel):
             return '{} {} [{}]'.format(*expression)
         else:
             return ' '.join(expression)
-    # Branch for language constructs defined in the `constructs` directory
-    elif hasattr(constructs, head):
-        module  = getattr(constructs, head)
-        creator = getattr(module, head)
+    elif kernel.is_construct(head):
+        #elif hasattr(constructs, head):
+        #module  = kernel.
+        #module  = getattr(constructs, head)
+        #creator = getattr(module, head)
+        creator = kernel.get_construct(head)
         return curry(creator, *expression[1:], kernel=kernel)
     elif head in kernel.definitions:
         return curry(kernel.definitions[head], *expression[1:], kernel=kernel)

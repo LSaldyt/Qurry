@@ -1,5 +1,5 @@
-from ..standard_library.datatypes.block import Block
-from ..standard_library.datatypes import Datatype
+from ..libraries.standard_library.datatypes.block import Block
+from ..libraries.standard_library.datatypes import Datatype
 
 from pprint import pprint
 
