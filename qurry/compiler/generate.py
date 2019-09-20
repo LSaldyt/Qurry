@@ -6,7 +6,6 @@ from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
 import pyquil
 
 from .utils import named_uuid
-from ..datatypes import update_definitions
 from ..datatypes import Datatype
 from ..kernel import Kernel
 from ..library.curry import curry
