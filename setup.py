@@ -7,7 +7,7 @@ setuptools.setup(
 
      name='qurry',
 
-     version='0.0.2',
+     version='0.0.3',
 
      scripts=['compile-qurry', 'quilarity', 'qurry-server'] ,
 
