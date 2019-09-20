@@ -1,17 +1,17 @@
 from ..library.curry import curry, CurriedFunction
 
-def l(argnames, outer_body, kernel=None):
-    def lambda_function(*argvalues, kernel=kernel):
-        if len(argvalues) == len(argnames):
-            for k, v in zip(argnames, argvalues):
-                kernel.define(k, v)
-            body = [kernel.builder(element, kernel=kernel) for element in outer_body]
-            for k in argnames:
-                kernel.definitions.pop(k)
-            return '\n'.join(body)
-        else:
-            @wraps(lambda_function)
-            def curried_function(*remaining, kernel=kernel):
-                return lambda_function(*args, *remaining, kernel=kernel)
-            return CurriedFunction(curried_function)
-    return CurriedFunction(lambda_function)
+from .la import la
+from functools import reduce
+
+def extract_arguments(body):
+    if isinstance(body, list):
+        return reduce(set.union, (extract_arguments(b) for b in body))
+    elif isinstance(body, str) and '%' in body:
+        return {body.split('%')[1]}
+    else:
+        return set()
+
+def l(outer_body, kernel=None):
+    arguments = ['%' + arg for arg in extract_arguments(outer_body)]
+    print(arguments)
+    return la(arguments, outer_body)
