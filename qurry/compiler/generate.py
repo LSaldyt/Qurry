@@ -59,6 +59,9 @@ def build_expression(expression, kernel):
     elif head in kernel.definitions:
         return curry(kernel.definitions[head], *expression[1:], kernel=kernel)
     else:
+        print('"{}"'.format(head))
+        print(dir(kernel.libraries['standard_library'].constructs))
+        print(kernel.is_construct(head))
         print('No generation branch for: {} (head={})'.format(expression, head))
         pprint(kernel.definitions)
         sys.exit(1)

@@ -21,13 +21,13 @@ class Kernel():
         return '{}-{}'.format(name, str(uuid.uuid4()))
 
     def is_construct(self, name):
-        for library in self.libraries:
+        for library in self.libraries.values():
             if name in library:
                 return True
         return False
 
     def get_construct(self, name):
-        for library in self.libraries:
+        for library in self.libraries.values():
             if name in library:
                 return library[name]
         return None

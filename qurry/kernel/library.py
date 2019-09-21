@@ -7,7 +7,12 @@ class Library:
 
         ## load constructs
         #self.constructs = module.constructs
+
+        print('Loaded ' + name)
         self.constructs = import_module('.{}.constructs'.format(name), 'qurry.libraries')
+        print(dir(self.constructs))
+        print(hasattr(self.constructs, 'define'))
+
         ## load utilities
         #self.library = None
         ## load utilities
@@ -17,5 +22,5 @@ class Library:
     def __contains__(self, name):
         return hasattr(self.constructs, name)
 
-    def __get__(self, name):
-        return getattr(self.constructs, name)
+    def __getitem__(self, name):
+        return getattr(getattr(self.constructs, name), name)
