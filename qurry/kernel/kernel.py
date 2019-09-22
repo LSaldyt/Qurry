@@ -9,6 +9,7 @@ class Kernel():
         self.definitions = dict()
         self.builder = builder
         self.libraries = {l : Library(l) for l in libraries}
+        self.topology = topology
 
     def define(self, name, value):
         if name in self.definitions:

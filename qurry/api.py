@@ -11,7 +11,7 @@ from .postprocess       import postprocess
 def run(filename, computer='9q-square-qvm', topology=None, indir='examples', outdir='examples/quil/', trials=10, postprocess=False):
 
     if topology is None:
-        topology = Topology(64, None)
+        topology = Topology(9, None)
 
     with open(indir + '/' + filename + '.lisp', 'r') as infile:
         body = infile.read()

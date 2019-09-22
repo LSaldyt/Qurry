@@ -69,6 +69,32 @@ def build_expression(expression, kernel):
 def generate_program(stack, kernel):
     pprint(stack)
     l = [build_expression(expression, kernel) for expression in stack]
+    #print(generate_qpic(l, kernel))
     intermediate = '\n'.join(map(str, l))
     print(intermediate)
     return pyquil.Program(intermediate)
+
+# def generate_qpic(expanded, kernel):
+#     qpic = ''
+#     qubits = kernel.topology.size
+#     for i in range(qubits):
+#         qpic += ('a{} W |\\psi_{}\\rangle'.format(i, i)) + '\n'
+#     for line in expanded:
+#         first, *rest = line.split(' ')
+#         if first == 'CNOT':
+#             qpic += 'a{} +a{}'.format(*rest) + '\n'
+#         elif first == 'MEASURE':
+#             first = 'M'
+#             rest = [item.replace('[', '').replace(']', '') for item in rest]
+#             qpic += '{} {}'.format(' '.join(rest), first) + '\n'
+#         else:
+#             qpic += '{} {}'.format(' '.join(rest), first) + '\n'
+#
+#     pprint(expanded)
+#     return qpic
+#
+#     #a +b
+#     #a H
+#     #a b M
+#     #c X b:owire
+#     #c Z a:owire
