@@ -35,4 +35,4 @@ def datatype(name, *fields, kernel):
     if name in kernel.definitions:
         raise ValueError('Redefinition of {}'.format(name))
     kernel.definitions[name] = dtype
-    return ''
+    return []

@@ -22,4 +22,4 @@ def cond(cond, a, b, kernel=None):
             a=a,
             b=b,
             first=kernel.named_uuid('first'),
-            end=kernel.named_uuid('end'))
+            end=kernel.named_uuid('end')).split(' ')

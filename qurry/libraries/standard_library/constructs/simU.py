@@ -9,10 +9,10 @@ def simU(block, target, unitary, unitary_block, kernel=None):
     '''
     Entangle multiple qubits, sequentially.
     '''
-    code = ''
+    code = []
     if not isinstance(block, Block):
         block = kernel.definitions[block]
-    code += collect(block, target, kernel=kernel)
-    code += CU(unitary, unitary_block, target, kernel=kernel) + '\n'
-    code += expand(block, target, kernel=kernel)
+    code.extend(collect(block, target, kernel=kernel))
+    code.extend(CU(unitary, unitary_block, target, kernel=kernel))
+    code.extend(expand(block, target, kernel=kernel))
     return code

@@ -8,7 +8,7 @@ def la(argnames, outer_body, kernel=None):
             body = [kernel.builder(element, kernel=kernel) for element in outer_body]
             for k in argnames:
                 kernel.definitions.pop(k)
-            return '\n'.join(body)
+            return body
         else:
             @wraps(lambda_function)
             def curried_function(*remaining, kernel=kernel):

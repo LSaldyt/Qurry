@@ -7,5 +7,5 @@ def cascadeU(block, unitary, unitary_block, kernel=None):
     '''
     block = kernel.definitions[block]
     code = cascade(block, kernel=kernel)
-    code += CU(unitary, unitary_block, block.end - 1, kernel=kernel)
+    code.extend(CU(unitary, unitary_block, block.end - 1, kernel=kernel))
     return code

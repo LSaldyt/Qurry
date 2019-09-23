@@ -7,5 +7,4 @@ def map(operator, blockname, kernel=None):
         block = kernel.definitions[blockname]
     except KeyError:
         raise ValueError('The block {} is not defined'.format(blockname))
-    return '\n'.join('{} {}'.format(operator, i)
-            for i in range(block.start, block.end + 1))
+    return [[operator, i] for i in range(block.start, block.end + 1)]

@@ -8,7 +8,6 @@ from math import acos, sqrt
 
 '''
 Small helper functions that define common controlled gates.
-Should be familiar to anyone if quantum computation.
 The only new part is the "Bernoulli" gate, which is just an RX rotation meant to produce a classical state
 '''
 

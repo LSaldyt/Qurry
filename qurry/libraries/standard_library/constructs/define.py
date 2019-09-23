@@ -21,4 +21,4 @@ def process_type(body, kernel):
 def define(*expression, kernel=None):
     name, *rest = expression
     kernel.define(name, process_type(rest, kernel))
-    return ''
+    return []

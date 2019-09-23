@@ -13,5 +13,4 @@ def extract_arguments(body):
 
 def l(outer_body, kernel=None):
     arguments = ['%' + arg for arg in extract_arguments(outer_body)]
-    print(arguments)
     return la(arguments, outer_body)

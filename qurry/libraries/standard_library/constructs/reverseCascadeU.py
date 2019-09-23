@@ -10,5 +10,5 @@ def reverseCascadeU(block, unitary, unitary_block, kernel=None):
     if not isinstance(block, Block):
         block = kernel.definitions[block]
     code = reverseCascade(block, kernel=kernel)
-    code += CU(unitary, unitary_block, block.start, kernel=kernel)
+    code.extend(CU(unitary, unitary_block, block.start, kernel=kernel))
     return code
