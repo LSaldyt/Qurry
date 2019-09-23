@@ -15,6 +15,7 @@ class Memory:
 
     def _get_space(self, nqubits):
         begin = self.head
+        offset = begin
         if self.head + nqubits + 1 < self.size:
             offset = self.head + nqubits
             self.head += nqubits
