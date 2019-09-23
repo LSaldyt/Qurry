@@ -15,12 +15,11 @@ class Memory:
 
     def _get_space(self, nqubits):
         begin = self.head
-        offset = begin
         if self.head + nqubits + 1 < self.size:
             offset = self.head + nqubits
             self.head += nqubits
         else:
-            MemoryError('Cannot allocate more than {} qubits'.format(self.size))
+            raise MemoryError('Cannot allocate more than {} qubits'.format(self.size))
         return Block(begin, offset)
 
     def allocate(self, datatype):
