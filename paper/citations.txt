@@ -1,13 +1,6 @@
-https://quantumalgorithmzoo.org/
-https://people.eecs.berkeley.edu/~christos/classics/Feynman.pdf
-http://www.stroustrup.com/ETAPS-corrected-draft.pdf
-
-https://www.pnas.org/content/115/38/9456#T1
 Original H2 simulation papers (2015, 2016)
 
 Shor factoring and discrete log papers
-
-Compare to, citing original papers: https://en.wikipedia.org/wiki/Quantum_programming
 
 https://www.mathstat.dal.ca/~selinger/quipper/
 https://arxiv.org/abs/1304.3390
@@ -20,4 +13,3 @@ Other peter selinger papers (like quant lambda calc)
 Cite Rigetti, google, and IBM obviously..
 Cite other talks
 Cite clojure/haskell other conventional languages
-Cite Nielsen and Chuang and other textbooks
