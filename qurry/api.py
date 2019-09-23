@@ -8,7 +8,7 @@ from .compiler.generate import generate_program, build_expression
 from .kernel            import Kernel, Topology
 from .postprocess       import postprocess
 
-def run(filename, computer='9q-square-qvm', topology=None, indir='examples', outdir='examples/quil/', trials=10, postprocess=False):
+def run(filename, computer='9q-square-qvm', topology=None, indir='examples', outdir='examples/quil/', diagramdir='examples/diagrams', trials=10, postprocess=False):
 
     if topology is None:
         topology = Topology(9, None)
@@ -18,7 +18,7 @@ def run(filename, computer='9q-square-qvm', topology=None, indir='examples', out
 
     stack   = parse(body)
     kernel  = Kernel(build_expression, topology, ['standard_library', 'test_library'])
-    program = generate_program(stack, kernel)
+    circuit, program = generate_program(stack, kernel)
 
     print('Program:')
     print(program)
@@ -27,6 +27,8 @@ def run(filename, computer='9q-square-qvm', topology=None, indir='examples', out
     quil = str(program)
     with open(outdir + '/' + filename + '.quil', 'w') as outfile:
         outfile.write(quil)
+    with open(diagramdir + '/' + filename + '.qpic', 'w') as outfile:
+        outfile.write(circuit)
 
     # Commented out temp
     # qc = get_qc(computer)

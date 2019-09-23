@@ -61,5 +61,6 @@ def generate_program(stack, kernel):
     qpic = QpicBackend()
     quil = QuilBackend()
 
-    print(qpic.generate(l, kernel=kernel))
-    return quil.generate(l, kernel=kernel)
+    qpic_out = qpic.generate(l, kernel=kernel)
+    quil_out = quil.generate(l, kernel=kernel)
+    return qpic_out, quil_out
