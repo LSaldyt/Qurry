@@ -11,6 +11,9 @@ class QuilBackend(Backend):
         self.spec = self.spec.union({'DAGGER', 'CONTROLLED'})
 
     def generate(self, l, kernel=None):
-        intermediate = '\n'.join(map(lambda x : ' '.join(map(str,x)), l))
-        return pyquil.Program(intermediate)
+        try:
+            intermediate = '\n'.join(map(lambda x : ' '.join(map(str,x)), l))
+            return pyquil.Program(intermediate)
+        except:
+            return ''
 

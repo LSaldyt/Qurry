@@ -34,4 +34,4 @@ a32 W |\psi_32\rangle
 a33 W |\psi_33\rangle
 a34 W |\psi_34\rangle
 a35 W |\psi_35\rangle
-H ['0']a0 +a1
+['CNOT', 0, '6'] [['CNOT', 1, '6'], ['CNOT', 2, '6'], ['CNOT', 3, '6'], ['CNOT', 4, '6'], ['CNOT', 5, '6'], 'CONTROLLED', 'X', '7', '6', ['CNOT', 5, '6'], ['CNOT', 4, '6'], ['CNOT', 3, '6'], ['CNOT', 2, '6'], ['CNOT', 1, '6'], ['CNOT', 0, '6']]
