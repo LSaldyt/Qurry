@@ -15,5 +15,5 @@ def CNU(control_qubits, work_qubits, unitary, unitary_block, kernel=None):
     for i in range(control_qubits.start, control_qubits.end - 1):
         j = work_qubits.start + i
         code.append(['CNOT', i, j])
-    code.extend(CU(unitary, unitary_block, work_qubits.end - 1, kernel=kernel))
+    code.append(CU(unitary, unitary_block, work_qubits.end - 1, kernel=kernel))
     return code
