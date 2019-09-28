@@ -26,21 +26,44 @@
 \maketitle
 
 \begin{abstract}
-     The core philosophy of Qurry is that simple language features, in aggregate, can make quantum programming significantly easier, by offering lightweight abstractions in the spirit of modern C++.
-    This allows users to implement quantum algorithms cleanly, without glossing over necessary lower-level details of quantum computing, such as the abstract topology of a particular computer.
-    Qurry takes a top-down approach, moving from the abstract goal of creating higher-order functions and datatypes to the level of individual language features.
-    While the desired semantics of a true quantum programming language are not yet completely crystalized, the creation of simple language abstractions will elevate the level at which quantum programs are thought about, potentially enlightening the creation of a true quantum programming language.
-    Many existing quantum programming languages are truly circuit languages, with few features above the level of gates, and sometimes rudimentary functions or macros, and there is currently a tendency not to stray very far from this model.
-    Lastly, Qurry is not just a language, but a software ecosystem which is meant to catalyze the development of quantum programming languages.
+    Innovation in near-term quantum programming requires the use of lightweight, transparent abstraction mechanisms.
+    This paper outlines a typeless, dynamic functional quantum programming language, and a surrounding software system which allows for rapid prototyping and evolution of the langauge.
+    Abstractions are desirable because they allow a programmer to express more computation with less code.
+    Transparency is crucial, especially in quantum computing, because hardware details more strongly affect the types of programs that can be written.
+    To some extent, abstraction and transparency oppose one another.
+    However, carefully crafted abstractions can be lightweight enough to preserve transparency.
+    Qurry achieves lightweight abstractions through heirarchical composition of data and of operations.
 \end{abstract}
 
 \section{Introduction}
 
-Innovation in near-term quantum programming requires the use of lightweight abstractions, which allow users to easily exploit the power of quantum computing while still understanding its fundamental mechanisms \cite{stroustrup}.
+Currently, quantum programming is analogically in a similar stage to classical programming in 1960s and early 1970s. 
+A true high-level quantum programming language is still a desideratum.
+In the history of classical programming languages, C, while not perfect, filled a major gap that had existed before its time \cite{kernighan2006c}, and quantum computing still lacks a similar language.
+Importantly, C's evolution was partially driven by the need for a language expressive enough to easily re-code Unix.
+Quantum languages, of course, are driven by a different motivation, primarily the power that quantum computing adds to the existing classical computing stack.
+Importantly, quantum programming does not appear to be replacing classical computation, but adding to it.
+Often quantum computers are used as auxillary elements to classical computers in hybrid computation.
+According to the needs of the field, a high-level quantum programming language will likely need to be lightweight, hybridized, and transparent. While myriad other desirable criteria exist, these are certainly among them.
+
+Hybridized instruction languages already exist, and allow one to leverage the power of existing classical computation \cite{forest, cirq, qasm, pyquil}.
+However, the ability to program at a higher level of abstraction is desired.
+It is not that it is particularly hard to write quantum circuits at the gate-level, but simply that existing quantum programming languages often force programmers to write redundant inexpressive code, in the sense that more description is required to get the same level of computation.
+An obstruction to this is that running circuits on quantum hardware is not trivial, and requires transparency in a given language.
+
+In the design philosophy of C++, Bjarne Stroustrup describes ``lightweight abstractions“, which allow users to easily exploit the full power of their computer without having to write hand optimized assembly code \cite{stroustrup}:
+``The aim [of C++] is to allow a programmer to work at the highest feasible level of abstraction by providing a simple and direct mapping to hardware and zero-overhead abstraction mechanisms"
+
+However, some have argued for the importance of hardware, as in Google's phrase ``hardware aware, not hardware agnostic" \cite{google_cloud}.
+Many aspects of hardware are particularly important, for instance, topology, which will potentially result in a programmer needing to modify a quantum algorithm for it to run on two separate computers.
+Additionally, the error generation of a quantum computer is actually a crucial detail, even though quantum programmers might desire to ignore it.
+In the current state of quantum computing, many details of hardware cannot yet be ignored. 
+However, it is obvious that \emph{eventual} hardware independence is desirable --- Consider the power of Java in the classical computing world. Lightweight abstractions are precisely the scaffold that will catalyze this transition.
+
 In 1981, Richard Feynman noted that quantum physics appears to be impossible to simulate using a classical computer, but that quantum computers appeared to be perfectly capable of simulating quantum physics \cite{feynman_1981}.
+
 Effectively, quantum computation potentially allows new problems to be computed efficiently: in particular, this includes literal simulations of the physical world, but also abstract algorithms which may receive a superpolynomial change in time complexity.
 Qurry allows quantum programmers to access the power of quantum computers, without sacrificing performance or understanding of the underlying mechanisms.
-
 \cite{nc}
 
 \cite{larose2019overview}
@@ -53,15 +76,10 @@ Qurry allows quantum programmers to access the power of quantum computers, witho
 \cite{quipper_guide}
 \cite{proto_quipper}
 
-\cite{forest}
-\cite{cirq}
-\cite{qasm}
-\cite{pyquil}
 
 \cite{omer1998procedural}
 \cite{biamonte2017quantum}
 
-\cite{google_cloud}
 \cite{lloyd2006programming}
 \cite{hickey2008clojure}
 
@@ -187,22 +205,6 @@ These are the following:
 
 \subsection{Parallels to C++ and its role in the classical software ecosystem}
 
-Lightweight abstractions, as defined by Bjarne Stroustrup, are abstractions that lower the cognitive load on the user, without sacrificing understanding of the underlying processes behind particular code \cite{stroustrup}.
-
-In Bjarne's words:
-``The aim [of C++] is to allow a programmer to work at the highest feasible level of abstraction by providing a simple and direct mapping to hardware and zero-overhead abstraction mechanisms"
-
-Layers of abstraction are a fundamental idea in all of computer science, and quantum computing is no different.
-Currently, quantum computing operates on the abstraction that is the gate-level, where programs are defined by gates acting sequentially on particular qubits, and users conventionally do not need to be aware about every hardware detail of their quantum computer.
-The universal gate model of quantum computing generally allows a quantum programmer to ignore many details of the quantum computer they are running on: Sources of error aside, a quantum program on an ion-trap computer should behave in the same way as the same program on a computer which uses superconducting qubits, in much the same way that a conventional C++ program does not need to worry about the CPU architecture of the computer it is running on, because (generally), these details are
-handled by the compiler.
-It is precisely abstractions like these which make programming possible in the first place.
-
-However, some have argued for the importance of hardware, as in Google's phrase ``hardware aware, not hardware agnostic". [TODO: Cite]
-Many aspects of hardware are particularly important, for instance, topology, which will potentially result in a programmer needing to modify a quantum algorithm for it to run on two separate computers.
-Additionally, the error generation of a quantum computer is actually a crucial detail, even though quantum programmers might desire to ignore it.
-In the current state of quantum computing, many details of hardware cannot yet be ignored. 
-However, it is obvious that \emph{eventual} hardware independence is desirable --- Consider the power of Java in the classical computing world. Lightweight abstractions are precisely the scaffold that will catalyze this transition.
 
 \section{Features}
 
