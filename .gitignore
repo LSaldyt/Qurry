@@ -6,3 +6,4 @@ circuit*
 build
 dist
 qurry.egg-info
+qpic.py

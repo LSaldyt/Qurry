@@ -1,19 +1,9 @@
 import sys
 
 from pprint import pprint
+from ..libraries.standard_library.library.curry import curry
 
-from pyquil.gates import STANDARD_INSTRUCTIONS, STANDARD_GATES
-import pyquil
-
-from .utils import named_uuid
-from ..datatypes import update_definitions
-from ..datatypes import Datatype
-from ..kernel import Kernel
-from ..library.curry import curry
-
-from .. import constructs
-
-from math import acos, asin, sin, cos, sqrt
+from ..backends import QuilBackend, QpicBackend
 
 '''
 This file contains the "meat and potatoes" of Qurry.
@@ -42,26 +32,25 @@ def build_expression(expression, kernel):
     '''
     Recursively build sub-expressions in larger expression
     '''
+    quil = QuilBackend()
     expression = [expand_property(item, kernel.definitions) for item in expression]
 
     # Break the expression into parts
     head = expression[0]
     upper = head.upper()
     # Use instructions from the QUIL spec
-    if upper in STANDARD_INSTRUCTIONS or upper in STANDARD_GATES or upper in {'DAGGER', 'CONTROLLED'}:
+    if upper in quil.spec:
         expression[0] = upper
-        if upper == 'MEASURE':
-            return '{} {} [{}]'.format(*expression)
-        else:
-            return ' '.join(expression)
-    # Branch for language constructs defined in the `constructs` directory
-    elif hasattr(constructs, head):
-        module  = getattr(constructs, head)
-        creator = getattr(module, head)
+        return expression
+    elif kernel.is_construct(head):
+        creator = kernel.get_construct(head)
         return curry(creator, *expression[1:], kernel=kernel)
     elif head in kernel.definitions:
         return curry(kernel.definitions[head], *expression[1:], kernel=kernel)
     else:
+        print('"{}"'.format(head))
+        print(dir(kernel.libraries['standard_library'].constructs))
+        print(kernel.is_construct(head))
         print('No generation branch for: {} (head={})'.format(expression, head))
         pprint(kernel.definitions)
         sys.exit(1)
@@ -69,6 +58,9 @@ def build_expression(expression, kernel):
 def generate_program(stack, kernel):
     pprint(stack)
     l = [build_expression(expression, kernel) for expression in stack]
-    intermediate = '\n'.join(map(str, l))
-    print(intermediate)
-    return pyquil.Program(intermediate)
+    qpic = QpicBackend()
+    quil = QuilBackend()
+
+    qpic_out = qpic.generate(l, kernel=kernel)
+    quil_out = quil.generate(l, kernel=kernel)
+    return qpic_out, quil_out

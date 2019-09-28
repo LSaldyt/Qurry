@@ -1,5 +1,5 @@
-from ..datatypes.block import Block
-from ..datatypes import Datatype
+from ..libraries.standard_library.datatypes.block import Block
+from ..libraries.standard_library.datatypes import Datatype
 
 from pprint import pprint
 
@@ -13,20 +13,20 @@ class Memory:
         self.size = size
         self.static = 0
 
-    def _inner_allocate(self, nqubits):
+    def _get_space(self, nqubits):
         begin = self.head
         if self.head + nqubits + 1 < self.size:
             offset = self.head + nqubits
             self.head += nqubits
         else:
-            MemoryError('Cannot allocate more than {} qubits'.format(self.size))
+            raise MemoryError('Cannot allocate more than {} qubits'.format(self.size))
         return Block(begin, offset)
 
     def allocate(self, datatype):
         qubitmap = dict()
         if isinstance(datatype, Block):
             print(datatype)
-            ret = qubitmap['block{}'.format(self.static)] = self._inner_allocate(datatype.end - datatype.start)
+            ret = qubitmap['block{}'.format(self.static)] = self._get_space(datatype.end - datatype.start)
             self.static += 1
             return qubitmap, ret
         else:
@@ -39,7 +39,7 @@ class Memory:
                         nqubits = block.end - block.start
                     elif fieldtype == 'qubit':
                         nqubits = 1
-                    qubitmap[field] = self._inner_allocate(nqubits)
+                    qubitmap[field] = self._get_space(nqubits)
         return qubitmap, None
 
 
