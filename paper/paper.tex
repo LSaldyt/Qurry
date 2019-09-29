@@ -1,16 +1,17 @@
 \documentclass[a4paper,twocolumn,11pt,accepted=2017-05-09]{quantumarticle}
 \pdfoutput=1
+
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{hyperref}
-
+\usepackage{listings}
 \usepackage{tikz}
 \usepackage{lipsum}
 \usepackage{graphicx}
-
 \usepackage{mathtools}
+
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
@@ -36,6 +37,17 @@
 \end{abstract}
 
 \section{Introduction}
+In 1981, Richard Feynman noted that quantum physics appears to be impossible to simulate using a classical computer, but that quantum computers appeared to be perfectly capable of simulating quantum physics \cite{feynman_1981}.
+Effectively, quantum computation potentially allows new problems to be computed efficiently: in particular, this includes literal simulations of the physical world, but also abstract algorithms which may receive a superpolynomial change in time complexity.
+
+Stephen Jordan, of Microsoft, keeps a nearly exhaustive list of quantum algorithms and the speedups that they offer \cite{jordan}.
+According to this list at time of writing, there are thirty-five distinct quantum algorithms which offer a potential superpolynomial speedup.
+This famously includes Peter Shor's factoring and discrete log algorithms, as well as, fundamentally, quantum simulation.
+\cite{shor, small_molecule_sim, feynman_1981, lanyon2010towards, lloyd2006programming}
+Interestingly, many quantum algorithms such as the Deutsch-Jozsa algorithm are matched (at least practically, and sometimes theoretically) by probabilistic algorithms, and even some algorithms with superpolynomial speedups are based on older probabilistic versions.  \cite{deutsch1992rapid}
+For instance, machine learning does not appear to have superpolynomial improvements at time of writing, but quantum computers can still be applied to it \cite{biamonte2017quantum}.
+The most promising application of quantum computing in the near term is in molecular simulation.
+As the comparisons section will demonstrate, Qurry offers unique programming language features which implementing each of these algorithms significantly easier.
 
 Currently, quantum programming is analogically in a similar stage to classical programming in 1960s and early 1970s. 
 A true high-level quantum programming language is still a desideratum.
@@ -43,7 +55,7 @@ In the history of classical programming languages, C, while not perfect, filled 
 Importantly, C's evolution was partially driven by the need for a language expressive enough to easily re-code Unix.
 Quantum languages, of course, are driven by a different motivation, primarily the power that quantum computing adds to the existing classical computing stack.
 Importantly, quantum programming does not appear to be replacing classical computation, but adding to it.
-Often quantum computers are used as auxillary elements to classical computers in hybrid computation.
+Often quantum computers are used as auxillary elements to classical computers in hybrid computation \cite{zeng2017first}.
 According to the needs of the field, a high-level quantum programming language will likely need to be lightweight, hybridized, and transparent. While myriad other desirable criteria exist, these are certainly among them.
 
 Hybridized instruction languages already exist, and allow one to leverage the power of existing classical computation \cite{forest, cirq, qasm, pyquil}.
@@ -52,58 +64,42 @@ It is not that it is particularly hard to write quantum circuits at the gate-lev
 An obstruction to this is that running circuits on quantum hardware is not trivial, and requires transparency in a given language.
 
 In the design philosophy of C++, Bjarne Stroustrup describes ``lightweight abstractions“, which allow users to easily exploit the full power of their computer without having to write hand optimized assembly code \cite{stroustrup}:
-``The aim [of C++] is to allow a programmer to work at the highest feasible level of abstraction by providing a simple and direct mapping to hardware and zero-overhead abstraction mechanisms"
+``The aim [of C++] is to allow a programmer to work at the highest feasible level of abstraction by providing a simple and direct mapping to hardware and zero-overhead abstraction mechanisms". 
+A zero-overhead abstraction is one which is easier to implement, but performs no differently than code hand-written in a lower-level language (Assembly, in the case of C++, and a quantum circuit language in the case of Qurry).
 
 However, some have argued for the importance of hardware, as in Google's phrase ``hardware aware, not hardware agnostic" \cite{google_cloud}.
 Many aspects of hardware are particularly important, for instance, topology, which will potentially result in a programmer needing to modify a quantum algorithm for it to run on two separate computers.
+To some extent, this can be handled by existing compilers, but not nearly at the same level as classical compilers are able to do this \cite{quilc}.
 Additionally, the error generation of a quantum computer is actually a crucial detail, even though quantum programmers might desire to ignore it.
 In the current state of quantum computing, many details of hardware cannot yet be ignored. 
 However, it is obvious that \emph{eventual} hardware independence is desirable --- Consider the power of Java in the classical computing world. Lightweight abstractions are precisely the scaffold that will catalyze this transition.
 
-In 1981, Richard Feynman noted that quantum physics appears to be impossible to simulate using a classical computer, but that quantum computers appeared to be perfectly capable of simulating quantum physics \cite{feynman_1981}.
+Clojure is another inspiration for Qurry..
+\cite{hickey2008clojure}
 
-Effectively, quantum computation potentially allows new problems to be computed efficiently: in particular, this includes literal simulations of the physical world, but also abstract algorithms which may receive a superpolynomial change in time complexity.
-Qurry allows quantum programmers to access the power of quantum computers, without sacrificing performance or understanding of the underlying mechanisms.
-\cite{nc}
+\subsection{Languages}
 
-\cite{larose2019overview}
+Qurry is certainly not the first of its kind.
+Several quantum programming languages exist (\cite{larose2019overview, omer1998procedural} TODO Cite more), but this paper will discuss two leading examples: Q\# and Quipper.
+
+Summarize and discuss Q\# here. TODO.
+
+\cite{svore2018q}
+
+Summarize and discuss Quipper here. TODO.
 
 \cite{selinger2006lambda}
 \cite{selinger2004towards}
-
 
 \cite{quipper}
 \cite{quipper_guide}
 \cite{proto_quipper}
 
-
-\cite{omer1998procedural}
-\cite{biamonte2017quantum}
-
-\cite{lloyd2006programming}
-\cite{hickey2008clojure}
-
-\subsection{Motivation}
-
-Stephen Jordan, of Microsoft, keeps a nearly exhaustive list of quantum algorithms and the speedups that they offer \cite{jordan}.
-According to this list at time of writing, there are thirty-five distinct quantum algorithms which offer a potential superpolynomial speedup.
-This famously includes Peter Shor's factoring and discrete log algorithms, as well as, fundamentally, quantum simulation.
-\cite{shor, small_molecule_sim, feynman, lanyon2010towards}
-Interestingly, many quantum algorithms such as the Deutsch-Jozsa algorithm are matched (at least practically, and sometimes theoretically) by probabilistic algorithms, and even some algorithms with superpolynomial speedups are based on older probabilistic versions.  \cite{deutsch1992rapid}
-For instance, machine learning does not appear to have superpolynomial improvements at time of writing.
-The most promising application of quantum computing in the near term is in molecular simulation.
-As the comparisons section will demonstrate, Qurry offers unique programming language features which implementing each of these algorithms significantly easier.
-
-% At time of writing, quantum computers have been used to simulate di-Hydrogen, Be-H2, and [Other small molecules, Cite]
-% [Qurry aims to assist in the development and implementation of each of these algorithms...]
-% 
-% Quantum computing [motivations]
-% [TODO: General motivations, cite Rigetti, cite Haskell/LISP/Rich Hickey, cite Probabilistic programming languages]
-
 \subsection{Background}
 
 The absolute basics of quantum computing are not nearly as intimidating as they are sometimes made out to be.
-The main requirement is linear algebra, but complex numbers and probability are also helpful. 
+The main requirement is linear algebra, but exposure to complex numbers and probability are also helpful. 
+For a complete overview, see the beginning chapters of ``Quantum Compututation and Quantum Information“ \cite{nc}.
 Conventionally, quantum data is represented on qubits.
 When measured, qubits will be in *either* of two states: $\ket{0}$ or $\ket{1}$.
 However, more generally, qubits are in a combination of these two states, which is known as a superposition.
@@ -159,9 +155,9 @@ Swap operators, where each takes two qubits, and PSWAP takes an additional angle
 Controlled operators:
 
 \begin{itemize}
-    \item CZ, CNOT %['control', 'target']
-    \item CSWAP %['control', 'target\_1', 'target\_2']
-    \item CPHASE00, CPHASE01, CPHASE10, CPHASE %['angle', 'control', 'target']
+    \item CZ, CNOT 
+    \item CSWAP 
+    \item CPHASE00, CPHASE01, CPHASE10, CPHASE 
 \end{itemize}
 
 And of course the hybrid measurement instruction, which takes a qubit as the first argument, and a classical register as the second:
@@ -173,13 +169,13 @@ And of course the hybrid measurement instruction, which takes a qubit as the fir
 And also contains the following classical operations:
 
 \begin{itemize}
-    \item TRUE, FALSE, NOT, NEG %['classical\_reg']
-    \item AND, OR, MOVE, EXCHANGE, IOR, XOR %['classical\_reg1', 'classical\_reg2']
-    \item ADD, SUB, MUL, DIV %['classical\_reg', 'right']
-    \item EQ, GT, GE, LE, LT %['classical\_reg1', 'classical\_reg2', 'classical\_reg3']
-    \item LOAD %['target\_reg', 'region\_name', 'offset\_reg']
-    \item STORE %['region\_name', 'offset\_reg', 'source']
-    \item CONVERT %['classical\_reg1', 'classical\_reg2']
+    \item TRUE, FALSE, NOT, NEG 
+    \item AND, OR, MOVE, EXCHANGE, IOR, XOR 
+    \item ADD, SUB, MUL, DIV 
+    \item EQ, GT, GE, LE, LT 
+    \item LOAD 
+    \item STORE 
+    \item CONVERT 
 \end{itemize}
 
 Most importantly, though, QUIL actually already has a notion of higher-level functions, which it calls ``Modifiers".
@@ -191,20 +187,19 @@ These are the following:
 
 \subsection{Classical Probabilistic Languages}
 
-\cite{carpenter2017stan}
-\cite{goodman2012church}
 
- Classical probabilistic programming languages are a recent innovation from the MIT cognitive science community. 
+Classical probabilistic programming languages are a recent innovation from the MIT cognitive science community \cite{goodman2012church, carpenter2017stan}.
  Essentially, they create a way for non-expert programmers to access the power of Bayesian inference. 
  Users can create simple probabilistic models in standard code, and then run them through an expert-created inference backend.
- Famously, this has resulted in dramatically reduced code complexity, with a famous case where a 50-line probabilistic program could compete with traditional approaches to face recognition [TODO: Cite].
+ Famously, this has resulted in dramatically reduced code complexity, with a famous case where a 50-line probabilistic program could compete with traditional approaches to face recognition \cite{50-lines}.
+ Additionally, classical probabilistic programming has outperformed many other AI techniques \cite{lake2015human}.
+ These languages are successful because they package powerful inference algorithms and intuitive, simple modeling into an understandable framework.
+
+ Similar success has also been seen, for instance, with frameworks such as Tensorflow, Keras, or Edward \cite{abadi2016tensorflow}.
 
  Qurry is inspired by the effects these languages have had, and in fact there is some overlap between quantum programming and classical probabilistic languages.
- For instance, quantum bayesian inference has been conceptualized since the 70s-90s [Cite].
- %There are 10-billion cool libraries that use quantum bayesian inference [Cite].
-
-\subsection{Parallels to C++ and its role in the classical software ecosystem}
-
+ For instance, quantum bayesian inference has been conceptualized since the 70s-90s \cite{tucci1995quantum}.
+ At time of writing, this has been distilled into packages such as Bayesforge \cite{bayesforge, przewikezlikowski2019support}.
 
 \section{Features}
 
@@ -217,30 +212,30 @@ These are the following:
     Many quantum algorithms will begin with a change of basis, effectively a state preparation. 
     Commonly, this is to the Hadamard basis, and is done by applying the Hadamard operator to a block of qubits.
     In a conventional circuit language, this is done as the following:
-    \begin{verbatim}
+    \begin{lstlisting}
     H 0
     H 1
     ...
-    H n\end{verbatim}
+    H n\end{lstlisting}
     However, textbooks and papers will write this as $H^{\otimes n}$, and in Qurry, it can be written:
-    \begin{verbatim}
+    \begin{lstlisting}
     (define workspace (block n qubit))
-    (map H workspace)\end{verbatim}
+    (map H workspace)\end{lstlisting}
     Implicitly, this example also introduces Qurry's assignment statement \emph{define}, and its representation for qubit arrays, the $block$ command, which takes a size and a type, and allocates space and handles mapping to actual qubit indices.
     More impressively, Qurry supports automatic currying of functions:
-    \begin{verbatim}
+    \begin{lstlisting}
     (define initialize_basis (map H))
     (define workspace (block n qubit))
-    (initialize_basis workspace)\end{verbatim}
+    (initialize_basis workspace)\end{lstlisting}
 
     Of course, Qurry utilizes the two existing higher-order functions defined by QUIL: DAGGER, and more importantly, CONTROLLED.
     For brevity, Qurry redefines CONTROLLED to CU.
     Effectively, this allows the creation of arbitrary controlled operators, for instance the redefinition of CNOT:
-    \begin{verbatim}
+    \begin{lstlisting}
     (define custom_cnot (CU X))
     (H 0)
     (custom_cnot 0 1)
-    \end{verbatim}
+    \end{lstlisting}
     Qurry calls functions like CU controlled higher level operators.
     This list includes:
     \begin{itemize}
@@ -268,14 +263,14 @@ These are the following:
 
     Lastly, Qurry implements lambda expressions, which allow arbitrary re-use and composition of other operators, and natively support currying.
     Since the $\lambda$ character is unavailable on most conventional keyboards, lambda expressions are denoted with an $l$, and can be used to create named functions, such as:
-    \begin{verbatim}
+    \begin{lstlisting}
     (define create-bell (l (a b) ((H a) (CNOT a b))))
-    \end{verbatim}
+    \end{lstlisting}
     And of course they support currying:
-    \begin{verbatim}
+    \begin{lstlisting}
     (define partial ((l (a b c) ((X a) (X b) (CCNOT a b c))) 0 1))
     (partial 2)
-    \end{verbatim}
+    \end{lstlisting}
     Obviously, Qurry's lisp interface will have plenty of parentheses.
 
     \subsection{Higher Order Datatypes}
@@ -293,14 +288,14 @@ These are the following:
     These can be \emph{block}s, single qubits, single bits, and other defined \emph{datatype} objects, allowing for recursive types.
     Fields within a datatype are simply accessed with the dot operator:
     % TODO: should functions be possible as datatype fields?
-    \begin{verbatim}
+    \begin{lstlisting}
         (datatype entanglion
                   (a qubit)
                   (b qubit))
         (define e (entanglion))
         (H e.a)
         (CNOT e.a e.b)
-    \end{verbatim}
+    \end{lstlisting}
 
     Recursively composed higher-order datatypes, in combination with recursively composed higher-order functions are the foundation for creating a more abstract programming language.
 
@@ -460,7 +455,7 @@ This allows one to rapidly test new ideas in quantum programming and let the lan
     Making additions to Qurry is particularly easy:
     For instance, the $map$ feature is defined using the following python code:
 
-    \begin{verbatim}
+    \begin{lstlisting}[language=Python]
 from ..compiler.utils import named_uuid
 
 def map(operator, blockname, kernel=None):
@@ -474,7 +469,7 @@ def map(operator, blockname, kernel=None):
         raise ValueError('The block {} is not defined'.format(blockname))
     return '\n'.join('{} {}'.format(operator, i)
             for i in range(block.start, block.end + 1))
-    \end{verbatim}
+    \end{lstlisting}
 
 \section{Statistical Libraries}
 
@@ -575,13 +570,6 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
  % This can be achieved in several ways, depending on how you are formatting your bibliography.
  % Suppose the DOI of an article \cite{examplecitation} that you want to cite is \texttt{10.22331/idonotexist}.
  % If you are formatting your bibliography manually, you can cite this work using the following in your \texttt{thebibliography} environment:
- % \begin{verbatim}
- % \bibitem{examplecitation}
- %   Name Surname,
- %   \href{https://doi.org/10.22331/
- %         idonotexist}{Quantum
- %         \textbf{123}, 123456 (1916).}
- % \end{verbatim}
  % 
  % \begin{theorem}[One citation per bibitem]
  %   Important: If you are formatting your bibliography manually, please do not group multiple citations into one \texttt{\textbackslash{}bibitem}.
@@ -590,43 +578,7 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
  % 
  % We encourage the use of BibTeX to generate your bibliography from the BibTeX meta-data provided by publishers.
  % For DOI linking to work, the BibTeX file must contain the \texttt{doi} field as for example in:
- % \begin{verbatim}
- % @article{examplecitation,
- %   author = {Surname, Name},
- %   title = {Title},
- %   journal = {Quantum},
- %   volume = {123},
- %   page = {123456},
- %   year = {1916},
- %   doi = {10.22331/idonotexist},
- % }
- % \end{verbatim}
- % Several authors had problems because of Unicode characters in their BibTeX files.
- % Be advised that \href{http://wiki.lyx.org/BibTeX/Tips}{BibTeX does not support Unicode characters}.
- % All special characters must be input via their respective LaTeX commands.
- % 
- % If you are using BibTeX, you can load the \texttt{natbib} package by putting
- % \begin{verbatim}
- % \usepackage[numbers,sort&compress]{natbib}
- % \end{verbatim}
  % in the preamble of your document and then use the \texttt{plainnat} citation style by including your BibTeX bibliography \texttt{mybibliography.bib} where you want the bibliography to appear as follows:
- % \begin{verbatim}
- % \bibliographystyle{plainnat}
- % \bibliography{mybibliography}
- % \end{verbatim}
- % The quantumarticle class automatically detects that the \texttt{natbib} package was loaded and redefines the \texttt{\textbackslash{}doi} command to create hyperlinks.
- % This is likely the easiest option if you are converting from another document class.
- % 
- % If you want to use BibLaTeX, you can instead add
- % \begin{verbatim}
- % \usepackage[backend=bibtex]{biblatex}
- % \addbibresource{mybibliography.bib}
- % \end{verbatim}
- % to the preamble of your document and then output the bibliography with
- % \begin{verbatim}
- % \printbibliography
- % \end{verbatim}
- % where appropriate.
  % You then have to upload the .bbl file along with the other source files when submitting to the arXiv.
  % Due to incompatibilities between different BibLaTeX versions we unfortunately cannot recommend this option \cite{biblatexsubmittingtothearxiv}.
  % 
@@ -639,9 +591,6 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
  % 
  % \begin{theorem}[Use \texttt{\textbackslash pdfoutput=1}]
  %   In order to get correct line breaks within hyperlinks and to make sure the arXiv produces a PDF as output, please add the line 
- % \begin{verbatim}
- % \pdfoutput=1
- % \end{verbatim}
  %   within the first 5 lines of your main LaTeX file, as suggested by the arXiv \cite{arxivpdfoutput}.
  % \end{theorem}
  % 
@@ -661,13 +610,6 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
  % 
  % \section{Extra packages}
  % Quantum encourages you to load the following extra packages:
- % \begin{verbatim}
- % \usepackage[utf8]{inputenc}
- % \usepackage[english]{babel}
- % \usepackage[T1]{fontenc}
- % \usepackage{amsmath}
- % \usepackage{hyperref}
- % \end{verbatim}
  % If you do not load the \texttt{hyperref} package, quantumarticle automatically loads it for you.
  % Packages that change font settings, such as \texttt{times} or \texttt{helvet} should be avoided.
  % 
@@ -685,7 +627,6 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
  % \section{Title information}
  % \label{sec:title-information}
  % You can provide information on authors and affiliations in the common format also used by \texttt{revtex}:
- % \begin{verbatim}
  % \title{Title}
  % \author{Author 1}
  % \author{Author 2}
@@ -695,11 +636,9 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
  % \author{Author 4}
  % \affiliation{Affiliation 1}
  % \affiliation{Affiliation 3}
- % \end{verbatim}
  % In this example affiliation 1 will be associated with authors 1, 2, and 4, affiliation 2 with author 3 and affiliation 3 with author 4.
  % Repeated affiliations are automatically recognized and typeset in \texttt{superscriptaddress} style.
  % Alternatively you can use a format similar to that of the \texttt{authblk} package and the \texttt{elsarticle} document class to specify the same affiliation relations as follows:
- % \begin{verbatim}
  % \title{Title}
  % \author[1]{Author 1}
  % \author[1]{Author 2}
@@ -708,7 +647,6 @@ The author would like to thank Dr. Will Zeng of Rigetti computing, an organizer 
  % \affil[1]{Affiliation 1}
  % \affil[2]{Affiliation 1}
  % \affil[3]{Affiliation 1}
- % \end{verbatim}
  % 
  % \section{LyX layout}
  % \label{sec:lyx-layout}

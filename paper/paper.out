@@ -1,19 +1,18 @@
 \BOOKMARK [1][-]{section*.1}{Introduction}{}% 1
-\BOOKMARK [2][-]{section*.2}{Motivation}{section*.1}% 2
+\BOOKMARK [2][-]{section*.2}{Languages}{section*.1}% 2
 \BOOKMARK [2][-]{section*.3}{Background}{section*.1}% 3
 \BOOKMARK [2][-]{section*.4}{Circuit Languages}{section*.1}% 4
 \BOOKMARK [2][-]{section*.5}{Classical Probabilistic Languages}{section*.1}% 5
-\BOOKMARK [2][-]{section*.6}{Parallels to C++ and its role in the classical software ecosystem}{section*.1}% 6
-\BOOKMARK [1][-]{section*.7}{Features}{}% 7
-\BOOKMARK [2][-]{section*.8}{Higher Order Functions}{section*.7}% 8
-\BOOKMARK [2][-]{section*.9}{Higher Order Datatypes}{section*.7}% 9
-\BOOKMARK [2][-]{section*.10}{Other Features}{section*.7}% 10
-\BOOKMARK [1][-]{section*.11}{Comparisons}{}% 11
-\BOOKMARK [1][-]{section*.12}{Software Ecosystem}{}% 12
-\BOOKMARK [1][-]{section*.13}{Standard Library}{}% 13
-\BOOKMARK [1][-]{section*.14}{Extension}{}% 14
-\BOOKMARK [1][-]{section*.15}{Statistical Libraries}{}% 15
-\BOOKMARK [1][-]{section*.16}{Conclusion}{}% 16
-\BOOKMARK [1][-]{section*.17}{Appendix one}{}% 17
-\BOOKMARK [1][-]{section*.18}{Acknowledgment}{}% 18
-\BOOKMARK [1][-]{section*.19}{References}{}% 19
+\BOOKMARK [1][-]{section*.6}{Features}{}% 6
+\BOOKMARK [2][-]{section*.7}{Higher Order Functions}{section*.6}% 7
+\BOOKMARK [2][-]{section*.8}{Higher Order Datatypes}{section*.6}% 8
+\BOOKMARK [2][-]{section*.9}{Other Features}{section*.6}% 9
+\BOOKMARK [1][-]{section*.10}{Comparisons}{}% 10
+\BOOKMARK [1][-]{section*.11}{Software Ecosystem}{}% 11
+\BOOKMARK [1][-]{section*.12}{Standard Library}{}% 12
+\BOOKMARK [1][-]{section*.13}{Extension}{}% 13
+\BOOKMARK [1][-]{section*.14}{Statistical Libraries}{}% 14
+\BOOKMARK [1][-]{section*.15}{Conclusion}{}% 15
+\BOOKMARK [1][-]{section*.16}{Appendix one}{}% 16
+\BOOKMARK [1][-]{section*.17}{Acknowledgment}{}% 17
+\BOOKMARK [1][-]{section*.18}{References}{}% 18
