@@ -1,0 +1,21 @@
+a0 W |\psi_0\rangle
+a1 W |\psi_1\rangle
+a2 W |\psi_2\rangle
+a3 W |\psi_3\rangle
+a4 W |\psi_4\rangle
+a5 W |\psi_5\rangle
+a6 W |\psi_6\rangle
+a7 W |\psi_7\rangle
+a8 W |\psi_8\rangle
+a9 W |\psi_9\rangle
+a10 W |\psi_{10}\rangle
+a11 W |\psi_{11}\rangle
+a12 W |\psi_{12}\rangle
+
+a0 +a6
+a1 +a7
+a2 +a8
+a3 +a9
+a4 +a10
+a5 +a11
+a12 X a11

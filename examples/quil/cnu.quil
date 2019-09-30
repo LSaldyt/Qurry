@@ -1,8 +1,4 @@
+
+
 H 0
-CNOT 0 7
-CNOT 1 8
-CNOT 2 9
-CNOT 3 10
-CNOT 4 11
-CNOT 5 12
-CONTROLLED X 13 12
+['CNOT', 0, 7] ['CNOT', 1, 8] ['CNOT', 2, 9] ['CNOT', 3, 10] ['CNOT', 4, 11] ['CNOT', 5, 12] ['CONTROLLED', 'X', '13', 12]
