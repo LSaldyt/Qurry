@@ -4,6 +4,9 @@
 Qurry is a prototype of a quantum probabilistic programming language, done with the [unitary fund](https://unitary.fund).
 The official project duration is one year, but the language may be usable before then (and in fact, can already be used to use all of the QUIL spec with some useful abstractions on top, like if statements, variable names, and so on).
 
+Qurry is currently _inactive_.
+
+<!--
 For more information on the progress of the project, see a [summary](brainstorm.md) (from early October), or an in-progress [paper](paper/paper.pdf). 
 
 If you use Qurry or are influenced by it, all I ask is that you cite the software. A bibtex citation is available at the end of this file.
@@ -11,7 +14,6 @@ Once a paper is published, please cite that (I will update it here).
 
 Since Qurry is currently in major rework (until `September 29th, 2019`), the instructions and description previously available on this readme have been commented out.
 
-<!--
 
 ## Installation
 
